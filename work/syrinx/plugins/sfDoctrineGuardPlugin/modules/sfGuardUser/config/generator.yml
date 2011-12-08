@@ -1,0 +1,53 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           sfGuardUser
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          sf_guard_user
+    with_doctrine_route:   true
+
+    config:
+      fields:
+        password_again: { label: "Passwort (2.x)" }
+        first_name: { label: "Vorname" }
+        last_name: { label: "Nachname" }
+        email_address: { label: "E-Mail" }
+        username: { label: "Benutzername" }
+        password: { label: "Passwort" }
+        is_active: { label: "Aktiv?" }
+        is_super_admin: { label: "Admin?" }
+        created_at: { label: "Erstelldatum" }
+        updated_at: { label: "Geändert" }
+        last_login: { label: "Letztes Login" }
+      list:
+        title:   Benutzer
+        display: [username, created_at, updated_at, last_login]
+        max_per_page: 10
+        batch_actions: {}
+        object_actions:
+          _edit: { label: "Editieren" }
+          _delete: { label: "Löschen" }
+        actions:
+          _new: { label: "Neu" }
+      form:
+        class: sfGuardUserAdminForm
+        display:
+          "Benutzer":       [first_name, last_name, email_address, username, password, password_again]
+          "Berechtigungen": [is_active, is_super_admin]
+      edit:
+        title: Benutzer "%%username%%" editieren
+        actions:
+          _delete: { label: Benutzer löschen }
+          _list: { label: "Zurück zur Liste" }
+          _save: { label: "Speichern" }
+      new:
+        title: Neuen Benutzer anlegen
+        actions:
+          _list: { label: "Zurück zur Liste" }
+          _save: { label: "Speichern" }
+      filter:
+        display: [username]

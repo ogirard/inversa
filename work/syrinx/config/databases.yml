@@ -1,0 +1,7 @@
+all:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn: 'mysql:host=62.112.152.161;port=3306;dbname=usr_web161_1'
+      username: web161
+      password: panflute

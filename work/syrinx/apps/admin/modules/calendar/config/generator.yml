@@ -1,0 +1,71 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           SyrinxCalendar
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          syrinx_calendar
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        title:        { label: Titel }
+        date:         { label: Datum, date_format: dd.MM.yyyy }
+        time:         { label: Zeit }
+        duration:     { label: Dauer }
+        description:  { label: Beschreibung }
+        participants: { label: Mitwirkende }
+        venue:        { label: Ort }
+        map:          { label: Karte, help: Bitte URL zu http://www.google.ch/maps angeben! }
+        image:        { label: Bild }
+        file1:        { label: Datei 1 }
+        file1name:    { label: Name Datei 1 }
+        file2:        { label: Datei 2 }
+        file2name:    { label: Name Datei 2 }
+        file3:        { label: Datei 3 }
+        file3name:    { label: Name Datei 3 }
+        file4:        { label: Datei 4 }
+        file4name:    { label: Name Datei 4 }
+        link1:        { label: Link 1 }
+        link1name:    { label: Name Link 1 }
+        link2:        { label: Link 2 }
+        link2name:    { label: Name Link 2 }
+        is_published: { label: Publiziert? }
+      list:    
+        title: Kalendereinträge
+        layout:  stacked
+        display: [title, date, time, duration, description, participants]
+        max_per_page: 10
+        batch_actions: {}
+        object_actions:
+          _edit: { label: "Editieren" }
+          _delete: { label: "Löschen" }
+        actions:
+          _new: { label: "Neu" }
+        params:  |
+          <h2>%%is_published%% %%title%%</h2><br/>
+          <table style="border-style:none" cellpadding="0" cellspacing="0" border="0"><tr style="border-style:none"><td width="100%" style="border-style:none">
+          %%date%%, %%time%%, %%duration%%min<br/><br/>
+          <table style="border-style:none" cellpadding="0" cellspacing="0" border="0"><tbody style="border-style:none; padding: 0px"><tr style="border-style:none; padding: 0px"><td class="name" style="border-style:none; padding: 0px">Beschreibung:</td><td class="value" style="border-style:none">
+          %%description%%</td></tr><tr style="border-style:none; padding: 0px"><td class="name" style="border-style:none; padding: 0px">Mitwirkende:</td><td class="value" style="border-style:none;">%%participants%%</td></tr></tbody></table>
+          </td><td style="border-style:none"><img src="/uploads/calendar/images/thumb_%%image%%" /></td></tr></table>
+      filter:  
+        display: [title, description, participants, is_published]
+      form:
+        class:   AdminSyrinxCalendarForm
+      edit:
+        title: Kalendereintrag "%%title%%" editieren         
+        actions:
+          _delete: { label: Kalendereintrag löschen }
+          _list: { label: "Zurück zur Liste" }
+          _save: { label: "Speichern" }
+      new:
+        title: Kalendereintrag erstellen
+        actions:
+          _list: { label: "Zurück zur Liste" }
+          _save: { label: "Speichern" }

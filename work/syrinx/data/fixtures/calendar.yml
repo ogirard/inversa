@@ -1,0 +1,24 @@
+SyrinxCalendar:
+<?php for ($i = 333; $i <= 333; $i++): ?>
+  <?php echo "concert".$i ?>:
+    title: Konzert Nummer <?php echo $i."\n" ?>
+    date: 2016.04.<?php echo ($i-332)."\n" ?>
+    time: 17:00 Uhr und 20:15 Uhr
+    description: Beschreibung für Konzert <?php echo $i ?>, mit einigen Details. Mehr Text, der einen Zeilenumbruch verursacht.
+    participants: Hanspeter Oggier (Panflöte)
+    duration: 120
+    venue: KKL, Luzern
+    map: http://www.google.ch/maps?f=q&source=s_q&hl=de&geocode=&q=KKL+Luzern&aq=&sll=46.536193,9.041748&sspn=5.335778,14.27124&ie=UTF8&hq=KKL+Luzern&hnear=&ll=47.051762,8.311844&spn=0.079649,0.222988&z=13
+    image: 
+    file1: concert<?php echo $i ?>_file1.pdf
+    file1name: Konzert <?php echo $i ?> Info 1
+    file2: concert<?php echo $i ?>_file2.pdf
+    file2name: Konzert <?php echo $i ?> Info 2
+    file3: concert<?php echo $i ?>_file3.pdf
+    file3name: Konzert <?php echo $i ?> Info 3
+    link1: http://www.somewhere.ch/info1/<?php echo $i."\n" ?>
+    link1name: Info Link <?php echo $i ?>/1
+    link2: http://www.somewhere.ch/info2/<?php echo $i."\n" ?>
+    link2name: Info Link <?php echo $i ?>/2
+<?php endfor ?>
+

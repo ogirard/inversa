@@ -1,0 +1,33 @@
+<?php slot('title', sprintf('Akademie Syrinx - %s', 'Projekte')) ?>
+
+<div id="projects">
+    <?php foreach ($syrinx_projects as $i => $project): ?>
+    
+	<table style="width:770px">		
+      <tr>		
+    <td style="vertical-align:top" width="100%">    
+      <h2><?php echo $project->getTitle() ?></h2>
+      <?php echo $project->getDescription() ?> <br/>
+     </td>
+ 		<?php if(!is_null($project->getImage()) ) : ?>
+		<td style="padding-left:25px;vertical-align:top;text-align:right">
+		   <img src="<?php echo url_for(sfConfig::get('sf_upload_dir').'/project/images/'.$project->getImage()) ?>" alt="Bild zum Projekt" />
+		   </td>
+      <?php endif ?>    
+      </tr>
+      </table>      
+      
+      <br/>
+      <?php foreach ($project->getFiles() as $name => $path): ?>   
+      <span class="option">—</span><a href="<?php echo url_for(sfConfig::get('sf_upload_dir').'/project/files/'.$path) ?>"><?php echo $name ?></a> <span class="doctype">[PDF]</span><br />
+      <?php endforeach ?>      
+      
+		<br />      
+      
+<?php if( $i < count($syrinx_projects) - 1 ): ?>
+	<div class="separator"></div><br/>
+<?php endif ?>
+    <?php endforeach ?>
+
+
+</div>

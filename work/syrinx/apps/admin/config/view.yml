@@ -1,0 +1,21 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    #title:        Akademie Syrinx Administration
+    #description:  Administration der Webseite der Akademie Syrinx, Musikschule für Panflöte
+    #keywords:     syrinx, panflöte, musikschule, oggier, symfony
+    #language:     de
+    #robots:       index, follow
+
+  stylesheets:    [admin_syrinx.css, jquery-ui-1.8.9.custom.css]
+
+  javascripts:    [jquery-1.5.js, jquery-ui-1.8.9.custom.min.js, syrinx.js]
+
+
+  has_layout:     true
+  layout:         layout

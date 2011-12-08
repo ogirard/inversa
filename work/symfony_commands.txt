@@ -1,0 +1,11 @@
+Doctrine:
+
+php app/console help doctrine:database:create
+php app/console doctrine:ensure-production-settings --env=prod
+
+
+php app/console doctrine:mapping:import InversaFrontendBundle annotation
+php app/console doctrine:generate:entities InversaFrontendBundle
+
+php app/console assets:install web
+php app/console cache:clear --env=prod --no-debug

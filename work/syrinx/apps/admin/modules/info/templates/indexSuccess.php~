@@ -1,0 +1,21 @@
+<h1>Willkommen im Administrationsbereich</h1>
+<br />
+Eingeloggt als<br/>
+<table class="info">
+<tr>
+<td>Benutzername:</td>
+<td><?php echo $sf_user->getUsername() ?></td>
+</tr>
+<tr>
+<td>Vorname:</td>
+<td><?php echo $sf_user->getFirstName() ?></td>
+</tr>
+<tr>
+<td>Nachname:</td>
+<td><?php echo $sf_user->getLastName() ?></td>
+</tr>
+<tr>
+<td>E-Mail:</td>
+<td><?php echo $sf_user->getEmailAddress() ?></td>
+</tr>
+</table>

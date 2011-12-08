@@ -1,0 +1,105 @@
+SyrinxCalendar:
+  actAs: { Timestampable: ~ }
+  connection: doctrine
+  tableName: syrinx_calendar
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+    date:
+      type: date()
+      notnull: true
+    time:
+      type: string(256)
+      notnull: true
+    duration:
+      type: integer(8)
+      notnull: false
+    description:
+      type: string()
+    participants:
+      type: string(1024)
+    venue:
+      type: string(1024)
+    map:
+      type: string(1024)
+    image:
+      type: string(1024)
+    file1:
+      type: string(1024)
+    file1name:
+      type: string(1024)
+    file2:
+      type: string(1024)
+    file2name:
+      type: string(1024)
+    file3:
+      type: string(1024)
+    file3name:
+      type: string(1024)
+    file4:
+      type: string(1024)
+    file4name:
+      type: string(1024)
+SyrinxProject:
+  actAs: { Timestampable: ~ }
+  connection: doctrine
+  tableName: syrinx_project
+  columns:
+    title:
+      type: string(255)
+    description:
+      type: string()
+    image:
+      type: string(1024)
+    file1:
+      type: string(1024)
+    file1name:
+      type: string(1024)
+    file2:
+      type: string(1024)
+    file2name:
+      type: string(1024)
+    file3:
+      type: string(1024)
+    file3name:
+      type: string(1024)
+    file4:
+      type: string(1024)
+    file4name:
+      type: string(1024)
+SyrinxRole:
+  actAs: { Timestampable: ~ }
+  connection: doctrine
+  tableName: syrinx_role
+  columns:
+    name:
+      type: string(16)
+      notnull: true
+SyrinxUser:
+  actAs: { Timestampable: ~ }
+  connection: doctrine
+  tableName: syrinx_user
+  columns:
+    username:
+      type: string(128)
+      notnull: true
+    password:
+      type: string(128)
+      notnull: true
+    firstname:
+      type: string(128)
+      notnull: true
+    lastname:
+      type: string(128)
+      notnull: true
+    email:
+      type: string(128)
+    role_id:
+      type: integer(8)
+      notnull: true
+  relations:
+    SyrinxRole:
+      local: role_id
+      foreign: id
+      type: one

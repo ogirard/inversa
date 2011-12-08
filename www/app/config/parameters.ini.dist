@@ -1,0 +1,13 @@
+[parameters]
+    database_driver="pdo_sqlite"
+    database_host="localhost"
+    database_port="3306"
+    database_name="inversa"
+    database_user="inversa"
+    database_password="asrevni2011"
+    mailer_transport="smtp"
+    mailer_host="localhost"
+    mailer_user=""
+    mailer_password=""
+    locale="en"
+    secret="feb108ce2410d747c42c65faf31e10bd898"

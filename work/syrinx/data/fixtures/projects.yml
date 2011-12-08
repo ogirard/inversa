@@ -1,0 +1,16 @@
+SyrinxProject:
+<?php for ($i = 100; $i <= 100; $i++): ?>
+  <?php echo "project".$i ?>:
+    title: Projekt Nummer <?php echo $i."\n" ?>
+    description: Beschreibung für Projekt <?php echo $i ?>, mit einigen Details.
+    image: 
+    file1: project<?php echo $i ?>_file1.pdf
+    file1name: Projekt <?php echo $i ?> Info 1
+    file2: project<?php echo $i ?>_file2.pdf
+    file2name: Projekt <?php echo $i ?> Info 2
+    link1: http://www.somewhere.ch/info1/<?php echo $i."\n" ?>
+    link1name: Info Link <?php echo $i ?>/1
+    link2: http://www.somewhere.ch/info2/<?php echo $i."\n" ?>
+    link2name: Info Link <?php echo $i ?>/2
+<?php endfor ?>
+

@@ -1,0 +1,94 @@
+SyrinxCalendar:
+  actAs: { Timestampable: ~ }
+  connection: doctrine
+  tableName: syrinx_calendar
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+    date:
+      type: date()
+      notnull: true
+    time:
+      type: string(256)
+      notnull: true
+    duration:
+      type: integer(8)
+      notnull: false
+    description:
+      type: string()
+    participants:
+      type: string(1024)
+    venue:
+      type: string(1024)
+    map:
+      type: string(1024)
+    image:
+      type: string(1024)
+    file1:
+      type: string(1024)
+    file1name:
+      type: string(1024)
+    file2:
+      type: string(1024)
+    file2name:
+      type: string(1024)
+    file3:
+      type: string(1024)
+    file3name:
+      type: string(1024)
+    file4:
+      type: string(1024)
+    file4name:
+      type: string(1024)
+    link1:
+      type: string(1024)
+    link1name:
+      type: string(1024)
+    link2:
+      type: string(1024)
+    link2name:
+      type: string(1024)
+    is_published: 
+      type: boolean
+      notnull: true
+      default: 1
+SyrinxProject:
+  actAs: { Timestampable: ~ }
+  connection: doctrine
+  tableName: syrinx_project
+  columns:
+    title:
+      type: string(255)
+    description:
+      type: string()
+    image:
+      type: string(1024)
+    file1:
+      type: string(1024)
+    file1name:
+      type: string(1024)
+    file2:
+      type: string(1024)
+    file2name:
+      type: string(1024)
+    file3:
+      type: string(1024)
+    file3name:
+      type: string(1024)
+    file4:
+      type: string(1024)
+    file4name:
+      type: string(1024)
+    link1:
+      type: string(1024)
+    link1name:
+      type: string(1024)
+    link2:
+      type: string(1024)
+    link2name:
+      type: string(1024)
+    is_published: 
+      type: boolean
+      notnull: true
+      default: 1

@@ -1,0 +1,107 @@
+<?php
+
+/**
+ * Admin SyrinxCalendar form.
+ *
+ * @package    syrinx
+ * @subpackage form
+ * @author     Olivier Girard
+ * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ */
+class AdminSyrinxCalendarForm extends SyrinxCalendarForm
+{
+    public function configure()
+    {
+        parent::configure();
+ 
+ 	     $this->validatorSchema['image'] = new sfValidatorFile(array(
+                'required'   => false,
+                'path'       => sfConfig::get('sf_upload_dir').'/calendar/images/',
+                'mime_types' => 'web_images',
+                ));     
+                
+        $this->widgetSchema['image'] = new sfWidgetFormInputFileEditable(array(
+                'label'     => 'Bild',
+                'file_src'  => '/uploads/calendar/images/'.$this->getObject()->getImage(),
+                'is_image'  => true,
+                'edit_mode' => !$this->isNew(),
+                'template'  => '<div><div style="padding:0px; padding-top:5px; padding-bottom:10px; margin=0px">%file%</div><br />%input%<br />%delete% Bild enfernen</div>',
+            ));
+            
+        $this->widgetSchema['date'] = new sfWidgetFormJQueryDate(array(
+                                                             'config' => '{}',
+                                                             ));
+
+        $currentYear = getdate();
+        $years = range($currentYear['year'] - 10, $currentYear['year'] + 15);
+        $this->widgetSchema['date']->getOption('date_widget')->setOption('format', '%day%.%month%.%year%');
+        $this->widgetSchema['date']->getOption('date_widget')->setOption('years', array_combine($years, $years));       
+ 
+        $this->validatorSchema['image_delete'] = new sfValidatorPass();
+        
+        $cal = $this->getObject();
+        $filenames = array($cal->getFile1(),$cal->getFile2(),$cal->getFile3(),$cal->getFile4());
+        for($i = 0; $i < 4; $i++)
+        {
+				$file = 'file'.($i+1);
+				$filename = ($filenames[$i] !== null && $filenames[$i] !== "") ? '/uploads/calendar/files/'.$filenames[$i] : '';
+				$current = ($filename !== "") ? '<a href="'.$filename.'">Aktuelle Datei</a>' : 'Keine Datei';
+				
+            $this->validatorSchema[$file] = new sfValidatorFile(array(
+                    'required'   => false,
+                    'path'       => sfConfig::get('sf_upload_dir').'/calendar/files/',
+                    'mime_types' => array ('application/pdf', 'application/zip'),
+                    ));     
+                    
+            $this->widgetSchema[$file] = new sfWidgetFormInputFileEditable(array(
+                    'label'     => 'Datei',
+                    'file_src'  => $filename,
+                    'is_image'  => false,
+                    'edit_mode' => !$this->isNew(),
+                    'template'  => '<div><b>'.$current .'</b><br/>%input%<br />%delete% Datei entfernen</div>',
+                ));
+ 
+            $this->validatorSchema[$file.'_delete'] = new sfValidatorPass();
+        }
+        
+        $fields = $this->getWidgetSchema()->getFields();
+        foreach ($fields as $f)
+        {
+        	  $c = get_class($f);
+        	  if($c == 'sfWidgetFormInputText' || $c == 'sfWidgetFormTextarea')
+        	  {
+        	      $f->setAttribute("class", "formInput");
+        	  }
+        	  $this->WriteLog($c);
+        }
+    }
+    
+    private function WriteLog($message)
+    {
+        if (sfConfig::get('sf_logging_enabled'))
+        {
+            sfContext::getInstance()->getLogger()->info($message);
+        }
+    }
+    
+    
+    private function CleanUploads()
+    {
+    	 $filesDir = sfConfig::get('sf_upload_dir').'/calendar/files/';
+	    if(!$dh = opendir($filesDir))
+	    {
+	        return;
+	    }
+	    while (false !== ($obj = readdir($dh)))
+	    {
+	        if($obj == '.' || $obj == '..')
+	        {
+	            continue;
+	        }
+	        $this->WriteLog($obj);
+	
+	        // unlink($dir . '/' . $obj);
+	    }
+	    closedir($dh);
+   }
+}
