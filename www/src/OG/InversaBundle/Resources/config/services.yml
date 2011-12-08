@@ -1,0 +1,7 @@
+parameters:
+#    og_inversa.example.class: OG\InversaBundle\Example
+
+services:
+#    og_inversa.example:
+#        class: %og_inversa.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

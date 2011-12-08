@@ -1,0 +1,27 @@
+OGInversaBundle_homepage:
+    pattern:  /home
+    defaults: { _controller: OGInversaBundle:Content:home }
+    
+OGInversaBundle_agenda:
+    pattern:  /agenda
+    defaults: { _controller: OGInversaBundle:Content:agenda }    
+        
+OGInversaBundle_projects:
+    pattern:  /projects
+    defaults: { _controller: OGInversaBundle:Content:projects }
+    
+OGInversaBundle_media:
+    pattern:  /media
+    defaults: { _controller: OGInversaBundle:Content:media }       
+
+OGInversaBundle_press:
+    pattern:  /press
+    defaults: { _controller: OGInversaBundle:Content:press }
+
+OGInversaBundle_gallery:
+    pattern:  /gallery
+    defaults: { _controller: OGInversaBundle:Content:gallery }
+
+OGInversaBundle_contact:
+    pattern:  /contact
+    defaults: { _controller: OGInversaBundle:Content:contact }
