@@ -1,0 +1,18 @@
+{# src/OG/InversaBundle/Resources/views/Content/new.html.twig #}
+{% extends 'OGInversaBundle:Content:base.html.twig' %}
+
+{% block title %}
+Ensemble Inversa | Test Form
+{% endblock %}
+
+{% block body %}
+<form action="{{ path('OGInversaBundle_test') }}" method="post" {{ form_enctype(form) }}>
+	{{ form_errors(form) }}
+
+	{{ form_row(form.name) }}
+	{{ form_row(form.file) }}
+
+	{{ form_rest(form) }}
+	<input type="submit" value="OK" />
+  </form>
+{% endblock %}

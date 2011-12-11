@@ -1,0 +1,20 @@
+# src/OG/InversaBundle/Resources/config/doctrine/Document.orm.yml
+OG\InversaBundle\Entity\Document:
+    type: entity
+    table: document
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        doctype:
+            type: string
+            length: 32
+            nullable: true
+        path:
+            type: string
+            length: 255
+            nullable: true

@@ -1,0 +1,22 @@
+SYMFONY Documentation
+------------------------------------------------------------------------------------------------------------------------------
+BUNDLE:
+php app/console generate:bundle --namespace=OG/InversaBundle
+
+ENTITIES:
+-- generate all entities in the bundle
+php app/console doctrine:generate:entities OGInversaBundle
+
+CACHE:
+-- clear dev cache
+php app/console cache:clear
+-- clear prod cache
+php app/console cache:clear --env=prod
+
+DB:
+-- create DB
+php app/console doctrine:database:create
+-- update schema
+php app/console doctrine:schema:update --force
+
+

@@ -1,0 +1,14 @@
+# src/OG/InversaBundle/Resources/config/doctrine/MediaItem.orm.yml
+OG\InversaBundle\Entity\MediaItem:
+    type: entity
+    table: mediaitem
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 100
+        description:
+            type: text

@@ -1,3 +1,7 @@
+OGInversaBundle_test:
+    pattern:  /test
+    defaults: { _controller: OGInversaBundle:Content:test }
+
 OGInversaBundle_homepage:
     pattern:  /home
     defaults: { _controller: OGInversaBundle:Content:home }

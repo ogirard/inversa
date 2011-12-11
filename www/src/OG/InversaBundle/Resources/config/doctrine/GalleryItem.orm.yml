@@ -1,0 +1,14 @@
+# src/OG/InversaBundle/Resources/config/doctrine/GalleryItem.orm.yml
+OG\InversaBundle\Entity\GalleryItem:
+    type: entity
+    table: galleryitem
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 100
+        description:
+            type: text

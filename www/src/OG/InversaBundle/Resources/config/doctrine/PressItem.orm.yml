@@ -1,0 +1,14 @@
+# src/OG/InversaBundle/Resources/config/doctrine/PressItem.orm.yml
+OG\InversaBundle\Entity\PressItem:
+    type: entity
+    table: pressitem
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 100
+        description:
+            type: text

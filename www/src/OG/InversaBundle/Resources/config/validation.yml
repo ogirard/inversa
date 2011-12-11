@@ -1,0 +1,12 @@
+OG\InversaBundle\Entity\AgendaItem:
+    properties:
+        name:
+            - NotBlank: ~
+            - MinLength: 3
+OG\InversaBundle\Entity\Document:
+    properties:            
+        file:
+            - File:
+                maxSize: 1024k
+                mimeTypes: [application/pdf, application/x-pdf]
+                mimeTypesMessage: Please upload a valid PDF
