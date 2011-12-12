@@ -3,6 +3,7 @@
 namespace OG\InversaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * OG\InversaBundle\Entity\Document
@@ -29,7 +30,7 @@ class Document
     /**
      * @var File $file
      */
-    public $file;
+    private $file;
 
     /**
      * Get id
@@ -84,6 +85,26 @@ class Document
     public function getDoctype()
     {
         return $this->doctype;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**
@@ -155,5 +176,15 @@ class Document
         if ($file = $this->getAbsolutePath()) {
             unlink($file);
         }
+    }
+
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }
