@@ -1,7 +1,6 @@
 <?php
 
 namespace OG\InversaBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,7 +22,6 @@ class AgendaItem
      * @var text $description
      */
     private $description;
-
 
     /**
      * Get id

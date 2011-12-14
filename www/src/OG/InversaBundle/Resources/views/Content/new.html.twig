@@ -6,7 +6,7 @@ Ensemble Inversa | Test Form
 {% endblock %}
 
 {% block body %}
-<form action="{{ path('OGInversaBundle_test') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('_content_test') }}" method="post" {{ form_enctype(form) }}>
 	{{ form_errors(form) }}
 
 	{{ form_row(form.name) }}

@@ -1,6 +1,16 @@
-OGInversaBundle:
-    resource: "@OGInversaBundle/Resources/config/routing.yml"
+#OGInversaBundle:
+#    resource: "@OGInversaBundle/Resources/config/routing.yml"
+#    prefix:   /
+    
+content:
+    resource: "@OGInversaBundle/Controller/ContentController.php"
     prefix:   /
+    type:     annotation
+    
+# import routes from a controller class
+admin:
+    resource: "@OGInversaBundle/Controller/AdminController.php"
+    type:     annotation
 
 # Internal routing configuration to handle ESI
 #_internal:

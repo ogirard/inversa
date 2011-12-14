@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * OG\InversaBundle\Entity\Document
- * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
  */
 class Document
 {
@@ -139,10 +137,6 @@ class Document
         return 'uploads/documents/'.$this->doctype;
     }
 
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
     public function preUpload()
     {
         if (null === $this->file) {
@@ -153,10 +147,6 @@ class Document
         $this->doctype = $this->file->guessExtension();
     }
 
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
     public function upload()
     {
         if (null === $this->file) {
@@ -168,9 +158,6 @@ class Document
         unset($this->file);
     }
 
-    /**
-     * @ORM\PostRemove()
-     */
     public function removeUpload()
     {
         if ($file = $this->getAbsolutePath()) {

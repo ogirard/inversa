@@ -1,0 +1,25 @@
+# src/OG/InversaBundle/Resources/config/doctrine/InversaUser.orm.yml
+OG\InversaBundle\Entity\InversaUser:
+    type: entity
+    table: inversauser
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        username:
+            type: string
+            length: 255
+        name:
+            type: string
+            length: 255
+        firstname:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+            nullable: true
+        password:
+            type: string
+            length: 255
