@@ -192,4 +192,54 @@ class InversaUser implements UserInterface
     {
         return (($this->getId() === $user->getId()) && ($this->getName() === $user->getName()));
     }
+    /**
+     * @var datetime $lastlogin
+     */
+    private $lastlogin;
+
+    /**
+     * @var boolean $isactive
+     */
+    private $isactive;
+
+
+    /**
+     * Set lastlogin
+     *
+     * @param datetime $lastlogin
+     */
+    public function setLastlogin($lastlogin)
+    {
+        $this->lastlogin = $lastlogin;
+    }
+
+    /**
+     * Get lastlogin
+     *
+     * @return datetime 
+     */
+    public function getLastlogin()
+    {
+        return $this->lastlogin;
+    }
+
+    /**
+     * Set isactive
+     *
+     * @param boolean $isactive
+     */
+    public function setIsactive($isactive)
+    {
+        $this->isactive = $isactive;
+    }
+
+    /**
+     * Get isactive
+     *
+     * @return boolean 
+     */
+    public function getIsactive()
+    {
+        return $this->isactive;
+    }
 }

@@ -1,0 +1,29 @@
+# src/OG/InversaBundle/Resources/config/doctrine/Location.orm.yml
+OG\InversaBundle\Entity\Location:
+    type: entity
+    table: location
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+            nullable: true
+        address:
+            type: text
+            nullable: true
+        mapurl:
+            type: string
+            length: 1024
+        isactive:
+            type: boolean
+    oneToOne:
+        image:
+            targetEntity: Image
+            joinColumn:
+                name: image_id
+                referencedColumnName: id

@@ -24,6 +24,11 @@ class ProjectItem
      */
     private $description;
 
+    /**
+     * @var boolean $isactive
+     */
+    private $isactive;
+
 
     /**
      * Get id
@@ -73,5 +78,104 @@ class ProjectItem
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set isactive
+     *
+     * @param boolean $isactive
+     */
+    public function setIsactive($isactive)
+    {
+        $this->isactive = $isactive;
+    }
+
+    /**
+     * Get isactive
+     *
+     * @return boolean 
+     */
+    public function getIsactive()
+    {
+        return $this->isactive;
+    }
+    /**
+     * @var OG\InversaBundle\Entity\WebUrl
+     */
+    private $links;
+
+    public function __construct()
+    {
+        $this->links = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add links
+     *
+     * @param OG\InversaBundle\Entity\WebUrl $links
+     */
+    public function addWebUrl(\OG\InversaBundle\Entity\WebUrl $links)
+    {
+        $this->links[] = $links;
+    }
+
+    /**
+     * Get links
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getLinks()
+    {
+        return $this->links;
+    }
+    /**
+     * @var OG\InversaBundle\Entity\Document
+     */
+    private $documents;
+
+    /**
+     * @var OG\InversaBundle\Entity\Image
+     */
+    private $images;
+
+
+    /**
+     * Add documents
+     *
+     * @param OG\InversaBundle\Entity\Document $documents
+     */
+    public function addDocument(\OG\InversaBundle\Entity\Document $documents)
+    {
+        $this->documents[] = $documents;
+    }
+
+    /**
+     * Get documents
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
+
+    /**
+     * Add images
+     *
+     * @param OG\InversaBundle\Entity\Image $images
+     */
+    public function addImage(\OG\InversaBundle\Entity\Image $images)
+    {
+        $this->images[] = $images;
+    }
+
+    /**
+     * Get images
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

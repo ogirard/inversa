@@ -5,7 +5,9 @@ php app/console generate:bundle --namespace=OG/InversaBundle
 
 ENTITIES:
 -- generate all entities in the bundle
-php app/console doctrine:generate:entities OGInversaBundle
+php app/console doctrine:generate:entities OGInversaBundle --no-backup
+-- generate CRUD controllers and forms
+php app/console generate:doctrine:crud --entity=OGInversaBundle:AgendaItem
 
 CACHE:
 -- clear dev cache
@@ -18,5 +20,28 @@ DB:
 php app/console doctrine:database:create
 -- update schema
 php app/console doctrine:schema:update --force
+
+
+--- DOCTRINE
+Doctrine Field Types Reference¶
+Doctrine comes with a large number of field types available. Each of these maps a PHP data type to a specific column type in whatever database you're using. The following types are supported in Doctrine:
+Strings
+string (used for shorter strings)
+text (used for larger strings)
+Numbers
+integer
+smallint
+bigint
+decimal
+float
+Dates and Times (use a DateTime object for these fields in PHP)
+date
+time
+datetime
+Other Types
+boolean
+object (serialized and stored in a CLOB field)
+array (serialized and stored in a CLOB field)
+For more information, see Doctrine's Mapping Types documentation.
 
 

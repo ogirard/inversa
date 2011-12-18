@@ -12,3 +12,28 @@ OG\InversaBundle\Entity\AgendaItem:
             length: 100
         description:
             type: text
+            nullable: true
+        eventdate:
+            type: datetime
+        participants:
+            type: string
+            length: 1024
+            nullable: true
+        isactive:
+            type: boolean
+    oneToMany:
+        documents:
+            targetEntity: Document
+            mappedBy: agendaitem
+        images:
+            targetEntity: Image
+            mappedBy: agendaitem
+        links:
+            targetEntity: WebUrl
+            mappedBy: agendaitem
+    oneToOne:
+        location:
+            targetEntity: Location
+            joinColumn:
+                name: location_id
+                referencedColumnName: id

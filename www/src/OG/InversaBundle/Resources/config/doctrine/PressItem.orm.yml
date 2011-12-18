@@ -12,3 +12,18 @@ OG\InversaBundle\Entity\PressItem:
             length: 100
         description:
             type: text
+            nullable: true
+        published:
+            type: datetime
+        isactive:
+            type: boolean
+    oneToMany:
+        documents:
+            targetEntity: Document
+            mappedBy: pressitem
+        images:
+            targetEntity: Image
+            mappedBy: pressitem
+        links:
+            targetEntity: WebUrl
+            mappedBy: pressitem

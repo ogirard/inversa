@@ -1,7 +1,7 @@
-# src/OG/InversaBundle/Resources/config/doctrine/Document.orm.yml
-OG\InversaBundle\Entity\Document:
+# src/OG/InversaBundle/Resources/config/doctrine/WebUrl.orm.yml
+OG\InversaBundle\Entity\WebUrl:
     type: entity
-    table: document
+    table: weburl
     id:
         id:
             type: integer
@@ -10,36 +10,25 @@ OG\InversaBundle\Entity\Document:
         name:
             type: string
             length: 255
-        doctype:
+        url:
             type: string
-            length: 32
-            nullable: true
-        path:
-            type: string
-            length: 255
-            nullable: true
+            length: 1024
     manyToOne:
         agendaitem:
             targetEntity: AgendaItem
-            inversedBy: documents
+            inversedBy: links
             joinColumn:
                 name: agendaitem_id
                 referencedColumnName: id
         projectitem:
             targetEntity: ProjectItem
-            inversedBy: documents
+            inversedBy: links
             joinColumn:
                 name: projectitem_id
                 referencedColumnName: id
         pressitem:
             targetEntity: PressItem
-            inversedBy: documents
+            inversedBy: links
             joinColumn:
                 name: pressitem_id
                 referencedColumnName: id
-    lifecycleCallbacks:
-        prePersist: [preUpload]
-        preUpdate: [preUpload]
-        postPersist: [upload]
-        postUpdate: [upload]
-        postRemove: [removeUpload]

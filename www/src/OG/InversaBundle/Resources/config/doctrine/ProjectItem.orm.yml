@@ -12,3 +12,16 @@ OG\InversaBundle\Entity\ProjectItem:
             length: 100
         description:
             type: text
+            nullable: true
+        isactive:
+            type: boolean
+    oneToMany:
+        documents:
+            targetEntity: Document
+            mappedBy: projectitem
+        images:
+            targetEntity: Image
+            mappedBy: projectitem
+        links:
+            targetEntity: WebUrl
+            mappedBy: projectitem

@@ -12,3 +12,6 @@ OG\InversaBundle\Entity\MediaItem:
             length: 100
         description:
             type: text
+            nullable: true
+        isactive:
+            type: boolean

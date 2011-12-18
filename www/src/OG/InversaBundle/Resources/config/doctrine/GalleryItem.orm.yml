@@ -12,3 +12,8 @@ OG\InversaBundle\Entity\GalleryItem:
             length: 100
         description:
             type: text
+            nullable: true
+    oneToMany:
+        images:
+            targetEntity: Image
+            mappedBy: galleryitem

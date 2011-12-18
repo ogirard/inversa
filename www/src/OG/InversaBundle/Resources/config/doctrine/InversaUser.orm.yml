@@ -23,3 +23,7 @@ OG\InversaBundle\Entity\InversaUser:
         password:
             type: string
             length: 255
+        lastlogin:
+            type: datetime
+        isactive:
+            type: boolean

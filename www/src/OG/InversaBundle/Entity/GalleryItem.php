@@ -74,4 +74,33 @@ class GalleryItem
     {
         return $this->description;
     }
+    /**
+     * @var OG\InversaBundle\Entity\Image
+     */
+    private $images;
+
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add images
+     *
+     * @param OG\InversaBundle\Entity\Image $images
+     */
+    public function addImage(\OG\InversaBundle\Entity\Image $images)
+    {
+        $this->images[] = $images;
+    }
+
+    /**
+     * Get images
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
 }

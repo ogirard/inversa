@@ -1,7 +1,7 @@
-# src/OG/InversaBundle/Resources/config/doctrine/Document.orm.yml
-OG\InversaBundle\Entity\Document:
+# src/OG/InversaBundle/Resources/config/doctrine/Image.orm.yml
+OG\InversaBundle\Entity\Image:
     type: entity
-    table: document
+    table: image
     id:
         id:
             type: integer
@@ -10,32 +10,36 @@ OG\InversaBundle\Entity\Document:
         name:
             type: string
             length: 255
-        doctype:
-            type: string
-            length: 32
+        description:
+            type: text
             nullable: true
         path:
             type: string
-            length: 255
-            nullable: true
+            length: 255      
     manyToOne:
         agendaitem:
             targetEntity: AgendaItem
-            inversedBy: documents
+            inversedBy: images
             joinColumn:
                 name: agendaitem_id
                 referencedColumnName: id
         projectitem:
             targetEntity: ProjectItem
-            inversedBy: documents
+            inversedBy: images
             joinColumn:
                 name: projectitem_id
                 referencedColumnName: id
         pressitem:
             targetEntity: PressItem
-            inversedBy: documents
+            inversedBy: images
             joinColumn:
                 name: pressitem_id
+                referencedColumnName: id
+        galleryitem:
+            targetEntity: GalleryItem
+            inversedBy: images
+            joinColumn:
+                name: galleryitem_id
                 referencedColumnName: id
     lifecycleCallbacks:
         prePersist: [preUpload]

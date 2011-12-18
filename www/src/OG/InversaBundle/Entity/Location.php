@@ -5,9 +5,9 @@ namespace OG\InversaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * OG\InversaBundle\Entity\MediaItem
+ * OG\InversaBundle\Entity\Location
  */
-class MediaItem
+class Location
 {
     /**
      * @var integer $id
@@ -23,6 +23,16 @@ class MediaItem
      * @var text $description
      */
     private $description;
+
+    /**
+     * @var text $address
+     */
+    private $address;
+
+    /**
+     * @var string $mapurl
+     */
+    private $mapurl;
 
     /**
      * @var boolean $isactive
@@ -81,6 +91,46 @@ class MediaItem
     }
 
     /**
+     * Set address
+     *
+     * @param text $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * Get address
+     *
+     * @return text 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set mapurl
+     *
+     * @param string $mapurl
+     */
+    public function setMapurl($mapurl)
+    {
+        $this->mapurl = $mapurl;
+    }
+
+    /**
+     * Get mapurl
+     *
+     * @return string 
+     */
+    public function getMapurl()
+    {
+        return $this->mapurl;
+    }
+
+    /**
      * Set isactive
      *
      * @param boolean $isactive
@@ -98,5 +148,30 @@ class MediaItem
     public function getIsactive()
     {
         return $this->isactive;
+    }
+    /**
+     * @var OG\InversaBundle\Entity\Image
+     */
+    private $image;
+
+
+    /**
+     * Set image
+     *
+     * @param OG\InversaBundle\Entity\Image $image
+     */
+    public function setImage(\OG\InversaBundle\Entity\Image $image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * Get image
+     *
+     * @return OG\InversaBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
