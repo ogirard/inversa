@@ -8,6 +8,7 @@ ENTITIES:
 php app/console doctrine:generate:entities OGInversaBundle --no-backup
 -- generate CRUD controllers and forms
 php app/console generate:doctrine:crud --entity=OGInversaBundle:AgendaItem
+php app/console generate:doctrine:crud --entity=OGInversaBundle:<Entity> --route-prefix=/admin/<entity> --with-write
 
 CACHE:
 -- clear dev cache

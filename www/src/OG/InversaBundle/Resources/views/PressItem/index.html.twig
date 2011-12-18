@@ -1,0 +1,49 @@
+{% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
+
+{% block body %}
+  
+<h1>PressItem list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Published</th>
+            <th>Isactive</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('admin_pressitem_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.name }}</td>
+            <td>{{ entity.description }}</td>
+            <td>{% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif%}</td>
+            <td>{{ entity.isactive }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_pressitem_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_pressitem_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('admin_pressitem_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+
+{% endblock %}

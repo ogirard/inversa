@@ -1,0 +1,22 @@
+{% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
+
+{% block body %}
+
+<h1>AgendaItem creation</h1>
+
+<form action="{{ path('admin_agendaitem_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_agendaitem') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+
+{% endblock %}

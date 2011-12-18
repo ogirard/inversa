@@ -99,29 +99,7 @@ class Image
     {
         return $this->path;
     }
-    /**
-     * @ORM\prePersist
-     */
-    public function preUpload()
-    {
-        // Add your code here
-    }
-
-    /**
-     * @ORM\postPersist
-     */
-    public function upload()
-    {
-        // Add your code here
-    }
-
-    /**
-     * @ORM\postRemove
-     */
-    public function removeUpload()
-    {
-        // Add your code here
-    }
+  
     /**
      * @var OG\InversaBundle\Entity\AgendaItem
      */
@@ -221,5 +199,86 @@ class Image
     public function getGalleryitem()
     {
         return $this->galleryitem;
+    }
+    
+    private $file;
+    
+    /**
+     * Set file
+     *
+     * @param string $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+    
+    /**
+     * Get file
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+    
+    public function getAbsolutePath()
+    {
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->id.'_'.$this->path;
+    }
+    
+    public function getWebPath()
+    {
+        return null === $this->path ? null : $this->getUploadDir().'/'.$this->id.'_'.$this->path;
+    }
+    
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+    
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'uploads/images/'.$this->doctype;
+    }
+    
+    /**
+     * @ORM\prePersist
+     */
+    public function preUpload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+    
+        $this->path = $this->file->getClientOriginalName();
+        $this->doctype = $this->file->guessExtension();
+    }
+    
+    /**
+     * @ORM\postPersist
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+    
+        $this->file->move($this->getUploadRootDir(), $this->id.'_'.$this->path);
+    
+        unset($this->file);
+    }
+    
+    /**
+     * @ORM\postRemove
+     */
+    public function removeUpload()
+    {
+        if ($file = $this->getAbsolutePath()) {
+            unlink($file);
+        }
     }
 }

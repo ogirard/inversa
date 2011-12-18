@@ -1,0 +1,55 @@
+{% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
+
+{% block body %}
+
+<h1>AgendaItem</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ entity.name }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ entity.description }}</td>
+        </tr>
+        <tr>
+            <th>Eventdate</th>
+            <td>{{ entity.eventdate|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Participants</th>
+            <td>{{ entity.participants }}</td>
+        </tr>
+        <tr>
+            <th>Isactive</th>
+            <td>{{ entity.isactive }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_agendaitem') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_agendaitem_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_agendaitem_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+
+{% endblock %}

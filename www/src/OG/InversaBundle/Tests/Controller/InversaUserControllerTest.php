@@ -4,7 +4,7 @@ namespace OG\InversaBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class AgendaItemControllerTest extends WebTestCase
+class InversaUserControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()
@@ -13,13 +13,13 @@ class AgendaItemControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/admin/agendaitem/');
+        $crawler = $client->request('GET', '/admin/user/');
         $this->assertTrue(200 === $client->getResponse()->getStatusCode());
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'agendaitem[field_name]'  => 'Test',
+            'inversauser[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class AgendaItemControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'agendaitem[field_name]'  => 'Foo',
+            'inversauser[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 
