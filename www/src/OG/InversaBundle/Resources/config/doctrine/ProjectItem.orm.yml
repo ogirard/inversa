@@ -15,6 +15,7 @@ OG\InversaBundle\Entity\ProjectItem:
             nullable: true
         isactive:
             type: boolean
+            nullable: true
     oneToMany:
         documents:
             targetEntity: Document

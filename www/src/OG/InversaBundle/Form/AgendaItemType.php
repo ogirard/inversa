@@ -23,4 +23,9 @@ class AgendaItemType extends AbstractType
     {
         return 'og_inversabundle_agendaitemtype';
     }
+    
+    public function getDefaultOptions(array $options)
+    {
+        return array('data_class' => 'OG\InversaBundle\Entity\AgendaItem');
+    }
 }

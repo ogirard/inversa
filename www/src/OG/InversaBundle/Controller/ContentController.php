@@ -20,7 +20,7 @@ class ContentController extends Controller
         $request = $this->getRequest();
         $item = new Document();
 
-        $form = $this->createForm(new DocumentType(), $item);
+        $form = $this->createForm(new DocumentType("OG\InversaBundle\Entity\Document"), $item);
 
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);

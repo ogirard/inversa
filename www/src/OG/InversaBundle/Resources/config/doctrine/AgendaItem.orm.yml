@@ -21,6 +21,7 @@ OG\InversaBundle\Entity\AgendaItem:
             nullable: true
         isactive:
             type: boolean
+            nullable: true
     oneToMany:
         documents:
             targetEntity: Document

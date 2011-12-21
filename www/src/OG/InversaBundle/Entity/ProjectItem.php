@@ -1,7 +1,6 @@
 <?php
 
 namespace OG\InversaBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +27,6 @@ class ProjectItem
      * @var boolean $isactive
      */
     private $isactive;
-
 
     /**
      * Get id
@@ -106,17 +104,19 @@ class ProjectItem
 
     public function __construct()
     {
+        $this->documents = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
         $this->links = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
-     * Add links
+     * Add link
      *
-     * @param OG\InversaBundle\Entity\WebUrl $links
+     * @param OG\InversaBundle\Entity\WebUrl $link
      */
-    public function addWebUrl(\OG\InversaBundle\Entity\WebUrl $links)
+    public function addWebUrl(\OG\InversaBundle\Entity\WebUrl $link)
     {
-        $this->links[] = $links;
+        $this->links[] = $link;
     }
 
     /**
@@ -138,15 +138,14 @@ class ProjectItem
      */
     private $images;
 
-
     /**
-     * Add documents
+     * Add document
      *
-     * @param OG\InversaBundle\Entity\Document $documents
+     * @param OG\InversaBundle\Entity\Document $document
      */
-    public function addDocument(\OG\InversaBundle\Entity\Document $documents)
+    public function addDocument(\OG\InversaBundle\Entity\Document $document)
     {
-        $this->documents[] = $documents;
+        $this->documents[] = $document;
     }
 
     /**
@@ -160,13 +159,13 @@ class ProjectItem
     }
 
     /**
-     * Add images
+     * Add image
      *
-     * @param OG\InversaBundle\Entity\Image $images
+     * @param OG\InversaBundle\Entity\Image $image
      */
-    public function addImage(\OG\InversaBundle\Entity\Image $images)
+    public function addImage(\OG\InversaBundle\Entity\Image $image)
     {
-        $this->images[] = $images;
+        $this->images[] = $image;
     }
 
     /**
@@ -177,5 +176,14 @@ class ProjectItem
     public function getImages()
     {
         return $this->images;
+    }
+    
+    /**
+    * ToString representation
+    * @return number
+    */
+    public function __toString()
+    {
+        return "PROJECT_".$this->id;
     }
 }

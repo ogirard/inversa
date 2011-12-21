@@ -2,7 +2,9 @@ SYMFONY Documentation
 ------------------------------------------------------------------------------------------------------------------------------
 BUNDLE:
 php app/console generate:bundle --namespace=OG/InversaBundle
-
+INSTALL ASSETS --> /web:
+php app/console assets:install web
+ 
 ENTITIES:
 -- generate all entities in the bundle
 php app/console doctrine:generate:entities OGInversaBundle --no-backup

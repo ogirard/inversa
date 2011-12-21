@@ -19,4 +19,9 @@ class GalleryItemType extends AbstractType
     {
         return 'og_inversabundle_galleryitemtype';
     }
+    
+    public function getDefaultOptions(array $options)
+    {
+        return array('data_class' => 'OG\InversaBundle\Entity\GalleryItem');
+    }
 }

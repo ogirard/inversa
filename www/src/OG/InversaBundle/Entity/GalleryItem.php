@@ -85,11 +85,11 @@ class GalleryItem
     }
     
     /**
-     * Add images
+     * Add image
      *
-     * @param OG\InversaBundle\Entity\Image $images
+     * @param OG\InversaBundle\Entity\Image $image
      */
-    public function addImage(\OG\InversaBundle\Entity\Image $images)
+    public function addImage(\OG\InversaBundle\Entity\Image $image)
     {
         $this->images[] = $images;
     }

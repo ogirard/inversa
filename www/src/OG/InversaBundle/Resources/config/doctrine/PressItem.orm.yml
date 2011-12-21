@@ -17,6 +17,7 @@ OG\InversaBundle\Entity\PressItem:
             type: datetime
         isactive:
             type: boolean
+            nullable: true
     oneToMany:
         documents:
             targetEntity: Document

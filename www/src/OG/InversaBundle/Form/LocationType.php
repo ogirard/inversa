@@ -23,4 +23,9 @@ class LocationType extends AbstractType
     {
         return 'og_inversabundle_locationtype';
     }
+    
+    public function getDefaultOptions(array $options)
+    {
+        return array('data_class' => 'OG\InversaBundle\Entity\Location');
+    }
 }

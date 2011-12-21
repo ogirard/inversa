@@ -281,4 +281,13 @@ class Image
             unlink($file);
         }
     }
+    
+    /**
+     * ToString representation
+     * @return number
+     */
+    public function __toString()
+    {
+        return "IMAGE_".$this->id;
+    }
 }

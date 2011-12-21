@@ -174,4 +174,13 @@ class Location
     {
         return $this->image;
     }
+    
+    /**
+    * ToString representation
+    * @return number
+    */
+    public function __toString()
+    {
+        return "LOCATION_".$this->id;
+    }
 }

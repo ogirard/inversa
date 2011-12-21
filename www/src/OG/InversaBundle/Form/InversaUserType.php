@@ -24,4 +24,9 @@ class InversaUserType extends AbstractType
     {
         return 'og_inversabundle_inversausertype';
     }
+    
+    public function getDefaultOptions(array $options)
+    {
+        return array('data_class' => 'OG\InversaBundle\Entity\InversaUser');
+    }
 }

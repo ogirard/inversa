@@ -20,4 +20,9 @@ class MediaItemType extends AbstractType
     {
         return 'og_inversabundle_mediaitemtype';
     }
+    
+    public function getDefaultOptions(array $options)
+    {
+        return array('data_class' => 'OG\InversaBundle\Entity\MediaItem');
+    }
 }

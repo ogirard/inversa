@@ -20,4 +20,9 @@ class ImageType extends AbstractType
     {
         return 'og_inversabundle_imagetype';
     }
+    
+    public function getDefaultOptions(array $options)
+    {
+        return array('data_class' => 'OG\InversaBundle\Entity\Image');
+    }
 }

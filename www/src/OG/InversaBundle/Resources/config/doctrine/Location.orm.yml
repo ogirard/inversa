@@ -21,6 +21,7 @@ OG\InversaBundle\Entity\Location:
             length: 1024
         isactive:
             type: boolean
+            nullable: true
     oneToOne:
         image:
             targetEntity: Image

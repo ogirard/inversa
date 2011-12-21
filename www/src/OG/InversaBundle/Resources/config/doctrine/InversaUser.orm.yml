@@ -27,3 +27,4 @@ OG\InversaBundle\Entity\InversaUser:
             type: datetime
         isactive:
             type: boolean
+            nullable: true

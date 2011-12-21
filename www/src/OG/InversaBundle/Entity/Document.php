@@ -255,4 +255,13 @@ class Document
     {
         return $this->pressitem;
     }
+    
+    /**
+    * ToString representation
+    * @return number
+    */
+    public function __toString()
+    {
+        return "DOC_".$this->id;
+    }
 }
