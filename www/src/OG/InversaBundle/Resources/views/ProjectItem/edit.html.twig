@@ -6,12 +6,7 @@
 
 <form action="{{ path('admin_projectitem_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
-        
-    {# store the prototype on the data-prototype attribute #}
-    <ul id="document-list" data-prototype="">
-        {{ form_row(edit_form.documents.get('prototype')) }}
-    </ul>
-    
+            
     <a href="#" id="add-document">Add document</a>
     
     <p>
@@ -43,22 +38,20 @@
     var documentCount = '{{ edit_form.documents | length }}';
 
     $(document).ready(function() {
-        $('#add-document').click(function() {
-            var documentList = $('#document-list');
+        $('#add-document').click(function(event) {
+        	event.preventDefault();
+        	
+            var $documentList = $('#og_inversabundle_projectitemtype_documents');
 
             // grab the prototype template
-            var newWidget = documentList.attr('data-prototype');
+            var newWidget = $documentList.attr('data-prototype');
             
-            // replace the "$$name$$" used in the id and name of the prototype
-            // with a number that's unique to our emails
-            // end name attribute looks like name="contact[emails][2]"
-            newWidget = newWidget.replace(/\$\$name\$\$/g, documentCount);
+            // replace the "$$name$$" with unique id 
+            $itemFormDiv = $(newWidget.replace(/\$\$name\$\$/g, documentCount));
             documentCount++;
 
             // create a new list element and add it to our list
-            var newLi = $('<li></li>').html(newWidget);
-            newLi.appendTo(jQuery('#document-list'));
-
+            $itemFormDiv.appendTo($documentList);
             return false;
         });
     });

@@ -1,7 +1,6 @@
 <?php
 
 namespace OG\InversaBundle\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -49,9 +48,7 @@ class ProjectItemController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+        return array('entity' => $entity, 'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -63,12 +60,9 @@ class ProjectItemController extends Controller
     public function newAction()
     {
         $entity = new ProjectItem();
-        $form   = $this->createForm(new ProjectItemType(), $entity);
+        $form = $this->createForm(new ProjectItemType(), $entity);
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
+        return array('entity' => $entity, 'form' => $form->createView());
     }
 
     /**
@@ -80,9 +74,9 @@ class ProjectItemController extends Controller
      */
     public function createAction()
     {
-        $entity  = new ProjectItem();
+        $entity = new ProjectItem();
         $request = $this->getRequest();
-        $form    = $this->createForm(new ProjectItemType(), $entity);
+        $form = $this->createForm(new ProjectItemType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -91,13 +85,10 @@ class ProjectItemController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_projectitem_show', array('id' => $entity->getId())));
-            
+
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
+        return array('entity' => $entity, 'form' => $form->createView());
     }
 
     /**
@@ -119,11 +110,8 @@ class ProjectItemController extends Controller
         $editForm = $this->createForm(new ProjectItemType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return array('entity' => $entity, 'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -143,7 +131,7 @@ class ProjectItemController extends Controller
             throw $this->createNotFoundException('Unable to find ProjectItem entity.');
         }
 
-        $editForm   = $this->createForm(new ProjectItemType(), $entity);
+        $editForm = $this->createForm(new ProjectItemType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -151,17 +139,36 @@ class ProjectItemController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
+            $this->updateReferences($entity);
+
             $em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_projectitem_edit', array('id' => $id)));
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return array('entity' => $entity, 'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),);
+    }
+
+    /**
+     * Update the references of the collections
+     * 
+     * @param \OG\InversaBundle\Entity\ProjectItem $entity
+     */
+    private function updateReferences(\OG\InversaBundle\Entity\ProjectItem $entity)
+    {
+        foreach ($entity->getDocuments() as $doc) {
+            $doc->setProjectitem($entity);
+        }
+
+        foreach ($entity->getImages() as $img) {
+            $img->setProjectitem($entity);
+        }
+
+        foreach ($entity->getLinks() as $link) {
+            $link->setProjectitem($entity);
+        }
     }
 
     /**
@@ -194,9 +201,6 @@ class ProjectItemController extends Controller
 
     private function createDeleteForm($id)
     {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
+        return $this->createFormBuilder(array('id' => $id))->add('id', 'hidden')->getForm();
     }
 }

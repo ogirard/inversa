@@ -20,9 +20,12 @@ OG\InversaBundle\Entity\ProjectItem:
         documents:
             targetEntity: Document
             mappedBy: projectitem
+            cascade: ["persist", "remove"]
         images:
             targetEntity: Image
             mappedBy: projectitem
+            cascade: ["persist", "remove"]
         links:
             targetEntity: WebUrl
             mappedBy: projectitem
+            cascade: ["persist", "remove"]

@@ -6,10 +6,9 @@ use Symfony\Component\Form\FormBuilder;
 
 class DocumentType extends AbstractType
 {
-
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder->add('name')->add('doctype')->add('path')->add('agendaitem')->add('projectitem')->add('pressitem');
+        $builder->add('name')->add('file')->add('webpath', null, array('required' => false));
     }
 
     public function getName()
