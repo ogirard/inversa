@@ -1,3 +1,3 @@
-O:
-cd "O:\Documents\Work\04_Web\EnsembleInversa\www"
+%1
+cd %2
 php app/console cache:clear

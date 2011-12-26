@@ -1,3 +1,3 @@
-O:
-cd "O:\Documents\Work\04_Web\EnsembleInversa\www"
-php app/console doctrine:schema:update --complete --dump-sql > "O:\Documents\Work\04_Web\EnsembleInversa\www\model.sql"
+%1
+cd %2
+php app/console doctrine:schema:update --complete --dump-sql > %2\model.sql
