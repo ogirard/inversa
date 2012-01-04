@@ -1,0 +1,274 @@
+/**
+ * CSS www.ensemble-inversa.ch
+ */
+
+@charset "utf-8";
+ 
+body {
+    font: 100%/1.4 Calibri, "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #e5e5e5;
+}
+ 
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl {
+    padding: 0;
+    margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+    margin-top: 0;
+}
+ 
+h1 {
+    font-size: 100%;
+    text-transform:uppercase;
+    color:#300065;
+}
+ 
+h2 {
+    font-size: 100%;
+    text-transform:uppercase;
+    color:#300065;
+    padding-bottom:5px;
+    font-weight:normal;
+    margin:0px;
+}
+ 
+h3 {
+    font-size: 100%;
+    text-transform:uppercase;
+    color:#09C;
+    padding-bottom:0px;
+    font-weight:normal;
+    margin:0px;
+}
+ 
+h4 {
+    font-size: 100%;
+    color:#300065;
+    padding-bottom:0px;
+    font-weight:normal;
+    margin:0px;
+        font-style:italic;
+}
+ 
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+    border: none;
+}
+
+a:link {
+    color: #e5e5e5;
+    text-decoration: none; 
+}
+a:visited {
+    color: #e5e5e5;
+    text-decoration: none;
+}
+a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+    text-decoration: none;
+    color:#ffffff;
+}
+ 
+
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a.activemenulink:link {
+    color: #e5e5e5;
+    text-decoration: none; 
+	font-weight:bold;
+}
+a.activemenulink:visited {
+    color: #e5e5e5;
+    text-decoration: none; 
+	font-weight:bold;
+}
+a.activemenulink:hover, a.info:active, a.info:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+    color: #ffffff;
+    text-decoration: none;
+	font-weight:bold;
+}
+
+.menulink {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+div.menu {
+  margin-top: 25px;
+  margin-bottom: 15px;
+  text-align:center;
+  width:100%;  
+}
+
+div.footer {
+  padding-top: 5px;
+  padding-bottom: 3px;
+  text-align:center;
+  width:100%;  
+}
+
+span.footertext {
+    font-size:10px;
+    color:#c5c5c5;
+	text-align:center;
+}
+
+div.instrumentpage {
+  padding-left:100px;
+  padding-right:100px;
+  padding-top:30px;
+}
+
+div.instrumenttitle {
+	height: 80px;
+	padding-top:10px;
+	width:100%;
+	text-align:center;
+}
+
+div.instrarea {
+	margin-left:300px;
+	margin-right:300px;
+}
+
+div.panflutearea {
+	background-color:#d10000;
+}
+
+div.flutearea {
+	background-color:#004aaf;
+}
+
+div.violinarea {
+	background-color:#00890a;
+}
+
+div.pianoorganarea {
+	background-color:#fe9500;
+}
+ 
+
+/* ~~ miscellaneous float/clear classes ~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+    float: right;
+    margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+    float: left;
+    margin-right: 8px;
+}
+ 
+.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
+    clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}
+div.thinline {
+    background-color:#09C;
+    height:1px;
+    width:auto;
+}
+div.thickline {
+    background-color:#300065;
+    height:2px;
+    width:auto;
+}
+ 
+
+ 
+div.tabs {
+    padding: 5px 0px;
+}
+ 
+span.tab {
+    text-transform:uppercase;
+    color: #09C;
+    text-decoration: none;
+    cursor: pointer;
+}
+ 
+span.tabover {
+    text-transform:uppercase;
+    color: #300065;
+    text-decoration: none;
+    cursor: pointer;
+}
+ 
+span.tabselected {
+    text-transform:uppercase;
+    color: #300065;
+    text-decoration: none;
+}
+ 
+span.spacer {
+    margin-left: 20px;
+}
+ 
+span.option {
+    color: #300065;
+    padding-right:10px;
+}
+ 
+ 
+/* simple table */
+table.simple
+{
+    padding:0px;
+    margin: 0px;
+}
+ 
+tr.simple
+{
+    padding:0px;
+    margin: 0px;
+}
+ 
+td.simple
+{
+    padding:0px;
+    margin: 0px;
+    vertical-align:top;
+}
+ 
+/* Login */
+ 
+div.LoginBox
+{
+    position:absolute;
+    top:50px;
+    left:50px;
+    border-style:solid;
+    border-width:1px;
+    border-color:#09C;
+    background-color:#cee0e4;
+    padding:10px;
+}
+ 
+input.LoginEdit
+{
+    margin-bottom:10px;
+    width:250px;
+    border-style:solid;
+    border-color:#CCCCCC;
+    border-width:1px;   
+    margin-left:15px;
+    padding:2px;
+}
+ 
+input.SubmitLink
+{
+    background: transparent;
+    border: none;
+    color: #300065;
+    font: 100%/1.4 Georgia, "Times New Roman", Times, serif;
+    cursor:pointer;
+    margin:0px;
+    margin-top:15px;
+    float:right;
+    padding:0px;
+}
+input.SubmitLink:hover
+{
+    color: #09C;
+}

@@ -1,0 +1,20 @@
+@charset "utf-8";
+#slider {
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+	background:#099;
+}
+.scroll {
+	overflow: auto;
+	position: relative; /* fix for IE to respect overflow */
+	clear: left;
+	margin-top: 0px;
+	margin-bottom:0px;
+	margin-left:auto;
+	margin-right:auto; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+.scrollContainer div.panel {
+	padding: 20px;
+	margin: 0 auto;
+}

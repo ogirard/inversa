@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+table.formtable {
+	margin: 0px;
+	padding: 0px;
+	border-width: 0px;
+	border-style: 0px;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+table.formtable tr {
+	vertical-align: middle;
+	margin: 0px;
+	padding: 0px;
+}
+
+table.formtable td {
+	vertical-align: middle;
+	margin: 0px;
+	padding: 0px;
+}
+
+input.formtext {
+	border-style: solid;
+	border-color: #979797;
+	border-width: 1px;
+	background-color: #e2e2e2;
+	margin: 2px;
+	margin-left: 16px;
+}
+
+label.formlabel {
+	color: #484848;
+	vertical-align: middle;
+}
+
+input.formbutton {
+	border-style: solid;
+	border-color: #979797;
+	border-width: 1px;
+	background-color: #e2e2e2;
+	margin: 2px;
+	font-weight: bold;
+}
+
+div.formerror {
+	font-size: 9pt;
+	color: #de0000;
+	font-style: italic;
+	margin: 2px 0px;
+	padding: 0px;
+}

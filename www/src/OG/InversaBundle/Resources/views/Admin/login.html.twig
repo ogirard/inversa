@@ -2,26 +2,25 @@
 
 {% block body %}
     <h1>Login</h1>
-
     <p>
-        Choose between two default users: <em>user/userpass</em> <small>(ROLE_USER)</small> or <em>admin/adminpass</em> <small>(ROLE_ADMIN)</small>
+        Sie betreten den Ensemble Inversa Administrator Bereich.<br />Bitte Login Daten eingeben!<br />
     </p>
 
-    {% if error %}
-        <div class="error">{{ error.message }}</div>
-    {% endif %}
-
     <form action="{{ path("_security_check") }}" method="post" id="login">
-        <div>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
-        </div>
-
-        <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="_password" />
-        </div>
-
-        <input type="submit" value="LOGIN" />
+        <table class="formtable">
+        <tr>
+        <td><label for="username" class="formlabel">Benutzername</label></td>
+        <td><input class="formtext" type="text" id="username" name="_username" value="{{ last_username }}" /></td>
+        </tr>
+        <tr>
+        <td><label for="password" class="formlabel">Passwort</label></td>
+        <td><input class="formtext" type="password" id="password" name="_password" /></td>
+        </tr>
+        </table><br />
+	    
+        {% if error %}
+	        <div class="formerror">{{ error.message }}</div>
+	    {% endif %}
+        <input class="formbutton" type="submit" value="Login" />
     </form>
 {% endblock %}

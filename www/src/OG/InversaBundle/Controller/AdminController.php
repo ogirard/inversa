@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
- * @Route("/admin")
+ * @Route("/admin", defaults={"_controller" = "OGInversaBundle:Admin:home" })
  */
 class AdminController extends Controller
 {
@@ -48,7 +48,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/home", name="_admin_home")
+     * @Route("/", name="_admin_home")
      * @Template()
      */
     public function homeAction()
