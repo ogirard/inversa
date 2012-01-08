@@ -159,6 +159,7 @@ class AgendaItem
         $this->documents = new \Doctrine\Common\Collections\ArrayCollection();
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
         $this->links = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->isactive = true;
     }
     
     /**

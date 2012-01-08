@@ -2,31 +2,28 @@
 
 {% block body %}
   
-<h1>ProjectItem edit</h1>
+<h1>Projekt "{{ entity.name }}" Editieren</h1>
 
-<form action="{{ path('admin_projectitem_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<form id="edititemform" action="{{ path('admin_projectitem_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <table class="formtable">
     {{ form_widget(edit_form) }}
-            
-    <a href="#" id="add-document">Add document</a>
+    </table> <br />
+     
+    <a href="#" id="add-document">Neues Dokument</a><br />  
     
-    <p>
-        <button type="submit">Edit</button>
-    </p>
+     <p>
+        <button type="submit">Speichern</button>
+    </p>  
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_projectitem') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_projectitem_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<span class="actionlist">
+  <form id="deleteitemform" action="{{ path('admin_projectitem_delete', { 'id': entity.id }) }}" method="post">
+    {{ form_widget(delete_form) }}    
+  </form>  
+  <br /><br />
+  <a href="" onclick="$('#edititemform').submit();" class="actionbutton"><span>Speichern</span></a>
+  <a href="" onclick="deleteGuarded()" class="actionbutton" style="margin-left:10px"><span>L&ouml;schen</span></a>
+  <a href="{{ path('admin_projectitem') }}" onclick="$('#deleteitemform').submit();" class="actionbutton" style="margin-left:50px"><span><img src="{{ asset('bundles/oginversa/images/list.png') }}" border="0" alt="Liste anzeigen" align="left" title="Liste anzeigen" />Liste anzeigen</span></a>
+</span>
 
 {% endblock %}
 
@@ -36,24 +33,23 @@
 <script type="text/javascript">
     // keep track of how many document fields have been rendered
     var documentCount = '{{ edit_form.documents | length }}';
+    var linkCount = '{{ edit_form.links | length }}';
+    var imageCount = '{{ edit_form.images | length }}';
 
     $(document).ready(function() {
-        $('#add-document').click(function(event) {
-        	event.preventDefault();
-        	
-            var $documentList = $('#og_inversabundle_projectitemtype_documents');
-
-            // grab the prototype template
-            var newWidget = $documentList.attr('data-prototype');
-            
-            // replace the "$$name$$" with unique id 
-            $itemFormDiv = $(newWidget.replace(/\$\$name\$\$/g, documentCount));
-            documentCount++;
-
-            // create a new list element and add it to our list
-            $itemFormDiv.appendTo($documentList);
-            return false;
-        });
+        var docDynEdit = new dynedit(documentCount, '#add-document', '#og_inversabundle_projectitemtype_documents');
+        docDynEdit.Initialize();
+        
+        // RegisterAddLink('#og_inversabundle_projectitemtype_links');
+        // RegisterAddImage('#og_inversabundle_projectitemtype_images');
     });
+
+    function deleteGuarded() {
+        if (confirm("Soll dieses Element definitiv gelöscht werden?")) {
+      	  $('#deleteitemform').submit();
+        }      
+        return false;
+    }
+    
 </script>
 {% endblock %}

@@ -5,7 +5,9 @@
 <h1>ProjectItem creation</h1>
 
 <form action="{{ path('admin_projectitem_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+<table class="formtable">    
+{{ form_widget(form) }}
+</table>
          
     <p>
         <button type="submit">Create</button>

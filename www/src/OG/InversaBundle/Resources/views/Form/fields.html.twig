@@ -1,0 +1,11 @@
+{# src/OG/InversaBundle/Resources/views/Form/fields.html.twig #}
+
+{% block field_row %}
+{% spaceless %}
+    <tr>
+       <td class="formlabel">{{ form_label(form) }}</td>
+       <td class="formfield">{{ form_widget(form) }}</td>
+       <td class="formerror">{{ form_errors(form) }}</td>
+    </tr>
+{% endspaceless %}
+{% endblock field_row %}

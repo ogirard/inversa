@@ -21,6 +21,7 @@
         {% if error %}
 	        <div class="formerror">{{ error.message }}</div>
 	    {% endif %}
-        <input class="formbutton" type="submit" value="Login" />
     </form>
+    
+    <a href="#" onclick="$('#login').submit();" class="actionbutton"><span>Login</span></a>
 {% endblock %}

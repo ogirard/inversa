@@ -26,7 +26,7 @@ class ProjectItemController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('OGInversaBundle:ProjectItem')->findAll();
-
+       
         return array('entities' => $entities);
     }
 

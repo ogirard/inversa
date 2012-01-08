@@ -2,16 +2,16 @@
 
 {% block body %}
   
-<h1>ProjectItem list</h1>
+<h1>Projekte</h1>
 
-<table class="records_list">
+<table class="records_list" cellpadding="0" cellspacing="0">
     <thead>
         <tr>
-            <th>Id</th>
+            <th class="idcolumn">Id</th>
             <th>Name</th>
-            <th>Description</th>
-            <th>Isactive</th>
-            <th>Actions</th>
+            <th class="desccolumn">Beschreibung</th>
+            <th>Aktiv?</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -20,28 +20,46 @@
             <td><a href="{{ path('admin_projectitem_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.name }}</td>
             <td>{{ entity.description }}</td>
-            <td>{{ entity.isactive }}</td>
             <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_projectitem_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_projectitem_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                {% if entity.isactive %}
+                   <img src="{{ asset('bundles/oginversa/images/active.png') }}" border="0" alt="Anzeigen" title="Aktiv" class="centered" style="margin-top: 3px;" />
+                {% else %}
+                   <img src="{{ asset('bundles/oginversa/images/inactive.png') }}" border="0" alt="Anzeigen" title="Inaktiv" class="centered" style="margin-top: 3px;" />
+                {% endif %}
+            </td>
+            <td>
+               <span class="actionlist">
+                   <a href="{{ path('admin_projectitem_show', { 'id': entity.id }) }}" class="actionbutton">
+                     <span>
+                       <img src="{{ asset('bundles/oginversa/images/show.png') }}" border="0" alt="Anzeigen" align="left" title="Anzeigen" /> 
+                     </span>
+                   </a>           
+                   <a href="{{ path('admin_projectitem_edit', { 'id': entity.id }) }}" class="actionbutton">
+                     <span>
+                       <img src="{{ asset('bundles/oginversa/images/edit.png') }}" border="0" alt="Editieren" align="left" title="Editieren" />
+                     </span>
+                   </a>
+               </span>
             </td>
         </tr>
+    {% else %}
+    <tr>
+        <td colspan="5">
+           <span class="noentries">Keine Eintr&auml;ge</span>
+        </td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>
 
-<ul>
-    <li>
-        <a href="{{ path('admin_projectitem_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+<br/>
+<br/>
+<span class="actionlist">
+    <a href="{{ path('admin_projectitem_new') }}" class="actionbutton">
+      <span>
+        <img src="{{ asset('bundles/oginversa/images/add.png') }}" class="withtext" border="0" alt="Neuen Eintrag erstellen" align="left" title="Neuer Eintrag" /> Neuer Eintrag
+      </span>
+    </a>
+</span>
 
 {% endblock %}

@@ -15,7 +15,17 @@ class ProjectItemType extends AbstractType
                       array('type' => new DocumentType(),
                             'allow_add' => true,
                             'allow_delete' => true,
-                            'prototype' => true));
+                            'prototype' => true))
+                ->add('links', 'collection',
+                      array('type' => new WebUrlType(),
+                            'allow_add' => true,
+                            'allow_delete' => true,
+                            'prototype' => true))
+                ->add('images', 'collection',
+                      array('type' => new ImageType(),
+                            'allow_add' => true,
+                            'allow_delete' => true,
+                            'prototype' => true));        
         
         // 'options'  => array('required' => false, 'attr' => array('class' => 'someclass'))
     }

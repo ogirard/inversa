@@ -99,4 +99,9 @@ class MediaItem
     {
         return $this->isactive;
     }
+    
+    public function __construct()
+    {
+        $this->isactive = true;
+    }
 }
