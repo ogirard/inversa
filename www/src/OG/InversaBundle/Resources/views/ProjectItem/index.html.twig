@@ -3,7 +3,11 @@
 {% block body %}
   
 <h1>Projekte</h1>
-
+<a href="{{ path('admin_projectitem_new') }}" class="actionbutton">
+    <span>
+      <img src="{{ asset('bundles/oginversa/images/add.png') }}" class="withtext" border="0" alt="Neuen Eintrag erstellen" align="left" title="Neuer Eintrag" /> Neuer Eintrag
+    </span>
+</a><br /><br />
 <table class="records_list" cellpadding="0" cellspacing="0">
     <thead>
         <tr>
@@ -51,15 +55,5 @@
     {% endfor %}
     </tbody>
 </table>
-
-<br/>
-<br/>
-<span class="actionlist">
-    <a href="{{ path('admin_projectitem_new') }}" class="actionbutton">
-      <span>
-        <img src="{{ asset('bundles/oginversa/images/add.png') }}" class="withtext" border="0" alt="Neuen Eintrag erstellen" align="left" title="Neuer Eintrag" /> Neuer Eintrag
-      </span>
-    </a>
-</span>
 
 {% endblock %}
