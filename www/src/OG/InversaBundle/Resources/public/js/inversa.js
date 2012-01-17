@@ -2,6 +2,7 @@ $(document).ready(function() {
 	SetMinHeight();
 	UnpackEmails();
 	InitButtons();
+	InitKendo();
 });
 
 function SetMinHeight() {
@@ -36,3 +37,7 @@ function InitButtons() {
 		}		
 	});
 }
+
+function InitKendo() {
+    $("input.datetimefield").kendoDatePicker();
+ }

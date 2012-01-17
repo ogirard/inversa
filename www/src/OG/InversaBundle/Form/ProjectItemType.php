@@ -10,6 +10,7 @@ class ProjectItemType extends AbstractType
     {
         $builder->add('name')
                 ->add('description')
+                ->add('day', 'text', array('attr' => array('class' => 'datetimefield'), 'required' => false))
                 ->add('isactive')
                 ->add('documents', 'collection',
                       array('type' => new DocumentType(),

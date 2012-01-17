@@ -187,4 +187,104 @@ class ProjectItem
     {
         return "PROJECT_".$this->id;
     }
+    /**
+     * @var date $when
+     */
+    private $when;
+
+    /**
+     * @var text $where
+     */
+    private $where;
+
+
+    /**
+     * Set when
+     *
+     * @param date $when
+     */
+    public function setWhen($when)
+    {
+        $this->when = $when;
+    }
+
+    /**
+     * Get when
+     *
+     * @return date 
+     */
+    public function getWhen()
+    {
+        return $this->when;
+    }
+
+    /**
+     * Set where
+     *
+     * @param text $where
+     */
+    public function setWhere($where)
+    {
+        $this->where = $where;
+    }
+
+    /**
+     * Get where
+     *
+     * @return text 
+     */
+    public function getWhere()
+    {
+        return $this->where;
+    }
+    /**
+     * @var text $location
+     */
+    private $location;
+
+
+    /**
+     * Set location
+     *
+     * @param text $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * Get location
+     *
+     * @return text 
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+    /**
+     * @var datetime $day
+     */
+    private $day;
+
+
+    /**
+     * Set day
+     *
+     * @param datetime $day
+     */
+    public function setDay($day)
+    {
+        $this->day = $day;
+    }
+
+    /**
+     * Get day
+     *
+     * @return datetime 
+     */
+    public function getDay()
+    {
+        return $this->day;
+    }
 }

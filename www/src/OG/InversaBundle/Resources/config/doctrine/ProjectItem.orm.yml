@@ -10,7 +10,13 @@ OG\InversaBundle\Entity\ProjectItem:
         name:
             type: string
             length: 100
-        description:
+        description:        
+            type: text
+            nullable: true
+        day:
+            type: datetime
+            nullable: true
+        location:
             type: text
             nullable: true
         isactive:
