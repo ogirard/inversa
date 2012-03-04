@@ -1,0 +1,115 @@
+/**
+ * CSS www.ensemble-inversa.ch
+ */
+
+@charset "utf-8";
+body {
+	font: 100%/1.4 Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #ffffff;
+	background-color: #0f0f0f;
+}
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl {
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;
+}
+/* common hyperlink style */ 
+a img {
+	border: none;
+}
+a:link, a:visited {
+	color: #696969;
+	text-decoration: none;
+}
+a:hover, a:active, a:focus {
+	text-decoration: none;
+	color:#ffffff;
+}
+/* Main menu*/
+a.menu:link, a.menu:visited {
+	color: #696969;
+	text-decoration: none;
+}
+a.menu:hover, a.menu:active, a.menu:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	text-decoration: none;
+	color:#ffffff;
+}
+/* active menu entry */
+a.activemenu:link, a.activemenu:visited {
+	color: #ffffff;
+	text-decoration: none;
+	font-weight:bold;
+}
+a.activemenu:hover, a.activemenu:active, a.activemenu:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	color: #ffffff;
+	text-decoration: none;
+	font-weight:bold;
+}
+/* Areas */
+/* Header (menu) */
+div.menu {
+	margin: 0px auto;
+	margin-top: 69px;
+	margin-bottom: 15px;
+	padding: 0px;
+	color: #696969;
+}
+div.dropdownmenu {
+	margin: 0px;
+	padding: 0px;
+	position:absolute;
+	z-index:99;
+}
+div.menuentry {
+	margin: 2px 0px;
+	padding: 0px;
+}
+/* Content */
+div.content {
+	margin: 0px auto;
+	padding: 0px;
+	position:relative;
+}
+/* Footer */ 
+div.footer {
+	padding-top: 5px;
+	padding-bottom: 3px;
+	text-align:center;
+	width:100%;
+	font-size:12px;
+	color:#696969;
+	text-align:center;
+}
+a.footer:link, a.footer:visited {
+	color: #696969;
+	text-decoration: none;
+}
+a.footer:hover, a.footer:active, a.footer:focus {
+	text-decoration: none;
+	color:#ffffff;
+}
+/* ~~ miscellaneous float/clear classes ~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+.relativecontainer {
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+}
