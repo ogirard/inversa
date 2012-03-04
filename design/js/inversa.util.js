@@ -2,6 +2,7 @@
 /**
  * Gets the complete height of the given jQuery element (= height() + vpadding + vmargin)
  */
+ 
 function GetElementHeight($element) {
 	return $element.height() + GetVerticalSpacing($element);
 }
@@ -25,7 +26,7 @@ function GetVerticalMargin($element) {
 }
 
 function ParsePixels(pixelString) {
-    return parseInt(pixelString.substring(0,2));
+    return parseInt(pixelString.replace("px", ""));
 }
 
 function GetRandom(from, to) {

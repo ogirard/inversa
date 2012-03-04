@@ -34,6 +34,7 @@ function GetAvailableWidth() {
     return $(document).width();
 }
 
+
 /**
  * Initializes the content area
  */

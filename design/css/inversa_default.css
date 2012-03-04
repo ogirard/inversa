@@ -7,34 +7,48 @@ div.defaultmenu {
 	width: 1220px;
 }
 div.defaultcontent {
-	position:absolute;
+	position:relative;
 	top:0px;
 	bottom:0px;
 	margin: 0px auto;
 	width:1220px;
 }
-div.imagediv {
+
+div.fixdiv {
 	position: absolute;
 	padding: 0px;
 	margin: 0px;
 }
+div.stackdiv {
+	padding: 0px;
+	margin: 0px;
+	display:block;
+}
 div.maincontent {
-    position: absolute;
-	left: 385px;
-	top: 192px;
-	bottom: 69px;
+	margin-left: 385px;
 	width: 675px;
 	overflow:auto;
+    font-size: 10pt;
+	display:inline-block;
 }
-div.textcontentdiv {
-	margin-left: 225px;
+div.maincontent:after
+{
+    content:"";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+div.textcontent {
 	margin-top: 27px;
+	margin-left: 225px;
 	margin-right: 42px;
+	margin-bottom: 27px;
 	font-size:11pt;
 	text-wrap:normal;
 	word-wrap:normal;
-	background-color:#ffffff;
 }
+
 div.clear {
 	clear: both;
 	height: 0;
@@ -42,3 +56,21 @@ div.clear {
 	padding: 0;
 	font-size: 0;
 }
+
+div.smalltext {
+	font-size:10pt;
+}
+
+a.inverse:link, a.inverse:visited {
+	color:#ffffff;
+	text-decoration: none;
+}
+a.inverse:hover, a.inverse:active, a.inverse:focus {
+	text-decoration: none;
+	color: #696969;
+}
+
+p {
+	margin-bottom: 22px;
+}
+
