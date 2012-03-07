@@ -25,6 +25,12 @@ function GetVerticalMargin($element) {
 	return vmargin;
 }
 
+function GetHorizontalMargin($element) {
+	var hmargin = ParsePixels($element.css('margin-left'));
+    hmargin += ParsePixels($element.css('margin-right'));
+	return hmargin;
+}
+
 function ParsePixels(pixelString) {
     return parseInt(pixelString.replace("px", ""));
 }

@@ -25,13 +25,13 @@ $(document).ready(function () {
 });
 
 function GetAvailableHeight() {
-    var menuHeight = GetElementHeight($('.menu'));
-	var footerHeight = GetElementHeight($('.footer'));
-    return $(document).height() - menuHeight - footerHeight - 5;
+    var menuHeight = GetElementHeight($('#menudiv'));
+	var footerHeight = GetElementHeight($('#footerdiv'));
+    return $(window).height() - menuHeight - footerHeight - 128;
 }
 
 function GetAvailableWidth() {
-    return $(document).width();
+    return $(window).width();
 }
 
 
@@ -39,8 +39,7 @@ function GetAvailableWidth() {
  * Initializes the content area
  */
 function InitializeContentArea() {
-	var width = GetAvailableWidth();
-    $('.content').width();
-	var height =  GetAvailableHeight();
-	$('.content').css('min-height', height);
+	var $content = $('.content');
+	var height =  GetAvailableHeight() - GetVerticalMargin;
+	$content.css('min-height', height);
 }

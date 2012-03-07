@@ -11,7 +11,8 @@ function SizeMainContentDiv() {
 	var $titleimage = $('#titleimage');
     var $instrumentimage = $('#instrumentimage');	
     var $maincontent = $('#maincontent');
-	var availableHeight = $('#content').height();
+	$titleimage.css('z-index', 5555);
+	var availableHeight = GetAvailableHeight();
     availableHeight -= GetVerticalSpacing($titleimage);
     availableHeight -= GetVerticalSpacing($instrumentimage);
 	$maincontent.css('min-height', availableHeight + 'px');
@@ -19,12 +20,14 @@ function SizeMainContentDiv() {
 
 function PositionFixDivs() {
 	var $memberimage = $('#memberimage');
-	var left = ParsePixels($memberimage.css('left'));
-	var top = ParsePixels($memberimage.css('top'));
-    var $maincontent = $('#maincontent');
-	var contentLeft = $maincontent.offset().left;
+	var $defaultcontent = $('.defaultcontent');
+	var $maincontent = $('.maincontent');
+	var left = $memberimage.offset().left - $defaultcontent.offset().left;
+	var bottom = $memberimage.offset().top + $memberimage.height() - $defaultcontent.offset().top + 27;
+	var contentleft = $maincontent.offset().left - $defaultcontent.offset().left + 27;
+	
 	$('#memberwww').css('left', left + 'px');
-	$('#memberwww').css('top', (top + $memberimage.height() + 27) + 'px');	
-    $('#memberaddress').css('left', (contentLeft + 27) + 'px');
-	$('#memberaddress').css('top', (top + $memberimage.height() + 27) + 'px');
+	$('#memberwww').css('top', bottom + 'px');	
+    $('#memberaddress').css('left', contentleft + 'px');
+	$('#memberaddress').css('top', bottom + 'px');
 }
