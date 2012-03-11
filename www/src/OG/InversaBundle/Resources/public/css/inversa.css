@@ -1,264 +1,102 @@
+/**
+ * CSS www.ensemble-inversa.ch
+ */
+
 @charset "utf-8";
-
 body {
-	font-family: "Segoe UI", Helvetica, Verdana, Arial, sans-serif;
-	font-size: 11pt;
-	background-color: #ffffff;
-	color: #484848;
-	padding:0px;
-	margin:0px;
+	font: 100%/1.4 Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #ffffff;
+	background-color: #0f0f0f;
 }
-
-div span {
-	font-family: "Segoe UI", Helvetica, Verdana, Arial, sans-serif;
-	font-size: 11pt;
-	color: #484848;
-	margin: 0px;
-	padding: 0px;
-}
-
 /* ~~ Element/tag selectors ~~ */
 ul, ol, dl {
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 }
-
 h1, h2, h3, h4, h5, h6, p {
-	margin-top: 0px;
-	color: #484848;
-	font-family: "Segoe UI", Helvetica, Verdana, Arial, sans-serif;
+	margin-top: 0;
 }
-
-h1 {
-	font-size: 16pt;
-	font-weight:normal;
-	margin-top:6px;
-	margin-bottom:24px;
-}
-
-h2 {
-	font-size: 100%;
-	text-transform:uppercase;
-	color:#300065;
-	padding-bottom:5px;
-	font-weight:normal;
-	margin:0px;
-}
-
-h3 {
-	font-size: 100%;
-	text-transform:uppercase;
-	color:#09C;
-	padding-bottom:0px;
-	font-weight:normal;
-	margin:0px;
-}
-
-h4 {
-	font-size: 100%;
-	color:#300065;
-	padding-bottom:0px;
-	font-weight:normal;
-	margin:0px;
-        font-style:italic;
-}
-
-.ErrorMessage
-{
-	color: #ff0000;
-	font-size:small;
-}
-
-a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+/* common hyperlink style */ 
+a img {
 	border: none;
 }
-/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
-a:link {
-	color: #724747;
-	text-decoration: none; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
-}
-a:visited {
-	color: #724747;
+a:link, a:visited {
+	color: #696969;
 	text-decoration: none;
 }
-a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+a:hover, a:active, a:focus {
 	text-decoration: none;
-	color:#de0000;
+	color:#ffffff;
 }
-
-
-/* ~~ adminmenu ~~ */
-a.adminmenu:link {
-	color: #484848;
+/* Main menu*/
+a.menu:link, a.menu:visited {
+	color: #696969;
 	text-decoration: none;
 }
-a.adminmenu:visited {
-	color: #484848;
+a.menu:hover, a.menu:active, a.menu:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
 	text-decoration: none;
+	color:#ffffff;
 }
-a.adminmenu:hover, a.admimenu:active, a.admimenu:focus { 
+/* active menu entry */
+a.activemenu:link, a.activemenu:visited {
+	color: #ffffff;
 	text-decoration: none;
-	color:#de0000;
+	font-weight:bold;
 }
-
-/* ~~ this fixed width container surrounds the other divs ~~ */
-.container {
-	width: 1024px;
+a.activemenu:hover, a.activemenu:active, a.activemenu:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	color: #ffffff;
+	text-decoration: none;
+	font-weight:bold;
+}
+/* Areas */
+/* Header (menu) */
+div.menu {
+	margin: 0px auto;
+	margin-top: 69px;
+	margin-bottom: 15px;
 	padding: 0px;
-    background-color:#FFFFFF;
-	margin-top: 0px;
-	margin-bottom:0px;
-	margin-left:auto;
-	margin-right:auto; /* the auto value on the sides, coupled with the width, centers the layout */
+	color: #696969;
 }
-
-table.containertable {
-	margin:0px;
-	padding:0px;
-	width: 100%;
+div.dropdownmenu {
+	margin: 0px;
+	padding: 0px;
+	position:absolute;
+	z-index:99;
 }
-
-tr.containerrow {
-	margin:0px;
-	padding:0px;
+div.menuentry {
+	margin: 2px 0px;
+	padding: 0px;
 }
-
-td.innercell {
-	margin:0px;
-	padding:0px;
-	background-color: #ffffff;
+/* Content */
+div.content {
+	margin: 0px auto;
+	padding: 0px;
+	position:relative;
 }
-
-td.shadowcell {
-	margin:0px;
-	padding:0px;
-	width: 17px;
+/* Footer */ 
+div.footer {
+	position:relative;
+	width:100%;
+	display:inline-block;
 }
-
-td.left {
-	border-width: 0px;
-	border-right-width: 1px;
-	border-style:solid;
-	border-color:#979797;
+div.footertext {
+	position:absolute;
+	margin-top: 35px;
+	padding-bottom: 10px;
+	font-size:12px;
+	color:#696969;	
+	display:block;
 }
-
-td.right {
-	border-width: 0px;
-	border-left-width: 1px;
-	border-style:solid;
-	border-color:#979797;
-}
-
-.header {
-	background: #FFFFFF;
-	color:#333333;
-	padding: 0px 15px;
-	margin-top: 25px;
-}
-
-span.adminmenu {
-	font-size: 14pt;
-	font-weight:normal;
-	color:#979797;
-}
-
-.userheader {
-	background: #FFFFFF;
-	color:#333333;
-	font-size:10pt;
-	padding:2px 5px;
-}
-
-.inversacontent {
-	margin-top:14px;
-	padding: 15px;
-	height: auto;
-}
-
-/* ~~ The footer ~~ */
-.footer {
-	padding-top:10px;
-	padding-bottom:20px;
-	background: #FFFFFF;
-}
-
-div.thinline {
-	background-color:#979797;
-	height:1px;
-	width:auto;
-}
-
-div.thickline {
-	background-color:#979797;
-	height:2px;
-	width:auto;
-}
-
-div.metroline {
-	background-color:#de0000;
-	height:12px;
-	width:auto;
-}
-
-span.footertext {
-	font-size:9px;
-	padding-left: 15px;
-	color:#999;
-}
-
-div.tabs {
-	padding: 5px 0px;
-}
-
-span.tab {
- 	text-transform:uppercase;
-	color: #09C;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-span.tabover {
- 	text-transform:uppercase;
-	color: #300065;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-span.tabselected {
- 	text-transform:uppercase;
-	color: #300065;
+a.footer:link, a.footer:visited {
+	color: #696969;
 	text-decoration: none;
 }
-
-span.spacer {
-	margin-left: 20px;
+a.footer:hover, a.footer:active, a.footer:focus {
+	text-decoration: none;
+	color:#ffffff;
 }
-
-span.option {
-	color: #300065;
-	padding-right:10px;
-}
-
-/* simple table */ 
-table.simple
-{
-	padding:0px;
-	margin: 0px;
-}
-
-tr.simple
-{
-	padding:0px;
-	margin: 0px;
-}
-
-td.simple
-{
-	padding:0px;
-	margin: 0px;
-	vertical-align:top;
-}
-
 /* ~~ miscellaneous float/clear classes ~~ */
 .fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
 	float: right;
@@ -268,10 +106,14 @@ td.simple
 	float: left;
 	margin-right: 8px;
 }
-
 .clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
 	clear:both;
 	height:0;
 	font-size: 1px;
 	line-height: 0px;
+}
+.relativecontainer {
+	position: relative;
+	margin: 0px;
+	padding: 0px;
 }

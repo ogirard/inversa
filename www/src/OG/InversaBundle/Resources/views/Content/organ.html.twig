@@ -1,0 +1,45 @@
+{# src/OG/InversaBundle/Resources/views/Default/index.html.twig #}
+{% extends 'OGInversaBundle:Content:base.html.twig' %}
+
+{% block title %}
+    Ensemble Inversa | Orgel und Klavier
+{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/oginversa/css/inversa.default.css') }}" />
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('bundles/oginversa/js/inversa.default.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="content" style="width:1220px;">
+    <div class="defaultcontent">
+      <div id="memberwww" class="fixdiv smalltext" style="z-index:1">
+      </div>      
+      <div id="memberimage" class="fixdiv" style="left: 160px; top: 147px; z-index:1;">
+        <img src="{{ asset('bundles/oginversa/images/organ/foto_sarah.png') }}" />            
+      </div>
+      <div id="memberaddress" class="fixdiv smalltext" style="z-index:1">
+        Napoleonstrasse 24<br />
+        3930 Visp<br />
+        +41 (0)79 323 40 88<br />
+        <a href="mailto:sarah@ensemble-inversa.ch" class="inverse">E-Mail</a>
+      </div>   
+      <div id="membertitle" class="fixdiv" style="z-index:5; top: 123px;">
+        <img src="{{ asset('bundles/oginversa/images/organ/typo_sarah.png') }}" />
+      </div>
+      
+      <div id="maincontent" class="maincontent stackdiv" style="background-color:#0070bc">
+        <div class="textcontent">
+          <p>Sarah Brunner, Orgel und Klavier</p><p>Inhalt</p>                       
+		</div>
+      </div>
+      
+      <div id="instrumentimage" class="stackdiv" style="margin-left:610px; z-index:2; margin-top:-24px;">
+        <img src="{{ asset('bundles/oginversa/images/organ/typo_orgel.png') }}" />
+      </div>
+    </div>
+    </div>
+{% endblock %}

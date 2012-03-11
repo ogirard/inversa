@@ -1,66 +1,20 @@
 <?php
 
 namespace OG\InversaBundle\Controller;
-use OG\InversaBundle\Entity\Document;
-use OG\InversaBundle\Entity\InversaUser;
-use OG\InversaBundle\Form\Type\DocumentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+/**
+ * @Route("/content")
+ */
 class ContentController extends Controller
 {
     /**
-     * 
-     * @Route("/test", name="_content_test")
-     */
-    public function testAction()
-    {
-        $request = $this->getRequest();
-        $item = new Document();
-
-        $form = $this->createForm(new DocumentType("OG\InversaBundle\Entity\Document"), $item);
-
-        if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
-
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($item);
-                $em->flush();
-                return $this
-                        ->render('OGInversaBundle:Content:index.html.twig',
-                                array('name' => 'Created document "' . $item->getName() . '"'));
-            }
-        }
-
-        return $this->render('OGInversaBundle:Content:new.html.twig', array('form' => $form->createView(),));
-    }
-
-    /**
      *
-     * @Route("/adduser", name="_content_user")
-     */
-    public function adduserAction()
-    {
-        $request = $this->getRequest();
-        $item = new InversaUser();
-        $item->setUsername("admin");
-        $item->setPassword("1234");
-        $item->setName("Muster");
-        $item->setFirstname("Hans");
-        $item->setEmail("test@me.com");
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($item);
-        $em->flush();
-
-        return $this->render('OGInversaBundle:Content:index.html.twig', array('name' => 'done add user'));
-    }
-
-    /**
-     *
-     * @Route("/home", name="_content_home")
+     * @Route("/", name="_content_home")
      */
     public function homeAction()
     {
@@ -69,11 +23,65 @@ class ContentController extends Controller
 
     /**
      *
+     * @Route("/inversa", name="_content_inversa")
+     */
+    public function inversaAction()
+    {
+        return $this->render('OGInversaBundle:Content:inversa.html.twig', array('name' => 'inversa'));
+    }
+
+    /**
+     *
+     * @Route("/inversa/panflute", name="_content_inversa_panflute")
+     */
+    public function panfluteAction()
+    {
+        return $this->render('OGInversaBundle:Content:panflute.html.twig', array('name' => 'panflute'));
+    }
+
+    /**
+     *
+     * @Route("/inversa/violin", name="_content_inversa_violin")
+     */
+    public function violinAction()
+    {
+        return $this->render('OGInversaBundle:Content:violin.html.twig', array('name' => 'violin'));
+    }
+
+    /**
+     *
+     * @Route("/inversa/flute", name="_content_inversa_flute")
+     */
+    public function fluteAction()
+    {
+        return $this->render('OGInversaBundle:Content:flute.html.twig', array('name' => 'flute'));
+    }
+
+    /**
+     *
+     * @Route("/inversa/organ", name="_content_inversa_organ")
+     */
+    public function organAction()
+    {
+        return $this->render('OGInversaBundle:Content:organ.html.twig', array('name' => 'organ'));
+    }
+
+    /**
+     *
      * @Route("/agenda", name="_content_agenda")
      */
     public function agendaAction()
     {
-        return $this->render('OGInversaBundle:Content:index.html.twig', array('name' => 'agenda'));
+        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'agendacurrent'));
+    }
+
+    /**
+     *
+     * @Route("/agenda/archive", name="_content_agenda_archive")
+     */
+    public function agendaarchiveAction()
+    {
+        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'agendaarchive'));
     }
 
     /**
@@ -82,7 +90,7 @@ class ContentController extends Controller
      */
     public function projectsAction()
     {
-        return $this->render('OGInversaBundle:Content:index.html.twig', array('name' => 'projects'));
+        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'projects'));
     }
 
     /**
@@ -91,16 +99,34 @@ class ContentController extends Controller
      */
     public function mediaAction()
     {
-        return $this->render('OGInversaBundle:Content:index.html.twig', array('name' => 'media'));
+        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'examples'));
     }
 
     /**
      *
-     * @Route("/press", name="_content_press")
+     * @Route("/media/videos", name="_content_media_videos")
      */
-    public function pressAction()
+    public function mediaVideosAction()
     {
-        return $this->render('OGInversaBundle:Content:index.html.twig', array('name' => 'press'));
+        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'videos'));
+    }
+
+    /**
+     *
+     * @Route("/media/press", name="_content_media_press")
+     */
+    public function mediaPressAction()
+    {
+        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'press'));
+    }
+
+    /**
+     *
+     * @Route("/media/downloads", name="_content_media_downloads")
+     */
+    public function mediaSamplesAction()
+    {
+        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'downloads'));
     }
 
     /**
@@ -109,7 +135,16 @@ class ContentController extends Controller
      */
     public function galleryAction()
     {
-        return $this->render('OGInversaBundle:Content:index.html.twig', array('name' => 'gallery'));
+        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'gallery'));
+    }
+
+    /**
+     *
+     * @Route("/cds", name="_content_cds")
+     */
+    public function cdsAction()
+    {
+        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'cds'));
     }
 
     /**
@@ -118,6 +153,6 @@ class ContentController extends Controller
      */
     public function contactAction()
     {
-        return $this->render('OGInversaBundle:Content:index.html.twig', array('name' => 'contact'));
+        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'contact'));
     }
 }

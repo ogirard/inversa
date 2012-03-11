@@ -1,7 +1,3 @@
-#OGInversaBundle:
-#    resource: "@OGInversaBundle/Resources/config/routing.yml"
-#    prefix:   /
-    
 OGInversaBundle:
     resource: "@OGInversaBundle/Controller"
     type:     annotation

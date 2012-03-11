@@ -11,14 +11,13 @@
     <script src="js/inversa.home.js" type="text/javascript"></script>
     <script src="js/inversa.menu.js" type="text/javascript"></script>
   </header>
-
   <body>
     <!-- Menu -->
-    <div class="menu">
+    <div id="menudiv" class="menu">
     <div class="homemenu">
     <div style="margin-left:365px;">
       <a href="index.html" class="menu activemenu" id="home">Home</a>&nbsp;&nbsp;|&nbsp;
-      <a href="underconstruction.html" class="menu" id="inversa">Ensemble Inversa</a>&nbsp;&nbsp;|&nbsp;
+      <a href="inversa.html" class="menu" id="inversa">Ensemble Inversa</a>&nbsp;&nbsp;|&nbsp;
       <a href="underconstruction.html" class="menu" id="agenda">Agenda</a>&nbsp;&nbsp;|&nbsp;
       <a href="underconstruction.html" class="menu" id="projects">Projekte</a>&nbsp;&nbsp;|&nbsp;
       <a href="underconstruction.html" class="menu" id="media">Media</a>&nbsp;&nbsp;|&nbsp;
@@ -31,13 +30,13 @@
           <a href="panflute.html" class="menu" id="panflute">Panflöte</a>
         </div>
         <div class="menuentry">        
-          <a href="underconstruction.html" class="menu" id="violin">Violine</a>
+          <a href="violin.html" class="menu" id="violin">Violine</a>
         </div>
         <div class="menuentry">                
-          <a href="underconstruction.html" class="menu" id="flute">Querflöte</a>
+          <a href="flute.html" class="menu" id="flute">Querflöte</a>
         </div>
         <div class="menuentry">                
-          <a href="underconstruction.html" class="menu" id="organ">Orgel</a>
+          <a href="organ.html" class="menu" id="organ">Orgel</a>
         </div>
       </div>
       <div id="agendamenu" class="dropdownmenu">
@@ -116,8 +115,13 @@
     
     <!-- Footer -->
     <div class="footer">
+    <div id="footerdiv" class="footertext" style="width:100%; text-align:center;">    
       &copy; 2012 <a class="footer" href="mailto:mail@ensemble-inversa.ch">Ensemble Inversa</a>&nbsp;&nbsp;|&nbsp;&nbsp;Gestaltung:
       <a class="footer" href="mailto:">Tobias Najer</a>&nbsp;&nbsp;|&nbsp;&nbsp;Programmierung: <a class="footer" href="mailto:">Olivier Girard</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="footer" href="#">Admin</a>
     </div>
+    </div>
+    <script type="text/javascript">
+      var currentActiveMenu = '';
+    </script>
   </body>
 </html>

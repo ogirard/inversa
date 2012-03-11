@@ -1,0 +1,49 @@
+{# src/OG/InversaBundle/Resources/views/Default/index.html.twig #}
+{% extends 'OGInversaBundle:Content:base.html.twig' %}
+
+{% block title %}
+    Ensemble Inversa | Querflöte
+{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/oginversa/css/inversa.default.css') }}" />
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('bundles/oginversa/js/inversa.default.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="content" style="width:1220px;">
+    <div class="defaultcontent">
+      <div id="memberwww" class="fixdiv smalltext" style="z-index:1">
+      </div>      
+      <div id="memberimage" class="fixdiv" style="left: 160px; top: 147px; z-index:1;">
+        <img src="{{ asset('bundles/oginversa/images/flute/foto_marielle.png') }}" />            
+      </div>
+      <div id="memberaddress" class="fixdiv smalltext" style="z-index:1">
+         Bord 77<br />
+         3924 St. Niklaus VS<br />
+         +41 (0)76 474 28 47<br />
+        <a href="mailto:marielle@ensemble-inversa.ch" class="inverse">E-Mail</a>
+      </div>   
+      <div id="membertitle" class="fixdiv" style="z-index:5; top: 123px;">
+        <img src="{{ asset('bundles/oginversa/images/flute/typo_marielle.png') }}" />
+      </div>
+      
+      <div id="maincontent" class="maincontent stackdiv" style="background-color:#d31459">
+        <div class="textcontent">
+          <p>Marielle Oggier, Querflöte</p>
+         <p>Marielle Oggier wurde 1980 in St.Niklaus, Wallis geboren. Bald schon entdeckte sie ihre Liebe zum Instrument Querflöte und begann mit sieben Jahren, Unterricht zu nehmen.</p>
+<p>Im Juni 2000 absolvierte sie am Kollegium Brig die Latein-Matura und bestand zur gleichen Zeit die Aufnahmeprüfung an der Musikhochschule Basel, wo sie in die Klasse von Kiyoshi Kasai aufgenommen wurde. Im Jahre 2004 erhielt sie das Musikpädagogische Diplom und studierte in der Konzertklasse von Felix Renggli weiter. Im Juli 2007 erhielt sie das Konzertdiplom mit Auszeichnung</p>
+<p>2001 wurde sie von der Allgemeinen Musikschule Oberwallis angestellt und übernahm die Querflötenklasse in Zermatt/Randa. Sie trat bereits mit der Oberwalliser Konzertgesellschaft, dem Uniorchester Basel, dem Neuen Orchester Basel, dem internationalen Jugendorchester der Jeunesses Musicales, der Camerata Bern und dem Hochschulorchester der Musikhochschule Basel, am Theater Basel, dem Lucerne Festival Academy Orchestera unter Pierre Boulez auf.</p>
+<p>Marielle Oggier besucht regelmässig Meisterklassen bei Aurèle Nicolet und Felix Renggli. Sie wirkt in diversen Kammermusikformationen mit.</p>
+		</div>
+      </div>
+      
+      <div id="instrumentimage" class="stackdiv" style="margin-left:610px; z-index:2">
+        <img src="{{ asset('bundles/oginversa/images/flute/typo_querfloete.png') }}" />
+      </div>
+    </div>
+    </div>
+{% endblock %}

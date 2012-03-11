@@ -1,0 +1,51 @@
+{# src/OG/InversaBundle/Resources/views/Default/index.html.twig #}
+{% extends 'OGInversaBundle:Content:base.html.twig' %}
+
+{% block title %}
+    Ensemble Inversa | Violine
+{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/oginversa/css/inversa.default.css') }}" />
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('bundles/oginversa/js/inversa.default.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="content" style="width:1220px;">
+    <div class="defaultcontent">
+      <div id="memberwww" class="fixdiv smalltext" style="z-index:1">
+        <a href="http://www.laidaalberdi.ch" target="_new" class="inverse">www.laidaalberdi.ch</a>
+      </div>      
+      <div id="memberimage" class="fixdiv" style="left: 160px; top: 147px; z-index:1;">
+        <img src="{{ asset('bundles/oginversa/images/violin/foto_laida.png') }}" />            
+      </div>
+      <div id="memberaddress" class="fixdiv smalltext" style="z-index:1">
+        Mutschellenstrasse 163<br />
+        8038 Z&uuml;rich<br />
+        +41 (0)78 665 11 28<br />
+        <a href="mailto:laida@ensemble-inversa.ch" class="inverse">E-Mail</a>
+      </div>   
+      <div id="membertitle" class="fixdiv" style="z-index:5; top: 123px;">
+        <img src="{{ asset('bundles/oginversa/images/violin/typo_laida.png') }}" />
+      </div>
+      
+      <div id="maincontent" class="maincontent stackdiv" style="background-color:#662d91">
+        <div class="textcontent">
+          <p>Laida Alberdi, Geige</p>
+          <p>1984 in Spanien geboren, erhält sie ihren ersten Unterricht 1987 in San Sebastian bei Ana M. Sebastian. Später studiert sie an der Pablo Sarasate Musikhochschule, wo sie bei Rafaella Acella im Jahr 2002 mit dem Lehrdiplom abschliesst. 2003-05 studiert in Madrid bei Yuri Volguin und Zakhar Bron.</p>
+<p>Es folgen ab 2005 Studien an der Musikhochschule Zürich, wo sie sich bei Robert Zimansky auf das Konzertdiplom (Master of Performance – Konzert) vorbereitet und dieses im Juni 2010 mit Auszeichnung abschliesst.</p>
+<p>Laida Alberdi besuchte Kurse und Meisterkurse bei Zakhar Bron, Andras Zifra, David Zafer, Vartan Manoogian, Eduardo Hernández Asiáin, Yuri Volguin und Víctor Pikaisen. Konzerte als Solistin und als Mitglied in verschiedenen Kammermusikformationen in Asturias, Pamplona, Burgos, Irún, San Sebastián (Kursaal, Rathaus), Madrid, Cataluña, Extremadura, Logroño, Bilbao (Euskalduna), Vitoria, Málaga, Bordeaux, Zürich, Bern,Wallis und Solothurn zeigen, dass sie eine rege Konzerttätigkeit entfalten konnte.</p>
+<p>In den Jahren 1995-97 ist sie Finalistin und Preisträgerin an den Jugendwettbewerben von San Sebastian. 2007 Gewinnerin des baskischen "Nicanor Zabaleta"-Wettbewerbs. Von 2003 bis 2005 ist sie doppelte Preisträgerin des "Lartundo" Stipendien- Wettbewerbs in San Sebastian sowie auch zweifache Preisträgerin des Stipendien-Wettbewerbs der "Diputación Foral de San Sebastián" (2005/06-2006/07).</p>
+<p>Verschiedene Stiftungen haben sie mit Stipendien unterstützt: Vontobel Stiftung, Elsy Meyer Stiftung, Fritz Gerber Stiftung, Dr. Max Husmann-Stiftung, der Freundeskreis Musik der Zürcher Hochschule der Künste und die ZHdK.</p>
+		</div>
+      </div>
+      
+      <div id="instrumentimage" class="stackdiv" style="margin-left:610px; z-index:2; margin-top:-1px">
+        <img src="{{ asset('bundles/oginversa/images/violin/typo_violine.png') }}" />
+      </div>
+    </div>
+    </div>
+{% endblock %}

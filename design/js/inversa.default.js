@@ -8,20 +8,16 @@ function InitializeContent() {
 }
 
 function SizeMainContentDiv() {
-	var $titleimage = $('#titleimage');
-    var $instrumentimage = $('#instrumentimage');	
     var $maincontent = $('#maincontent');
-	$titleimage.css('z-index', 5555);
-	var availableHeight = GetAvailableHeight();
-    availableHeight -= GetVerticalSpacing($titleimage);
-    availableHeight -= GetVerticalSpacing($instrumentimage);
+    var $instrumentimage = $('#instrumentimage');
+	var availableHeight = GetAvailableHeight() - GetVerticalMargin($maincontent) - GetElementHeight($instrumentimage);
 	$maincontent.css('min-height', availableHeight + 'px');
 }
 
 function PositionFixDivs() {
 	var $memberimage = $('#memberimage');
+	var $maincontent = $('#maincontent');
 	var $defaultcontent = $('.defaultcontent');
-	var $maincontent = $('.maincontent');
 	var left = $memberimage.offset().left - $defaultcontent.offset().left;
 	var bottom = $memberimage.offset().top + $memberimage.height() - $defaultcontent.offset().top + 27;
 	var contentleft = $maincontent.offset().left - $defaultcontent.offset().left + 27;
@@ -30,4 +26,5 @@ function PositionFixDivs() {
 	$('#memberwww').css('top', bottom + 'px');	
     $('#memberaddress').css('left', contentleft + 'px');
 	$('#memberaddress').css('top', bottom + 'px');
+    $('.footertext').css('left', $maincontent.offset().left + 'px');
 }

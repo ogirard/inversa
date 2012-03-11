@@ -17,13 +17,15 @@ function RegisterMenu(id) {
 
 	var $menulink = $('#' + id);
 	var $menu = $('#' + id + 'menu');
-    $menu.hide();
+	if(!IsActiveMenu($menu, $menulink)) {
+      $menu.hide();
+	}
 	
 	$menulink.hover(function() {
 		isMouseOver = true;
 		ShowMenu($menu, $(this));
 	}, function() {
-		HideMenu($menu, function() { return !isMouseOver && !isMouseOverMenu });		
+		HideMenu($menu, $menulink, function() { return !isMouseOver && !isMouseOverMenu });		
 		isMouseOver = false;
 	});
 	
@@ -31,17 +33,17 @@ function RegisterMenu(id) {
 		isMouseOverMenu = true;
 	}, function() {
 		
-		HideMenu($menu, function() { return !isMouseOver && !isMouseOverMenu });		
+		HideMenu($menu, $menulink, function() { return !isMouseOver && !isMouseOverMenu });		
 		isMouseOverMenu = false;
 	});
 	
-	if(IsActiveMenu($menu)) {
+	if(IsActiveMenu($menu, $menulink)) {
       ShowMenu($menu, $menulink);
 	}
 }
 
-function HideMenu($menu, check) {
-  if(IsActiveMenu($menu)) {
+function HideMenu($menu, $menulink, check) {
+  if(IsActiveMenu($menu, $menulink)) {
 	  return;
   }
   
@@ -60,7 +62,15 @@ function ShowMenu($menu, $owner) {
 	$menu.slideDown(200);
 }
 
-function IsActiveMenu($menu) {
+function IsActiveMenu($menu, $menulink) {
+	if(!$menu || !$menulink) {
+		return false;
+	}
+	
+	if($menulink.hasClass('activemenu')) {
+		return true;
+	}
+	
 	var hasActiveElement = false;
 	$.each($('a.menu', $menu), function(i, entry) {
 		if($(entry).hasClass('activemenu')) {

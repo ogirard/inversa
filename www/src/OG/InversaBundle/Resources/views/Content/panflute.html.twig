@@ -1,0 +1,51 @@
+{# src/OG/InversaBundle/Resources/views/Default/index.html.twig #}
+{% extends 'OGInversaBundle:Content:base.html.twig' %}
+
+{% block title %}
+    Ensemble Inversa | Panflöte
+{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/oginversa/css/inversa.default.css') }}" />
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('bundles/oginversa/js/inversa.default.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+<div class="content" style="width:1220px;">
+    <div class="defaultcontent">
+      <div id="memberwww" class="fixdiv smalltext" style="z-index:1">
+        <a href="http://www.hanspeteroggier.ch" target="_new" class="inverse">www.hanspeteroggier.ch</a>
+      </div>      
+      <div id="memberimage" class="fixdiv" style="left: 160px; top: 147px; z-index:1;">
+        <img src="{{ asset('bundles/oginversa/images/panflute/foto_hanspeter.png') }}" />            
+      </div>
+      <div id="memberaddress" class="fixdiv smalltext" style="z-index:1">
+        Mutschellenstrasse 163<br />
+        8038 Z&uuml;rich<br />
+        +41 (0)78 665 11 28<br />
+        <a href="mailto:hanspeter@ensemble-inversa.ch" class="inverse">E-Mail</a>
+      </div>   
+      <div id="membertitle" class="fixdiv" style="z-index:5; top: 123px;">
+        <img src="{{ asset('bundles/oginversa/images/panflute/typo_hanspeter.png') }}" />
+      </div>
+      
+      <div id="maincontent" class="maincontent stackdiv" style="background-color:#dd0000">
+        <div class="textcontent">
+<p>Hanspeter Oggier, Panflöte</p>
+<p>1981 in St. Niklaus (Schweiz, VS) geboren. In den Jahren 1989 bis 1995 Ausbildung auf der Panflöte bei verschiedenen Lehrern im Wallis. Ab 1996 erhält er in Genf regelmässigen Unterricht bei Simion Stanciu "Syrinx", dessen Sommerseminare und Meisterkurse er besucht, beispielsweise in La Floreffe (Belgien).</p></p>
+<p>Im Herbst 2002 beginnt Hanspeter Oggier beim SMPV das Musikstudium mit Hauptfach Panflöte in Genf und Zürich, 2005 erhält er das Lehrdiplom (Hauptfachlehrer: Simion Stanciu "Syrinx"). In den Jahren 2006 und 2007 bereitet er sich bei Herrn Kiyoshi Kasai, Dozent für Querflöte an der Musikakademie Basel, auf das Konzertdiplom SMPV vor, welches er im Februar 2008 mit Auszeichnung abschließt. Zwischen September 2008 und Juli 2010 absolviert er an der Hochschule Luzern – Musik bei Janne Thomsen den Studiengang "Master of Arts in Music, Major Performance Klassik, Panflöte".</p>
+<p>In den letzten Jahren entfaltet er eine rege Konzerttätigkeit als Solist verschiedener Orchester und als Kammermusiker. Es ist ihm ein grosses Anliegen, die vielfältigen und teilweise immer noch unbekannten Facetten der Panflöte zu zeigen. So wagt er sich an Werke verschiedener Epochen und Stilrichtungen, die er als Novum auf der Panflöte interpretiert. Eines der zentralen Anliegen seines Schaffens ist es, den zahlreichen und teils fast schon in Vergessenheit geratenen Artikulationsmöglichkeiten auf der Panflöte wieder ihren gebührenden Platz einzuräumen. So beschäftigt er sich intensiv mit der Aufführungspraxis alter Musik, ist aber gleichzeitig auch bestrebt, in Zusammenarbeit mit Komponistinnen und Komponisten das Repertoire für original für Panflöte geschriebene Musik zu erweitern.</p>
+<p>Im Jahre 2007 ist Hanspeter Oggier Preisträger der Kiefer Hablitzel Stiftung. Im Dezember 2008 erscheint seine erste CD "Arpeggione" in Zusammenarbeit mit Marielle Oggier (Querflöte) und Mathias Clausen (Klavier) mit Ersteinspielungen auf der Panflöte von Werken wie F. Schuberts "Arpeggione", B. Bartóks "Suite Paysanne Hongroise" oder F. A. Dopplers "Andante und Rondo".</p>
+<p>Ab dem Herbstsemester 2011 ist Hanspeter Oggier als Fachbeauftragter für Panflöte (Abteilung Klassik) an der Hochschule Luzern – Musik tätig.</p>                                              
+		</div>
+      </div>
+      
+      <div id="instrumentimage" class="stackdiv" style="margin-left:610px; z-index:2">
+        <img src="{{ asset('bundles/oginversa/images/panflute/typo_panfloete.png') }}" />
+      </div>
+    </div>
+    </div>
+{% endblock %}
