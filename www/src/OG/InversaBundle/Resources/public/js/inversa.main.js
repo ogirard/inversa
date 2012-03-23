@@ -11,6 +11,8 @@ var defaultColors = {
 
 var OnStartup;
 
+var OnLoaded;
+
 $(document).ready(function () {
     // when the DOM is ready...
     InitializeContentArea();
@@ -21,6 +23,14 @@ $(document).ready(function () {
 	
 	if(OnStartup) {
 	  OnStartup();
+	}
+});
+
+$(window).load(function() {
+	PositionActiveMenu();
+	
+	if(OnLoaded) {
+		OnLoaded();
 	}
 });
 

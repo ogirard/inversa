@@ -1,12 +1,15 @@
 // JavaScript Document
 
 OnStartup = InitializeContent;
+OnLoaded = PositionAndSize;
 
 function InitializeContent() {
   $('#mainMenu').addClass('defaultmenu');
-  $('#memberwww').hide();
-  $('#memberaddress').hide();
-  InvokeLater([SizeMainContentDiv, PositionFixDivs]);  
+}
+
+function PositionAndSize() {
+	SizeMainContentDiv();
+	PositionFixDivs();
 }
 
 function SizeMainContentDiv() {
@@ -29,6 +32,4 @@ function PositionFixDivs() {
     $('#memberaddress').css('left', contentleft + 'px');
 	$('#memberaddress').css('top', bottom + 'px');
     $('.footertext').css('left', $maincontent.offset().left + 'px');
-    $('#memberwww').show('fast');
-    $('#memberaddress').show('fast');
 }

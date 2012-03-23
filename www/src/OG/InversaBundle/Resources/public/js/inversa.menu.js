@@ -14,6 +14,17 @@ function InitializeMenus() {
 	RegisterMenu('media');
 }
 
+function PositionActiveMenu() {
+	$.each(['inversa', 'agenda', 'media'], function(i, id) {
+	  var $menulink = $('#' + id);
+	  var $menu = $('#' + id + 'menu');
+	  $menu.hide();
+      if(IsActiveMenu($menu, $menulink)) {
+		  ShowMenu($menu, $menulink);
+	  }
+	});
+}
+
 function RegisterMenu(id) {
 	var isMouseOver = false;
 	var isMouseOverMenu = false;	
@@ -36,11 +47,6 @@ function RegisterMenu(id) {
 		HideMenu($menu, $menulink, function() { return !isMouseOver && !isMouseOverMenu; });		
 		isMouseOverMenu = false;
 	});
-	
-	$menu.hide();
-	if(IsActiveMenu($menu, $menulink)) {
-	   ShowMenu($menu, $menulink);
-	}
 }
 
 function HideMenu($menu, $menulink, check) {
