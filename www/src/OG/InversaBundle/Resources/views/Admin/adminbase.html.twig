@@ -2,30 +2,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{% block title %}Ensemble Inversa{% endblock %}</title>
-        {% block stylesheets %}
-            <link href="{{ asset('bundles/oginversa/css/inversa.css') }}" type="text/css" rel="stylesheet" />
-            <link href="{{ asset('bundles/oginversa/css/inversa_form.css') }}" type="text/css" rel="stylesheet" />
-            <link href="{{ asset('bundles/oginversa/css/kendo/kendo.common.min.css') }}" type="text/css" rel="stylesheet" />
-            <link href="{{ asset('bundles/oginversa/css/kendo/kendo.default.min.css') }}" type="text/css" rel="stylesheet">
-        {% endblock %} 
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>{% block title %}Ensemble Inversa{% endblock %}</title>
+  <link href="{{ asset('bundles/oginversa/css/inversa.admin.css') }}" type="text/css" rel="stylesheet" />
+  <link href="{{ asset('bundles/oginversa/css/inversa.form.css') }}" type="text/css" rel="stylesheet" />
+  <link href="{{ asset('bundles/oginversa/css/kendo/kendo.common.min.css') }}" type="text/css" rel="stylesheet" />
+  <link href="{{ asset('bundles/oginversa/css/kendo/kendo.default.min.css') }}" type="text/css" rel="stylesheet">
+  <script src="{{ asset('bundles/oginversa/js/jquery-1.7.1.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/oginversa/js/inversa.admin.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/oginversa/js/inversa.util.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/oginversa/js/inversa.dynedit.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/oginversa/js/kendo/kendo.all.min.js') }}" type="text/javascript"></script> 
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 </head>
-<body background="{{ asset('bundles/oginversa/images/admin_bg.png') }}">
-<div class="container">
-<table class="containertable" background="{{ asset('bundles/oginversa/images/admin_bg.png') }}" cellpadding="0" cellspacing="0">
-<tr class="containerrow">
-<td class="shadowcell left" background="{{ asset('bundles/oginversa/images/shadow_left.png') }}">&nbsp;</td>
-<td class="innercell">
- <img src="{{ asset('bundles/oginversa/images/admin_title.png') }}" border="0" alt="Admin" align="left" />
+
+<body>
+  <img id="adminImage" src="{{ asset('bundles/oginversa/images/admin_title.png') }}" border="0" alt="Admin" align="left" />
+  
   {% if app.user %}
   <div class="userheader" align="right">
     {{ app.user.username }} &nbsp;&nbsp;&nbsp;<span class="footertext"><a href="{{ path('_admin_logout') }}">logout</a></span>
   </div>
   {% endif %}
   <br clear="all" />
-  <div class="header"><span class="adminmenu">
+  
+  <div class="header" id="headerdiv"><span class="adminmenu">
   <a href="{{ path('_admin_home' ) }}" class="adminmenu info">Info</a>
   &nbsp;&nbsp;&nbsp;<a href="{{ path('admin_agendaitem' ) }}" class="adminmenu agenda">Agenda</a>
   &nbsp;&nbsp;&nbsp;<a href="{{ path('admin_projectitem' ) }}" class="adminmenu projects">Projekte</a>
@@ -33,28 +34,18 @@
   &nbsp;&nbsp;&nbsp;<a href="{{ path('admin_pressitem' ) }}" class="adminmenu press">Presse</a>
   &nbsp;&nbsp;&nbsp;<a href="{{ path('admin_galleryitem' ) }}" class="adminmenu gallery">Galerie</a>
   </span></div>
-  <div class="metroline" style="margin-top:12px"></div>
-
+  <div class="thinline"> </div>
+  
   <div class="inversacontent">
     {% block body %}{% endblock %}
   </div>
 
-  <div class="footer">
+  <div class="footer" id="footerdiv">
     <div class="thinline"></div>
-    <span class="footertext">Copyright &copy; 2012 by Ensemble Inversa, <a class="info" href="mailto:mail@ensembleinversa.ch">mail@ensembleinversa.ch</a></span>
+    <span class="footertext">Copyright &copy; 2012 by <a class="info" href="mailto:mail@ensemble-inversa.ch">Ensemble Inversa</a></span>
   </div>
-</td>
-<td class="shadowcell right" background="{{ asset('bundles/oginversa/images/shadow_right.png') }}">&nbsp;</td>
-</tr>
-</table>
- 
-</div>
-{% block javascripts %}
-    <script src="{{ asset('bundles/oginversa/js/jquery-1.7.1.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/oginversa/js/inversa.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/oginversa/js/dynedit.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/oginversa/js/kendo/kendo.all.min.js') }}" type="text/javascript"></script>   
-    
+
+{% block javascripts %}   
 {% endblock %}
 </body>
 </html>

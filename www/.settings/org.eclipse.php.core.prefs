@@ -1,3 +1,5 @@
-#Mon Dec 26 16:58:38 CET 2011
+#Sun Mar 25 10:57:49 CEST 2012
 eclipse.preferences.version=1
-include_path=0;/Inversa
+include_path=0;/inversa
+phpVersion=php5.3
+use_asp_tags_as_php=false
