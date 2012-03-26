@@ -34,8 +34,30 @@ table.formtable .formtext {
 table.formtable .formlabel {
     color: #484848;
     vertical-align: middle;
+    padding-leftt: 12px;
+    padding-right: 12px;
 }
  
+table.formtable .formfield {
+    width: 350px;	
+    padding: 5px;
+}
+
+table.formtable .formfield input {
+	  width: 100%;
+}
+table.formtable .formfield textarea {
+    width: 100%;
+}
+table.formtable .formfield .k-datepicker {
+    width: 100%;
+}
+
+div.nestedItem {
+	margin: 5px;
+	background-color: #ff0000;
+}
+
 input.formbutton {
     border-style: solid;
     border-color: #979797;
