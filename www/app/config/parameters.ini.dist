@@ -1,5 +1,5 @@
 [parameters]
-    database_driver="pdo_sqlite"
+    database_driver="pdo_mysql"
     database_host="localhost"
     database_port="3306"
     database_name="inversa"

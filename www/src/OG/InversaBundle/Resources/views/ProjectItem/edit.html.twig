@@ -5,15 +5,15 @@
 <h1>Projekt "{{ entity.name }}" Editieren</h1>
 
 <form id="edititemform" action="{{ path('admin_projectitem_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    <table class="formtable">
-    {{ form_widget(edit_form) }}
-    </table> <br />
-     
-    <a href="#" id="add-document">Neues Dokument</a><br />  
-    
-     <p>
-        <button type="submit">Speichern</button>
-    </p>  
+  {{ form_widget(edit_form) }}
+  <br />
+  
+  <a href="#" id="add-document">Neues Dokument</a><br />
+  <a href="#" id="add-image">Neues Bild</a><br />  
+  <a href="#" id="add-link">Neuer Link</a><br />        
+  <p>
+    <button type="submit">Speichern</button>
+  </p>  
 </form>
 <span class="actionlist">
   <form id="deleteitemform" action="{{ path('admin_projectitem_delete', { 'id': entity.id }) }}" method="post">
@@ -37,11 +37,12 @@
     var imageCount = '{{ edit_form.images | length }}';
 
     $(document).ready(function() {
-        var docDynEdit = new dynedit(documentCount, '#add-document', '#og_inversabundle_projectitemtype_documents');
+        var docDynEdit = new DynamicEdit(documentCount, '#add-document', '#og_inversabundle_projectitemtype_documents', 'Dokument');
         docDynEdit.Initialize();
-        
-        // RegisterAddLink('#og_inversabundle_projectitemtype_links');
-        // RegisterAddImage('#og_inversabundle_projectitemtype_images');
+        var imgDynEdit = new DynamicEdit(imageCount, '#add-image', '#og_inversabundle_projectitemtype_images', 'Bild');
+        imgDynEdit.Initialize();
+        var linkDynEdit = new DynamicEdit(linkCount, '#add-link', '#og_inversabundle_projectitemtype_links', 'Link');
+        linkDynEdit.Initialize();
     });
 
     function deleteGuarded() {
