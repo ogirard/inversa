@@ -16,6 +16,11 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 
 	function PrepareEmbeddedForm() {
 		$list.css('margin-left', '40px');
+
+		for ( var i = 0; i < initCount; i++) {
+			$div = $(listId + "_" + i).parent();
+			FormatNestedDiv($div, i + 1);
+		}
 	}
 
 	function MoveAddLink() {
@@ -32,20 +37,12 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 			// replace the "$$name$$" with unique id
 			$itemFormDiv = $(newWidget.replace(/\$\$name\$\$/g, count));
 			count++;
-			var $headerLabel = $($('label', $itemFormDiv)[0]); 
-			$headerLabel.text(headerLabel + ' ' + count);
-			$headerLabel.addClass('headerLabel');
-			
 
+			FormatNestedDiv($itemFormDiv, count);
 			TransformEmbeddedEntry($itemFormDiv);
 			// create a new list element and add it to our list
 			$itemFormDiv.appendTo($list);
-			$itemFormDiv.addClass('nestedItem');
-			$removeLink = $('<a href="#">Entfernen</a>');
-			$removeLink.click(function() {
-				$list.remove($itemFormDiv);
-			});
-			$removeLink.appendTo($itemFormDiv);
+
 			return false;
 		});
 	}
@@ -56,5 +53,27 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 		}
 
 		return $embeddedEntry;
+	}
+
+	function FormatNestedDiv($div, nr) {
+		var $headerLabel = $($('label', $div)[0]);
+		$headerLabel.text(headerLabel + ' ' + nr);
+		$headerLabel.addClass('headerLabel');
+		$div.addClass('nestedItem');
+		$removeLink = $('<a href="#">Entfernen</a>');
+		$removeLink.click(function() {
+			$div.remove();
+			count--;
+			UpdateLabels();
+		});
+		$removeLink.appendTo($div);
+	}
+
+	function UpdateLabels() {
+		$.each($('.nestedItem', $list), function(index, div) {
+			$div = $(div);
+			var $headerLabel = $($('label', $div)[0]);
+			$headerLabel.text(headerLabel + ' ' + (index + 1));
+		});
 	}
 }

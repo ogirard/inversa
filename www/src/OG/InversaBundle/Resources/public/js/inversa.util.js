@@ -36,7 +36,7 @@ function ParsePixels(pixelString) {
 	if (!pixelString) {
 		return 0;
 	}
-	
+
 	return parseInt(pixelString.replace("px", ""));
 }
 
@@ -51,3 +51,7 @@ function InvokeLater(actions) {
 		});
 	}, 50);
 }
+
+$.fn.exists = function() {
+	return this.length !== 0;
+};

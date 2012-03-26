@@ -20,11 +20,15 @@ div span {
 
 div.nestedItem {
 	margin: 5px;
-	background-color: #ff0000;
 }
 
 label.headerLabel {
-	font-weight: bold;
+	font-size: 8pt;
+	font-color: #696969;
+	background-color: #ffffff;
+	margin: 5px 0px;
+	display: block;
+	
 }
 
 /* ~~ Element/tag selectors ~~ */
