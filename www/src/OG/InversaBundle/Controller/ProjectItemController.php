@@ -26,7 +26,7 @@ class ProjectItemController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('OGInversaBundle:ProjectItem')->findAll();
-       
+
         return array('entities' => $entities);
     }
 
@@ -131,6 +131,13 @@ class ProjectItemController extends Controller
             throw $this->createNotFoundException('Unable to find ProjectItem entity.');
         }
 
+        $originalDocs = array();
+        
+        // Create an array of the current document objects in the database
+        foreach ($entity->getDocuments() as $doc) {
+            $originalDocs[] = $doc;
+        }
+
         $editForm = $this->createForm(new ProjectItemType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -138,13 +145,34 @@ class ProjectItemController extends Controller
 
         $editForm->bindRequest($request);
 
-        if ($editForm->isValid()) {
-            $this->updateReferences($entity);
+        if ('POST' === $request->getMethod()) {
+            $editForm->bindRequest($this->getRequest());
 
-            $em->persist($entity);
-            $em->flush();
+            if ($editForm->isValid()) {
+                $this->updateReferences($entity);
 
-            return $this->redirect($this->generateUrl('admin_projectitem_edit', array('id' => $id)));
+                // filter $originalDocs to contain docs no longer present
+                foreach ($entity->getDocuments() as $doc) {
+                    foreach ($originalDocs as $key => $toDel) {
+                        if ($toDel->getId() === $doc->getId()) {
+                            unset($originalDocs[$key]);
+                        }
+                    }
+                }
+
+                // remove the relationship between the doc and the ProjectItem
+                foreach ($originalDocs as $doc) {
+                    // remove the Doc from the ProjectItem
+                    $entity->getDocuments()->removeElement($doc);
+                    $em->remove($doc);
+                }
+
+                $em->persist($entity);
+                $em->flush();
+
+                // redirect back to edit page
+                return $this->redirect($this->generateUrl('admin_projectitem_edit', array('id' => $id)));
+            }
         }
 
         return array('entity' => $entity, 'edit_form' => $editForm->createView(),

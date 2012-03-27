@@ -18,19 +18,6 @@ div span {
 	padding: 0px;
 }
 
-div.nestedItem {
-	margin: 5px;
-}
-
-label.headerLabel {
-	font-size: 8pt;
-	font-color: #696969;
-	background-color: #ffffff;
-	margin: 5px 0px;
-	display: block;
-	
-}
-
 /* ~~ Element/tag selectors ~~ */
 ul,ol,dl {
 	padding: 0px;

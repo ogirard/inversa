@@ -16,7 +16,8 @@ class ProjectItemType extends AbstractType
                       array('type' => new DocumentType(),
                             'allow_add' => true,
                             'allow_delete' => true,
-                            'prototype' => true))
+                            'prototype' => true,
+                            'by_reference' => false))
                 ->add('links', 'collection',
                       array('type' => new WebUrlType(),
                             'allow_add' => true,

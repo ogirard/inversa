@@ -8,7 +8,7 @@ class WebUrlType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder->add('name')->add('url')->add('agendaitem')->add('projectitem')->add('pressitem');
+        $builder->add('name')->add('url');
     }
 
     public function getName()

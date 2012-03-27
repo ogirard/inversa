@@ -160,6 +160,16 @@ class ProjectItem
     }
 
     /**
+     * Set documents
+     *
+     * @param Doctrine\Common\Collections\Collection $documents
+     */
+    public function setDocuments($documents)
+    {
+        $this->documents = $documents;
+    }
+
+    /**
      * Add image
      *
      * @param OG\InversaBundle\Entity\Image $image
@@ -178,14 +188,14 @@ class ProjectItem
     {
         return $this->images;
     }
-    
+
     /**
-    * ToString representation
-    * @return number
-    */
+     * ToString representation
+     * @return number
+     */
     public function __toString()
     {
-        return "PROJECT_".$this->id;
+        return "PROJECT_" . $this->id;
     }
     /**
      * @var date $when
@@ -196,7 +206,6 @@ class ProjectItem
      * @var text $where
      */
     private $where;
-
 
     /**
      * Set when
@@ -242,7 +251,6 @@ class ProjectItem
      */
     private $location;
 
-
     /**
      * Set location
      *
@@ -266,7 +274,6 @@ class ProjectItem
      * @var datetime $day
      */
     private $day;
-
 
     /**
      * Set day
