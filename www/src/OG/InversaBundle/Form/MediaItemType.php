@@ -10,9 +10,9 @@ class MediaItemType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('isactive')
+            ->add('name', null, array('required' => true, 'label' => 'Name'))
+            ->add('description', null, array('required' => false, 'label' => 'Beschreibung'))
+            ->add('isactive', null, array('required' => false, 'label' => 'Aktiv?'))
         ;
     }
 

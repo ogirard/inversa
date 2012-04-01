@@ -5,9 +5,20 @@ div.nestedItem {
 }
 
 label.headerLabel {
-	font-size: 8pt;
+	font-size: 10pt;
 	font-color: #696969;
-	background-color: #ffffff;
+	font-weight: bold;
 	margin: 5px 0px;
+	display: block;	
+}
+
+form div { 
+	display:block;
+}
+
+form label {
 	display: block;
+	clear: left;
+    float: left;
+	width: 200px;
 }

@@ -55,3 +55,16 @@ function InvokeLater(actions) {
 $.fn.exists = function() {
 	return this.length !== 0;
 };
+
+function GetHost() {
+	return window.location.protocol + '://' + window.location.host + "/";
+}
+
+function GetFileName(filePath) {
+	if (!filePath) {
+		return '';
+	}
+
+	var parts = filePath.split('/');
+	return parts[parts.length - 1];
+}

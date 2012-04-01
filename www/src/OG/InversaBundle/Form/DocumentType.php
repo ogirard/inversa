@@ -8,7 +8,9 @@ class DocumentType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder->add('name')->add('file')->add('webpath', null, array('required' => false));
+        $builder->add('name', null, array('label' => 'Name'))
+                ->add('file', null, array('label' => 'Neue Datei'))
+                ->add('webpath', null, array('required' => false));
     }
 
     public function getName()

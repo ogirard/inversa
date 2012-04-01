@@ -10,13 +10,12 @@ class LocationType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('address')
-            ->add('mapurl')
-            ->add('isactive')
-            ->add('image')
-        ;
+            ->add('name', null, array('required' => true, 'label' => 'Name'))
+            ->add('description', null, array('required' => false, 'label' => 'Beschreibung'))
+            ->add('address', null, array('required' => false, 'label' => 'Adresse'))
+            ->add('image', new ImageType(), array('required' => false, 'label' => 'Bild'))
+            ->add('mapurl', null, array('required' => false, 'label' => 'Karte (URL)'))
+            ->add('isactive', null, array('required' => false, 'label' => 'Aktiv?'));
     }
 
     public function getName()

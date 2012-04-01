@@ -58,18 +58,30 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 		$headerLabel.text(headerLabel + ' ' + nr);
 		$headerLabel.addClass('headerLabel');
 		$div.addClass('nestedItem');
+		$('<br />').insertAfter($headerLabel);
+
+		// remove webpath / add current file link
+		var $webPathInput = $(listId + '_' + (nr - 1) + '_webpath');
+		var webPath = $webPathInput.val();
+		$webPathInput.parent().hide(0);
+
+		var $currentFile = $('<div><label for="currentFile' + nr
+				+ '">Aktuelle Datei</label><a id="currentFile' + nr
+				+ '" href="' + GetHost() + webPath + '" target="_blank">'
+				+ GetFileName(webPath) + '</a></div>');
+		$currentFile.insertAfter($webPathInput.parent());
+
+		// add remove link
+		$removeLinkDiv = $('<div style="margin-top:7px; margin-bottom:10px;"></div>');
 		$removeLink = $('<a href="#">Entfernen</a>');
 		$removeLink.click(function(event) {
 			event.preventDefault();
 			RemoveNestedDiv($div);
 			return false;
 		});
-		$removeLink.appendTo($div);
 
-		// remove webpath
-		var $webPathInput = $(listId + '_' + (nr - 1) + '_webpath');
-		var webPath = $webPathInput.val();
-		$webPathInput.parent().hide(0);
+		$removeLink.appendTo($removeLinkDiv);
+		$removeLinkDiv.appendTo($div);
 	}
 
 	function RemoveNestedDiv($div) {
