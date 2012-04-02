@@ -39,7 +39,6 @@ class Location
      */
     private $isactive;
 
-
     /**
      * Get id
      *

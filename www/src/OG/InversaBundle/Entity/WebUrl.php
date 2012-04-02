@@ -24,7 +24,6 @@ class WebUrl
      */
     private $url;
 
-
     /**
      * Get id
      *

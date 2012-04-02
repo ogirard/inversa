@@ -3,46 +3,34 @@
 {% block body %}
   
 <h1>Projekte</h1>
-<a href="{{ path('admin_projectitem_new') }}" class="actionbutton">
-    <span>
-      <img src="{{ asset('bundles/oginversa/images/add.png') }}" class="withtext" border="0" alt="Neuen Eintrag erstellen" align="left" title="Neuer Eintrag" /> Neuer Eintrag
-    </span>
-</a><br /><br />
-<table class="records_list" cellpadding="0" cellspacing="0">
+<a href="{{ path('admin_projectitem_new') }}">Neuer Eintrag</a><br /><br />
+<table class="records_list">
     <thead>
         <tr>
-            <th class="idcolumn">Id</th>
-            <th>Name</th>
-            <th class="desccolumn">Beschreibung</th>
-            <th><center>Aktiv?</center></th>
-            <th></th>
+            <th width="25">ID</th>
+            <th width="200">Name</th>
+            <th width="350">Beschreibung</th>
+            <th width="75"><center>Aktiv?</center></th>
+            <th width="150">&nbsp;&nbsp;</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('admin_projectitem_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.id }}</td>
             <td>{{ entity.name }}</td>
             <td>{{ entity.description }}</td>
             <td>
                 {% if entity.isactive %}
-                   <img src="{{ asset('bundles/oginversa/images/active.png') }}" border="0" alt="Anzeigen" title="Aktiv" class="centered" style="margin-top: 3px;" />
+                   Aktiv
                 {% else %}
-                   <img src="{{ asset('bundles/oginversa/images/inactive.png') }}" border="0" alt="Anzeigen" title="Inaktiv" class="centered" style="margin-top: 3px;" />
+                   Nicht aktiv
                 {% endif %}
             </td>
             <td>
                <span class="actionlist">
-                   <a href="{{ path('admin_projectitem_show', { 'id': entity.id }) }}" class="actionbutton">
-                     <span>
-                       <img src="{{ asset('bundles/oginversa/images/show.png') }}" border="0" alt="Anzeigen" align="left" title="Anzeigen" /> 
-                     </span>
-                   </a>           
-                   <a href="{{ path('admin_projectitem_edit', { 'id': entity.id }) }}" class="actionbutton">
-                     <span>
-                       <img src="{{ asset('bundles/oginversa/images/edit.png') }}" border="0" alt="Editieren" align="left" title="Editieren" />
-                     </span>
-                   </a>
+                   <a href="{{ path('admin_projectitem_show', { 'id': entity.id }) }}" class="actionlink">anzeigen</a>&nbsp;&nbsp;|&nbsp;  
+                   <a href="{{ path('admin_projectitem_edit', { 'id': entity.id }) }}" class="actionlink">editieren</a>
                </span>
             </td>
         </tr>

@@ -103,4 +103,14 @@ class GalleryItem
     {
         return $this->images;
     }
+
+    /**
+     * Set images
+     *
+     * @param Doctrine\Common\Collections\Collection $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+    }
 }

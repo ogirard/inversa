@@ -181,6 +181,17 @@ class AgendaItem
     {
         return $this->documents;
     }
+
+    /**
+     * Set documents
+     *
+     * @param Doctrine\Common\Collections\Collection $documents
+     */
+    public function setDocuments($documents)
+    {
+        $this->documents = $documents;
+    }
+    
     /**
      * @var OG\InversaBundle\Entity\WebUrl
      */
@@ -206,6 +217,17 @@ class AgendaItem
     {
         return $this->links;
     }
+
+    /**
+     * Set links
+     *
+     * @param Doctrine\Common\Collections\Collection $links
+     */
+    public function setLinks($links)
+    {
+        $this->links = $links;
+    }
+    
     /**
      * @var OG\InversaBundle\Entity\Image
      */
@@ -231,6 +253,17 @@ class AgendaItem
     {
         return $this->images;
     }
+
+    /**
+     * Set images
+     *
+     * @param Doctrine\Common\Collections\Collection $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+    }
+    
     /**
      * @var OG\InversaBundle\Entity\Location
      */

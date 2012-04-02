@@ -29,7 +29,6 @@ class MediaItem
      */
     private $isactive;
 
-
     /**
      * Get id
      *

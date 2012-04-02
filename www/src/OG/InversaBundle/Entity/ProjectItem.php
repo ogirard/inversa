@@ -129,6 +129,17 @@ class ProjectItem
     {
         return $this->links;
     }
+
+    /**
+     * Set links
+     *
+     * @param Doctrine\Common\Collections\Collection $links
+     */
+    public function setLinks($links)
+    {
+        $this->links = $links;
+    }
+
     /**
      * @var OG\InversaBundle\Entity\Document
      */
@@ -187,6 +198,16 @@ class ProjectItem
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set images
+     *
+     * @param Doctrine\Common\Collections\Collection $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
     }
 
     /**

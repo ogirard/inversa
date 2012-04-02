@@ -142,7 +142,7 @@ class PressItem
         $this->documents = new \Doctrine\Common\Collections\ArrayCollection();
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
         $this->links = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->isactive = true;        
+        $this->isactive = true;
     }
 
     /**
@@ -164,6 +164,16 @@ class PressItem
     {
         return $this->documents;
     }
+    
+    /**
+     * Set documents
+     *
+     * @param Doctrine\Common\Collections\Collection $documents
+     */
+    public function setDocuments($documents)
+    {
+        $this->documents = $documents;
+    }
 
     /**
      * Add images
@@ -184,6 +194,16 @@ class PressItem
     {
         return $this->images;
     }
+        
+    /**
+     * Set images
+     *
+     * @param Doctrine\Common\Collections\Collection $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+    }
 
     /**
      * Add link
@@ -203,5 +223,15 @@ class PressItem
     public function getLinks()
     {
         return $this->links;
+    }
+
+    /**
+     * Set links
+     *
+     * @param Doctrine\Common\Collections\Collection $links
+     */
+    public function setLinks($links)
+    {
+        $this->links = $links;
     }
 }
