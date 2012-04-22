@@ -187,6 +187,12 @@ span.adminmenu {
 	margin-right: .8em;
 }
 
+span.noFileSelected {
+	font-style: italic;
+	font-size: 9pt;
+	margin: 4px;
+}
+
 /* ~~ action link ~~ */
 a.actionlink:link,a.actionlink:visited {
 	color: #696969;

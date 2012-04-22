@@ -20,6 +20,7 @@ $(document).ready(function() {
 	UnpackEmails();
 	InitButtons();
 	InitKendo();
+	ApplyKendoPageInit();
 
 	$(window).resize(function() {
 		SetMinHeight();
@@ -35,6 +36,8 @@ $(window).load(function() {
 	if (OnLoaded) {
 		OnLoaded();
 	}
+
+	ApplyKendoFields();
 });
 
 function SetMinHeight() {
@@ -75,15 +78,53 @@ function InitButtons() {
 
 function InitKendo() {
 	kendo.culture("de-CH");
-	$('input.datetimefield').kendoDatePicker();
+}
+
+function ApplyKendoPageInit() {
+	// grid
 	$('.records_list').kendoGrid({
 		height : 600,
 		groupable : true,
 		sortable : true,
-		pageable: true,
-        scrollable: false,
-        filterable: true,
+		pageable : true,
+		scrollable : false,
+		filterable : true,
 		toolbar : kendo.template($('#listtoolbartemplate').html())
+	});
+}
+
+function ApplyKendoFields($scope) {
+	if (!$scope) {
+		$scope = $('body');
+	}
+
+	// file upload
+	$scope.find('input:file').kendoUpload({
+		multiple : false
+	});
+
+	// date time field
+	$scope.find('input.datetimefield').kendoDatePicker();
+	$scope.find('input.datetimefield').addClass('inversa-datefield');
+
+	// text field
+	$.each($scope.find('input:text'), function(i, input) {
+		if (!$(input).parent().hasClass('k-picker-wrap')) {
+			$(input).addClass('k-textbox inversa-textbox');
+		}
+	});
+
+	// multi-line text field
+	$scope.find('textarea').addClass('k-textbox inversa-textarea');
+
+	// check box
+	$scope.find('input[type="checkbox"]').addClass(
+			'k-checkbox inversa-checkbox');
+
+	// select
+	$scope.find('select').kendoComboBox({
+		filter : "contains",
+		suggest : true
 	});
 }
 
@@ -110,5 +151,5 @@ function IsNullOrEmpty(text) {
 }
 
 function DeleteElementGuard() {
-    return confirm('Soll dieses Element definitiv gelöscht werden?');
+	return confirm('Soll dieses Element definitiv gelöscht werden?');
 }

@@ -25,6 +25,7 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 
 	function MoveAddLink() {
 		$addLink.insertBefore($list);
+		$addLink.addClass('inversa-formlink');
 	}
 
 	function RegisterDynAdd() {
@@ -40,6 +41,7 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 			$itemFormDiv.appendTo($list);
 			FormatNestedDiv($itemFormDiv, count);
 			TransformEmbeddedEntry($itemFormDiv);
+
 			// create a new list element and add it to our list
 			return false;
 		});
@@ -65,15 +67,21 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 		var webPath = $webPathInput.val();
 		$webPathInput.parent().hide(0);
 
+		var fileHyperlink = '<span class="noFileSelected">Keine Datei vorhanden</span>';
+
+		if (!IsNullOrEmpty(webPath)) {
+			fileHyperlink = '<a id="currentFile' + nr + '" href="' + GetHost()
+					+ webPath + '" target="_blank" class="inversa-formlink">' + GetFileName(webPath)
+					+ '</a>';
+		}
+
 		var $currentFile = $('<div><label for="currentFile' + nr
-				+ '">Aktuelle Datei</label><a id="currentFile' + nr
-				+ '" href="' + GetHost() + webPath + '" target="_blank">'
-				+ GetFileName(webPath) + '</a></div>');
+				+ '">Aktuelle Datei</label>' + fileHyperlink + '</div>');
 		$currentFile.insertAfter($webPathInput.parent());
 
 		// add remove link
 		$removeLinkDiv = $('<div style="margin-top:7px; margin-bottom:10px;"></div>');
-		$removeLink = $('<a href="#">Entfernen</a>');
+		$removeLink = $('<a href="#" class="inversa-formlink" style="float:right">Entfernen</a><br style="clear:all"/>');
 		$removeLink.click(function(event) {
 			event.preventDefault();
 			RemoveNestedDiv($div);
@@ -82,6 +90,9 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 
 		$removeLink.appendTo($removeLinkDiv);
 		$removeLinkDiv.appendTo($div);
+
+		// apply field transformations after load/reload/insert
+		ApplyKendoFields($div);
 	}
 
 	function RemoveNestedDiv($div) {
@@ -106,4 +117,4 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 
 function InitDynamicEdit(initCount, addLinkId, listId, headerLabel) {
 	(new DynamicEdit(initCount, addLinkId, listId, headerLabel)).Initialize();
-} 
+}
