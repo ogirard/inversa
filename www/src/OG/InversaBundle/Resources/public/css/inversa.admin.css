@@ -3,7 +3,6 @@
 body {
 	font-family: "Segoe UI", Helvetica, Verdana, Arial, sans-serif;
 	font-size: 11pt;
-	background-color: #ffffff;
 	color: #484848;
 	padding: 0px;
 	margin: 0px;
@@ -32,9 +31,10 @@ h1,h2,h3,h4,h5,h6,p {
 
 h1 {
 	font-size: 16pt;
-	font-weight: normal;
+	text-transform: uppercase;
 	margin-top: 6px;
 	margin-bottom: 24px;
+	font-weight: normal;
 }
 
 h2 {
@@ -92,19 +92,20 @@ a:hover,a:active,a:focus {
 }
 
 /* ~~ adminmenu ~~ */
-a.adminmenu:link {
-	color: #484848;
+a.adminmenu:link,a.adminmenu:visited {
+	color: #ffffff;
 	text-decoration: none;
-}
-
-a.adminmenu:visited {
-	color: #484848;
-	text-decoration: none;
+	background-color: #0070ba;
+	padding: 11px 15px;
+	margin: 0px;
 }
 
 a.adminmenu:hover,a.admimenu:active,a.admimenu:focus {
 	text-decoration: none;
-	color: #de0000;
+	color: #ffffff;
+	background-color: #006699;
+	padding: 11px 15px;
+	margin: 0px;
 }
 
 /* ~~ this fixed width container surrounds the other divs ~~ */
@@ -157,10 +158,8 @@ td.right {
 }
 
 .header {
-	background-color: #EFEFEF;
 	color: #333333;
 	padding: 0px 15px;
-	margin-top: 25px;
 }
 
 span.adminmenu {
@@ -181,6 +180,23 @@ span.adminmenu {
 	padding: 15px;
 	height: auto;
 	background-color: #efefef;
+}
+
+.toolbar {
+	float: right;
+	margin-right: .8em;
+}
+
+/* ~~ action link ~~ */
+a.actionlink:link,a.actionlink:visited {
+	color: #696969;
+	text-decoration: none;
+	margin: 0px;
+}
+
+a.actionlink:hover,a.actionlink:active,a.actionlink:focus {
+	text-decoration: none;
+	color: #de0000;
 }
 
 /* ~~ The footer ~~ */
@@ -266,6 +282,10 @@ td.simple {
 	padding: 0px;
 	margin: 0px;
 	vertical-align: top;
+}
+
+td.noentries {
+	font-style: italic;
 }
 
 /* ~~ miscellaneous float/clear classes ~~ */

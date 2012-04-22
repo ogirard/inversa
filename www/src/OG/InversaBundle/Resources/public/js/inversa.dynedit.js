@@ -103,3 +103,7 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 		count = maxCount;
 	}
 }
+
+function InitDynamicEdit(initCount, addLinkId, listId, headerLabel) {
+	(new DynamicEdit(initCount, addLinkId, listId, headerLabel)).Initialize();
+} 

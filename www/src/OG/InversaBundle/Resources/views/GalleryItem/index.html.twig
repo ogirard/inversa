@@ -2,44 +2,49 @@
 
 {% block body %}
   
-<h1>GalleryItem list</h1>
-
+<h1>Galerien</h1>
+&raquo; <a href="{{ path('admin_galleryitem_new') }}" class="actionlink">Neuer Eintrag</a><br /><br />
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Actions</th>
+            <th width="25">ID</th>
+            <th width="200">Name</th>
+            <th width="350">Beschreibung</th>
+            <th width="75"><center>Aktiv?</center></th>
+            <th width="150">&nbsp;&nbsp;</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('admin_galleryitem_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.id }}</td>
             <td>{{ entity.name }}</td>
             <td>{{ entity.description }}</td>
             <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_galleryitem_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_galleryitem_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                {% if entity.isactive %}
+                   Aktiv
+                {% else %}
+                   Nicht aktiv
+                {% endif %}
+            </td>
+            <td>
+               <span class="actionlist">
+                   &raquo; <a href="{{ path('admin_galleryitem_show', { 'id': entity.id }) }}" class="actionlink">anzeigen</a>&nbsp;&nbsp;|&nbsp;  
+                   &raquo; <a href="{{ path('admin_galleryitem_edit', { 'id': entity.id }) }}" class="actionlink">editieren</a>
+               </span>
             </td>
         </tr>
+    {% else %}
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+           <span class="noentries">Keine Eintr&auml;ge</span>
+        </td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>        
     {% endfor %}
     </tbody>
 </table>
-
-<ul>
-    <li>
-        <a href="{{ path('admin_galleryitem_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
-
 {% endblock %}

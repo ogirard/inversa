@@ -57,7 +57,7 @@ $.fn.exists = function() {
 };
 
 function GetHost() {
-	return window.location.protocol + '://' + window.location.host + "/";
+	return window.location.protocol + '//' + window.location.host + "/";
 }
 
 function GetFileName(filePath) {

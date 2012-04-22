@@ -2,24 +2,41 @@
 
 {% block body %}
   
-<h1>ProjectItem creation</h1>
+<h1>Neues Projekt</h1>
 
-<form action="{{ path('admin_projectitem_create') }}" method="post" {{ form_enctype(form) }}>
-<table class="formtable">    
+<form id="createitemform" action="{{ path('admin_projectitem_create') }}" method="post" {{ form_enctype(form) }}>   
 {{ form_widget(form) }}
-</table>
-         
-    <p>
-        <button type="submit">Create</button>
-    </p>
+<br />
+  
+  <a href="#" id="add-document">Neues Dokument</a><br />
+  <a href="#" id="add-image">Neues Bild</a><br />  
+  <a href="#" id="add-link">Neuer Link</a><br />        
+  <ul>
+    <button type="submit">Speichern</button>
+  </ul>  
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_projectitem') }}">
-            Back to the list
-        </a>
-    </li>
+<ul>
+  <a href="{{ path('admin_projectitem') }}" class="actionlink" onclick="$('#deleteitemform').submit();" class="actionbutton" style="margin-left:50px">Liste</a>
 </ul>
 
+{% endblock %}
+
+{% block javascripts %}
+
+  {{ parent() }} 
+<script type="text/javascript">
+    // keep track of how many document fields have been rendered
+    var documentCount = '{{ form.documents | length }}';
+    var linkCount = '{{ form.links | length }}';
+    var imageCount = '{{ form.images | length }}';
+
+    $(document).ready(function() {
+        var docDynEdit = new DynamicEdit(documentCount, '#add-document', '#og_inversabundle_projectitemtype_documents', 'Dokument');
+        docDynEdit.Initialize();
+        var imgDynEdit = new DynamicEdit(imageCount, '#add-image', '#og_inversabundle_projectitemtype_images', 'Bild');
+        imgDynEdit.Initialize();
+        var linkDynEdit = new DynamicEdit(linkCount, '#add-link', '#og_inversabundle_projectitemtype_links', 'Link');
+        linkDynEdit.Initialize();
+    });    
+</script>
 {% endblock %}
