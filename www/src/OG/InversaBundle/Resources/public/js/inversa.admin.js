@@ -126,6 +126,10 @@ function ApplyKendoFields($scope) {
 		filter : "contains",
 		suggest : true
 	});
+
+	// password
+	$scope.find('input[type="password"]').addClass(
+			'k-textbox inversa-passwordbox');
 }
 
 var GetKendoColumns = function() {

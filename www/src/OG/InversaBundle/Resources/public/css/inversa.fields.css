@@ -3,7 +3,7 @@
  */
 @charset "utf-8";
 
-.inversa-textbox,.inversa-textarea,.inversa-numberfield,.inversa-selectbox
+.inversa-textbox,.inversa-textarea,.inversa-numberfield,.inversa-selectbox,.inversa-passwordbox
 	{
 	min-width: 400px;
 	margin: 4px;
