@@ -19,6 +19,8 @@
 
 .k-button {
 	margin: 4px !important;
+	min-width: 120px !important;
+	font-size: 10pt;
 }
 
 .k-datepicker,.k-combobox {
@@ -32,5 +34,10 @@ a.inversa-formlink {
 
 form label {
 	margin: 4px;
+	color: #898989;
+}
+
+span.noentries {
+	font-style: italic;
 	color: #898989;
 }

@@ -10,23 +10,28 @@
   
   <a href="#" id="add-document">Neues Dokument</a><br />
   <a href="#" id="add-image">Neues Bild</a><br />  
-  <a href="#" id="add-link">Neuer Link</a><br />        
+  <a href="#" id="add-link">Neuer Link</a><br />
+  <br />
   
-  <div style="text-align: right; width:100%">
+  <div style="text-align: right; width:100%" class="actionswithborder">
   <button type="submit" class="actionbutton k-button">Speichern</button>
   </div>  
 </form>
 <form id="deleteitemform" action="{{ path('admin_projectitem_delete', { 'id': entity.id }) }}" method="post" onsubmit="return DeleteElementGuard();" style="display: inline-block;">
     {{ form_widget(delete_form) }}
-    <button class="actionbutton k-button" type="submit">Löschen</button> 
-</form>  
-<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_projectitem') }}'">Liste</button> 
+    <div class="actions" style="margin-left:-1px;">
+      <button class="actionbutton k-button" type="submit">Löschen</button>
+    </div> 
+</form>
+<div class="actions" style="margin-left: -4px">  
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_projectitem') }}'">Liste</button>
+</div> 
 
 {% endblock %}
 
 {% block javascripts %}
-
-  {{ parent() }} 
+  {{ parent() }}
+  
 <script type="text/javascript">
     InitDynamicEdit('{{ edit_form.documents | length }}', '#add-document', '#og_inversabundle_projectitemtype_documents', 'Dokument');
     InitDynamicEdit('{{ edit_form.images | length }}', '#add-image', '#og_inversabundle_projectitemtype_images', 'Bild');

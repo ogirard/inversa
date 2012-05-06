@@ -32,8 +32,10 @@
                 {% endif %}
             </td>
             <td>
-                <button class="k-button" onclick="window.location.href='{{ path('admin_projectitem_show', { 'id': entity.id }) }}'">anzeigen</button>
-                <button class="k-button" onclick="window.location.href='{{ path('admin_projectitem_edit', { 'id': entity.id }) }}'">editieren</button>
+                <div class="actionswithborder">
+                  <button class="k-button" onclick="window.location.href='{{ path('admin_projectitem_show', { 'id': entity.id }) }}'">anzeigen</button>
+                  <button class="k-button" onclick="window.location.href='{{ path('admin_projectitem_edit', { 'id': entity.id }) }}'">editieren</button>
+                </div>
             </td>
         </tr>
     {% else %}

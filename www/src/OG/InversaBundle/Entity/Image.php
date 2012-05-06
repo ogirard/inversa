@@ -29,6 +29,10 @@ class Image
      */
     private $path;
 
+    /**
+     * @var string $doctype
+     */
+    private $doctype;
 
     /**
      * Get id
@@ -99,12 +103,31 @@ class Image
     {
         return $this->path;
     }
-  
+    
+    /**
+     * Set doctype
+     *
+     * @param string $doctype
+     */
+    public function setDoctype($doctype)
+    {
+        $this->doctype = $doctype;
+    }
+    
+    /**
+     * Get doctype
+     *
+     * @return string
+     */
+    public function getDoctype()
+    {
+        return $this->doctype;
+    }
+
     /**
      * @var OG\InversaBundle\Entity\AgendaItem
      */
     private $agendaitem;
-
 
     /**
      * Set agendaitem
@@ -129,7 +152,6 @@ class Image
      * @var OG\InversaBundle\Entity\ProjectItem
      */
     private $projectitem;
-
 
     /**
      * Set projectitem
@@ -159,7 +181,6 @@ class Image
      * @var OG\InversaBundle\Entity\GalleryItem
      */
     private $galleryitem;
-
 
     /**
      * Set pressitem
@@ -200,9 +221,9 @@ class Image
     {
         return $this->galleryitem;
     }
-    
+
     private $file;
-    
+
     /**
      * Set file
      *
@@ -212,7 +233,7 @@ class Image
     {
         $this->file = $file;
     }
-    
+
     /**
      * Get file
      *
@@ -222,29 +243,29 @@ class Image
     {
         return $this->file;
     }
-    
+
     public function getAbsolutePath()
     {
-        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->id.'_'.$this->path;
+        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->id . '_' . $this->path;
     }
-    
+
     public function getWebPath()
     {
-        return null === $this->path ? null : $this->getUploadDir().'/'.$this->id.'_'.$this->path;
+        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->id . '_' . $this->path;
     }
-    
+
     protected function getUploadRootDir()
     {
         // the absolute directory path where uploaded documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
     }
-    
+
     protected function getUploadDir()
     {
         // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
-        return 'uploads/images/'.$this->doctype;
+        return 'uploads/images/' . $this->doctype;
     }
-    
+
     /**
      * @ORM\prePersist
      */
@@ -253,11 +274,11 @@ class Image
         if (null === $this->file) {
             return;
         }
-    
+
         $this->path = $this->file->getClientOriginalName();
         $this->doctype = $this->file->guessExtension();
     }
-    
+
     /**
      * @ORM\postPersist
      */
@@ -266,28 +287,30 @@ class Image
         if (null === $this->file) {
             return;
         }
-    
-        $this->file->move($this->getUploadRootDir(), $this->id.'_'.$this->path);
-    
+
+        $this->file->move($this->getUploadRootDir(), $this->id . '_' . $this->path);
+
         unset($this->file);
     }
-    
+
     /**
      * @ORM\postRemove
      */
     public function removeUpload()
     {
         if ($file = $this->getAbsolutePath()) {
-            unlink($file);
+            if (file_exists($file)) {
+                unlink($file);
+            }
         }
     }
-    
+
     /**
      * ToString representation
      * @return number
      */
     public function __toString()
     {
-        return "IMAGE_".$this->id;
+        return "IMAGE_" . $this->id;
     }
 }

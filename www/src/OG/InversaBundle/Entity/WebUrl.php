@@ -71,13 +71,18 @@ class WebUrl
      */
     public function getUrl()
     {
+        if (!is_null($this->url)) {
+            // if url does not contain :// and does not start with a /, add http:// automatically
+            if (strpos($this->url, "://") === false && strpos($this->url, "/") !== 0) {
+                return "http://" . $this->url;
+            }
+        }
         return $this->url;
     }
     /**
      * @var OG\InversaBundle\Entity\AgendaItem
      */
     private $agendaitem;
-
 
     /**
      * Set agendaitem
@@ -103,7 +108,6 @@ class WebUrl
      */
     private $projectitem;
 
-
     /**
      * Set projectitem
      *
@@ -127,7 +131,6 @@ class WebUrl
      * @var OG\InversaBundle\Entity\PressItem
      */
     private $pressitem;
-
 
     /**
      * Set pressitem

@@ -74,21 +74,14 @@ a img {
 	border: none;
 }
 /* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
-a:link {
-	color: #724747;
-	text-decoration: none;
-	/* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
-}
-
-a:visited {
-	color: #724747;
+a:link,a:visited  {
+	color: #0070ba;
 	text-decoration: none;
 }
-
 a:hover,a:active,a:focus {
 	/* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
 	text-decoration: none;
-	color: #de0000;
+	color: #006699;
 }
 
 /* ~~ adminmenu ~~ */

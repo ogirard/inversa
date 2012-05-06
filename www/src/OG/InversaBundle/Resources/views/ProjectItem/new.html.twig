@@ -4,20 +4,22 @@
   
 <h1>Neues Projekt</h1>
 
-<form id="createitemform" action="{{ path('admin_projectitem_create') }}" method="post" {{ form_enctype(form) }}>   
-{{ form_widget(form) }}
-<br />
+<form id="createitemform" action="{{ path('admin_projectitem_create') }}" method="post" {{ form_enctype(form) }} style="display: inline-block;">   
+  {{ form_widget(form) }}
+  <br />
   
   <a href="#" id="add-document">Neues Dokument</a><br />
   <a href="#" id="add-image">Neues Bild</a><br />  
   <a href="#" id="add-link">Neuer Link</a><br />        
-  <ul>
-    <button type="submit">Speichern</button>
-  </ul>  
+ 
+  <div style="text-align: right; width:100%" class="actionswithborder">
+    <button type="submit" class="actionbutton k-button">Speichern</button>
+  </div>  
 </form>
-<ul>
-  <a href="{{ path('admin_projectitem') }}" class="actionlink" onclick="$('#deleteitemform').submit();" class="actionbutton" style="margin-left:50px">Liste</a>
-</ul>
+
+<div class="actions">
+  <button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_projectitem') }}'">Liste</button>
+</div> 
 
 {% endblock %}
 
@@ -25,18 +27,8 @@
 
   {{ parent() }} 
 <script type="text/javascript">
-    // keep track of how many document fields have been rendered
-    var documentCount = '{{ form.documents | length }}';
-    var linkCount = '{{ form.links | length }}';
-    var imageCount = '{{ form.images | length }}';
-
-    $(document).ready(function() {
-        var docDynEdit = new DynamicEdit(documentCount, '#add-document', '#og_inversabundle_projectitemtype_documents', 'Dokument');
-        docDynEdit.Initialize();
-        var imgDynEdit = new DynamicEdit(imageCount, '#add-image', '#og_inversabundle_projectitemtype_images', 'Bild');
-        imgDynEdit.Initialize();
-        var linkDynEdit = new DynamicEdit(linkCount, '#add-link', '#og_inversabundle_projectitemtype_links', 'Link');
-        linkDynEdit.Initialize();
-    });    
+    InitDynamicEdit('{{ form.documents | length }}', '#add-document', '#og_inversabundle_projectitemtype_documents', 'Dokument');
+    InitDynamicEdit('{{ form.images | length }}', '#add-image', '#og_inversabundle_projectitemtype_images', 'Bild');
+    InitDynamicEdit('{{ form.links | length }}', '#add-link', '#og_inversabundle_projectitemtype_links', 'Link');
 </script>
 {% endblock %}

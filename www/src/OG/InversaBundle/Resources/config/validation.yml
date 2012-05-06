@@ -7,13 +7,13 @@ OG\InversaBundle\Entity\Document:
     properties:            
         file:
             - File:
-                maxSize: 1024k
-                mimeTypes: [application/pdf, application/x-pdf]
-                mimeTypesMessage: Please upload a valid PDF
+                maxSize: 3072k
+                mimeTypes: [application/pdf, application/x-pdf, text/plain, text/xml, application/msword]
+                mimeTypesMessage: PDF, Word oder Text Datei (<3MB)
 OG\InversaBundle\Entity\Image:
     properties:            
         file:
             - Image:
-                maxSize: 5120k
-                #mimeTypes: [application/pdf, application/x-pdf]
-                #mimeTypesMessage: Please upload a valid PDF
+                maxSize: 2048k
+                mimeTypes: [image/png, image/jpeg, image/gif]
+                mimeTypesMessage: Bild Datei (PNG, JPEG, GIF, <2MB)

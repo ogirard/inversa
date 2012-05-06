@@ -125,47 +125,36 @@ class ProjectItemController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
+        // EXAMPLE FOR LOGGING
+        $logger = $this->get('logger');
+        $logger->info('$$MY: TEST for logging');
+
         $entity = $em->getRepository('OGInversaBundle:ProjectItem')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ProjectItem entity.');
         }
 
-        $originalDocs = array();
-        
-        // Create an array of the current document objects in the database
-        foreach ($entity->getDocuments() as $doc) {
-            $originalDocs[] = $doc;
-        }
+        $originalDocs = Util::asArray($entity->getDocuments());
+        $originalLinks = Util::asArray($entity->getLinks());
+        $originalImages = Util::asArray($entity->getImages());
 
         $editForm = $this->createForm(new ProjectItemType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
-
         if ('POST' === $request->getMethod()) {
             $editForm->bindRequest($this->getRequest());
+
+            $logger->info('$$MY: ' . date_format($entity->getDay(), 'dd.MM.yyyy'));
 
             if ($editForm->isValid()) {
                 $this->updateReferences($entity);
 
-                // filter $originalDocs to contain docs no longer present
-                foreach ($entity->getDocuments() as $doc) {
-                    foreach ($originalDocs as $key => $toDel) {
-                        if ($toDel->getId() === $doc->getId()) {
-                            unset($originalDocs[$key]);
-                        }
-                    }
-                }
-
-                // remove the relationship between the doc and the ProjectItem
-                foreach ($originalDocs as $doc) {
-                    // remove the Doc from the ProjectItem
-                    $entity->getDocuments()->removeElement($doc);
-                    $em->remove($doc);
-                }
+                Util::syncItems($em, $originalDocs, $entity->getDocuments());
+                Util::syncItems($em, $originalLinks, $entity->getLinks());
+                Util::syncItems($em, $originalImages, $entity->getImages());
 
                 $em->persist($entity);
                 $em->flush();
