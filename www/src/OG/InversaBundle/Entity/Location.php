@@ -180,6 +180,6 @@ class Location
     */
     public function __toString()
     {
-        return "LOCATION_".$this->id;
+        return $this->name;
     }
 }

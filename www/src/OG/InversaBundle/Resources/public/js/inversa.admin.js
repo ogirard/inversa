@@ -21,6 +21,7 @@ $(document).ready(function() {
 	InitButtons();
 	InitKendo();
 	ApplyKendoPageInit();
+	ReplaceWebPathByLink();
 
 	$(window).resize(function() {
 		SetMinHeight();
@@ -82,15 +83,17 @@ function InitKendo() {
 
 function ApplyKendoPageInit() {
 	// grid
-	$('.records_list').kendoGrid({
-		height : 600,
-		groupable : true,
-		sortable : true,
-		pageable : true,
-		scrollable : false,
-		filterable : true,
-		toolbar : kendo.template($('#listtoolbartemplate').html())
-	});
+	if ($('#listtoolbartemplate').length > 0) {
+		$('.records_list').kendoGrid({
+			height : 600,
+			groupable : true,
+			sortable : true,
+			pageable : true,
+			scrollable : false,
+			filterable : true,
+			toolbar : kendo.template($('#listtoolbartemplate').html())
+		});
+	}
 }
 
 function ApplyKendoFields($scope) {
@@ -156,4 +159,36 @@ function IsNullOrEmpty(text) {
 
 function DeleteElementGuard() {
 	return confirm('Soll dieses Element definitiv gelöscht werden?');
+}
+
+function ReplaceWebPathByLink() {
+	// var $webPathInput = $(listId + '_' + (nr - 1) + '_webpath');
+
+	$.each($('input.webpathinput'),function(i, input) {
+			var $webPathInput = $(input);
+			if ($webPathInput.attr('isHandled') != 'true') {
+
+				$webPathInput.attr('isHandled', 'true');
+
+				var webPath = $webPathInput.val();
+				$webPathInput.parent().hide(0);
+
+				var fileHyperlink = '<span class="noFileSelected">Keine Datei vorhanden</span>';
+
+				if (!IsNullOrEmpty(webPath)) {
+					fileHyperlink = '<a id="path' 
+						    + i
+							+ '" href="'
+							+ GetHost()
+							+ webPath
+							+ '" target="_blank" class="inversa-formlink">'
+							+ GetFileName(webPath) + '</a>';
+				}
+
+				var $currentFile = $('<div><label for="path' + i
+						+ '">Aktuelle Datei</label>'
+						+ fileHyperlink + '</div>');
+				$currentFile.insertAfter($webPathInput.parent());
+			}
+		});
 }

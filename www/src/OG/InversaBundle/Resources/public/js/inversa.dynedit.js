@@ -63,21 +63,7 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 		$('<br />').insertAfter($headerLabel);
 
 		// remove webpath / add current file link
-		var $webPathInput = $(listId + '_' + (nr - 1) + '_webpath');
-		var webPath = $webPathInput.val();
-		$webPathInput.parent().hide(0);
-
-		var fileHyperlink = '<span class="noFileSelected">Keine Datei vorhanden</span>';
-
-		if (!IsNullOrEmpty(webPath)) {
-			fileHyperlink = '<a id="currentFile' + nr + '" href="' + GetHost()
-					+ webPath + '" target="_blank" class="inversa-formlink">' + GetFileName(webPath)
-					+ '</a>';
-		}
-
-		var $currentFile = $('<div><label for="currentFile' + nr
-				+ '">Aktuelle Datei</label>' + fileHyperlink + '</div>');
-		$currentFile.insertAfter($webPathInput.parent());
+		ReplaceWebPathByLink();
 
 		// add remove link
 		$removeLinkDiv = $('<div style="margin-top:7px; margin-bottom:10px;"></div>');

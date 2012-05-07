@@ -15,7 +15,8 @@ OG\InversaBundle\Entity\Image:
             nullable: true
         doctype:
             type: string
-            length: 8     
+            length: 8
+            nullable: true  
         path:
             type: string
             length: 255      

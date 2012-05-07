@@ -12,7 +12,7 @@ class ImageType extends AbstractType
         $builder->add('name', null, array('required' => true, 'label' => 'Name'))
                 ->add('description', null, array('required' => false, 'label' => 'Beschreibung'))
                 ->add('file', null, array('required' => false, 'label' => 'Neues Bild'))
-                ->add('webpath', null, array('required' => false));
+                ->add('webpath', null, array('attr' => array('class' => 'webpathinput'), 'required' => false));
     }
 
     public function getName()

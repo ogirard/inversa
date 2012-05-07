@@ -10,7 +10,7 @@ class DocumentType extends AbstractType
     {
         $builder->add('name', null, array('label' => 'Name'))
                 ->add('file', null, array('label' => 'Neue Datei'))
-                ->add('webpath', null, array('required' => false));
+                ->add('webpath', null, array('attr' => array('class' => 'webpathinput'), 'required' => false));
     }
 
     public function getName()

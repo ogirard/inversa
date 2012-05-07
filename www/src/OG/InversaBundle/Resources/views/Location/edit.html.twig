@@ -2,27 +2,23 @@
 
 {% block body %}
   
-<h1>Location edit</h1>
+<h1>Location "{{ entity.name }}" Editieren</h1>
 
-<form action="{{ path('admin_location_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
+<form id="edititemform" action="{{ path('admin_location_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} style="display: inline-block;">
+  {{ form_widget(edit_form) }}
+  
+  <div style="text-align: right; width:100%" class="actionswithborder">
+  <button type="submit" class="actionbutton k-button">Speichern</button>
+  </div>  
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_location') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_location_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<form id="deleteitemform" action="{{ path('admin_location_delete', { 'id': entity.id }) }}" method="post" onsubmit="return DeleteElementGuard();" style="display: inline-block;">
+    {{ form_widget(delete_form) }}
+    <div class="actions" style="margin-left:-1px;">
+      <button class="actionbutton k-button" type="submit">Löschen</button>
+    </div> 
+</form>
+<div class="actions" style="margin-left: -4px">  
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_location') }}'">Liste</button>
+</div> 
 
 {% endblock %}

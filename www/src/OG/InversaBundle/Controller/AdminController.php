@@ -53,6 +53,7 @@ class AdminController extends Controller
      */
     public function homeAction()
     {
-        return array('name' => "Halllooooooooo");
+        $request = $this->getRequest();
+        return array('name' => $request->getSession()->get(SecurityContext::LAST_USERNAME));
     }
 }

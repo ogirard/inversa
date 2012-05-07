@@ -17,7 +17,7 @@ class Image
     /**
      * @var string $name
      */
-    private $name;
+    private $name = "";
 
     /**
      * @var text $description
@@ -32,7 +32,7 @@ class Image
     /**
      * @var string $doctype
      */
-    private $doctype;
+    private $doctype = "";
 
     /**
      * Get id

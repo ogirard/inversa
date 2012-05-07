@@ -2,12 +2,12 @@
 
 {% block body %}
   
-<h1>Location</h1>
+<h1>Location {{ entity.name }}</h1>
 
-<table class="record_properties">
+<table class="entitytable">
     <tbody>
         <tr>
-            <th>Id</th>
+            <th>ID</th>
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
@@ -15,41 +15,45 @@
             <td>{{ entity.name }}</td>
         </tr>
         <tr>
-            <th>Description</th>
+            <th>Beschreibung</th>
             <td>{{ entity.description }}</td>
         </tr>
         <tr>
-            <th>Address</th>
+            <th>Adresse</th>
             <td>{{ entity.address }}</td>
         </tr>
         <tr>
-            <th>Mapurl</th>
-            <td>{{ entity.mapurl }}</td>
+            <th>Map</th>
+            <td><a href="{{ entity.mapurl|e }}">{{ entity.mapurl }}</a></td>
         </tr>
         <tr>
-            <th>Isactive</th>
-            <td>{{ entity.isactive }}</td>
+            <th>Bild</th>
+            <td>
+            {% if entity.image.webpath %}
+            <a href="http://{{ app.request.host }}/{{ entity.image.webpath|e }}" target="_blank">{{ entity.image.name }}</a><br />
+            {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>
+             {% if entity.isactive %}
+                   Aktiv
+                {% else %}
+                   Nicht aktiv
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_location') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_location_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_location_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
-
+<br />
+<br />
+<div class="actionswithborder actionsspacing">
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_location_edit', { 'id': entity.id }) }}'">Editieren</button>
+<form id="deleteitemform" action="{{ path('admin_location_delete', { 'id': entity.id }) }}" method="post" onsubmit="return DeleteElementGuard();" style="display: inline-block;">
+    {{ form_widget(delete_form) }}
+    <button class="actionbutton k-button" type="submit">Löschen</button> 
+</form> 
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_location') }}'">Liste</button>
+</div>
 {% endblock %}

@@ -1,6 +1,22 @@
 {% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
 
 {% block body %}
-    <h1>Home {{ name }}</h1>
+    <h1>Willkommen {{ app.user.username }}</h1>
+    <p>
+    Dies ist der <b>Verwaltungsbereich</b> für die Webseite <a href="http://www.ensemble-inversa.ch">www.ensemble-inversa.ch</a>.<br /><br /><br />
+    Folgende Elemente können erfasst, editiert oder wieder gelöscht werden:
+    <ul class="itemlist">
+    <li><b>Agenda</b> Kalendereinträge von Konzerten, Anlässen, Veranstaltungen des Ensembles<br /><br /></li>
+    <li><b>Projekte</b> Projekte / Veranstaltungen des Ensembles ohne bestimmten Tertmin<br /><br /></li>
+    <li><b>Media</b> Audio- und Vidio Material<br /><br /></li>
+    <li><b>Presse</b> Veröffentlichungen<br /><br /></li>
+    <li><b>Galerien</b> Bilder Galerien<br /><br /></li>
+    <li><b>Locations</b> Veranstaltungsorte (zur wiederholten Verwendung in anderen Elementkategorien)<br /><br /></li>
+    </ul><br />
+    </p>
+    <p>
+    <b>Achtung!</b> Alle Änderungen werden in Echtzeit an den Daten in der Datenbank vorgenommen und sind somit unmittelbar im öffentlichen Bereich auch sichtbar. <br/>
+    Einzelne Elemente können (je nach Typ) als "aktiv" oder "nicht aktiv" markiert werden. Im letzteren Fall wird das entsprechende Element nicht im öffentlichen Bereich angezeigt.
+    </p>
 {% endblock %}
 

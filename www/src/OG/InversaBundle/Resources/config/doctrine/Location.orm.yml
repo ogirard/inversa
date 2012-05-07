@@ -28,3 +28,4 @@ OG\InversaBundle\Entity\Location:
             joinColumn:
                 name: image_id
                 referencedColumnName: id
+            cascade: [ "persist", "remove" ]
