@@ -15,6 +15,10 @@ OG\InversaBundle\Entity\AgendaItem:
             nullable: true
         eventdate:
             type: datetime
+        eventtime:
+            type: string
+            length: 50
+            nullable: true
         participants:
             type: string
             length: 1024
@@ -32,7 +36,7 @@ OG\InversaBundle\Entity\AgendaItem:
         links:
             targetEntity: WebUrl
             mappedBy: agendaitem
-    oneToOne:
+    manyToOne:
         location:
             targetEntity: Location
             joinColumn:

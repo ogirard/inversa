@@ -12,7 +12,9 @@ class PressItemType extends AbstractType
         $builder
             ->add('name', null, array('required' => true, 'label' => 'Name'))
             ->add('description', null, array('required' => false, 'label' => 'Beschreibung'))
-            ->add('published', null, array('required' => false, 'label' => 'Publiziert?'))
+            ->add('published', 'date',
+                    array('attr' => array('class' => 'datetimefield'), 'required' => false, 'label' => 'Datum',
+                            'widget' => 'single_text', 'format' => 'dd.MM.yyyy'))
             ->add('documents', 'collection',
                     array('type' => new DocumentType(),
                             'allow_add' => true,

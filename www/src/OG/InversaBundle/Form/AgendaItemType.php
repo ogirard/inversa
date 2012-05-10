@@ -12,9 +12,13 @@ class AgendaItemType extends AbstractType
         $builder
             ->add('name', null, array('required' => true, 'label' => 'Name'))
             ->add('description', null, array('required' => false, 'label' => 'Beschreibung'))
-            ->add('eventdate', null, array('required' => false, 'label' => 'Datum'))
+            ->add('eventdate', 'date',
+                    array('attr' => array('class' => 'datetimefield'), 'required' => false, 'label' => 'Datum',
+                            'widget' => 'single_text', 'format' => 'dd.MM.yyyy'))
+            ->add('eventtime', null, array('required' => false, 'label' => 'Zeit'))
             ->add('participants', null, array('required' => false, 'label' => 'Teilnehmer'))
-            ->add('location', null, array('required' => false, 'label' => 'Ort', 'type' => new LocationType()))
+            ->add('location', 'entity',
+                        array('required' => false, 'label' => 'Ort', 'class' => 'OGInversaBundle:Location'))
             ->add('documents', 'collection',
                     array('type' => new DocumentType(),
                             'allow_add' => true,

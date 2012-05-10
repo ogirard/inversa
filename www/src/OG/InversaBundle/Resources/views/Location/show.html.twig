@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <th>Map</th>
-            <td><a href="{{ entity.mapurl|e }}">{{ entity.mapurl }}</a></td>
+            <td><a href="{{ entity.mapurl|e }}" target="_blank">{{ entity.mapurl }}</a></td>
         </tr>
         <tr>
             <th>Bild</th>
@@ -32,16 +32,6 @@
             {% if entity.image.webpath %}
             <a href="http://{{ app.request.host }}/{{ entity.image.webpath|e }}" target="_blank">{{ entity.image.name }}</a><br />
             {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>
-             {% if entity.isactive %}
-                   Aktiv
-                {% else %}
-                   Nicht aktiv
-                {% endif %}
             </td>
         </tr>
     </tbody>

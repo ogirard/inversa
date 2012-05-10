@@ -2,12 +2,12 @@
 
 {% block body %}
 
-<h1>AgendaItem</h1>
+<h1>Agendaeintrag {{ entity.name }}</h1>
 
-<table class="record_properties">
+<table class="entitytable">
     <tbody>
         <tr>
-            <th>Id</th>
+            <th>ID</th>
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
@@ -15,41 +15,84 @@
             <td>{{ entity.name }}</td>
         </tr>
         <tr>
-            <th>Description</th>
+            <th>Beschreibung</th>
             <td>{{ entity.description }}</td>
         </tr>
         <tr>
-            <th>Eventdate</th>
-            <td>{{ entity.eventdate|date('Y-m-d H:i:s') }}</td>
+            <th>Datum</th>
+            <td>{{ entity.eventdate | date("d.m.Y") }}</td>
         </tr>
         <tr>
-            <th>Participants</th>
+            <th>Zeit</th>
+            <td>{{ entity.eventtime }}</td>
+        </tr>
+        <tr>
+            <th>Ort</th>
+            <td>{{ entity.location }}</td>
+        </tr>
+        <tr>
+            <th>Teilnehmer</th>
             <td>{{ entity.participants }}</td>
         </tr>
         <tr>
-            <th>Isactive</th>
-            <td>{{ entity.isactive }}</td>
+            <th>Dokumente</th>
+            <td>
+              <ul class="itemlistdoc">
+              {% for doc in entity.documents %}
+              <li>
+              <a href="http://{{ app.request.host }}/{{ doc.webPath|e }}" target="_blank">{{ doc.name|e }}</a><br />
+              </li>
+              {% else %}
+              <span class="noentries">Keine Dokumente</span>
+              {% endfor %}
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>URLs</th>
+            <td>
+              <ul class="itemlisturl">
+              {% for link in entity.links %}
+              <li><a href="{{ link.url|e }}" target="_blank">{{ link.name|e }}</a><br /></li>
+              {% else %}
+              <span class="noentries">Keine URLs</span>
+              {% endfor %}
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Bilder</th>
+            <td>
+              <ul class="itemlistimg">
+              {% for img in entity.images %}
+              <li><a href="http://{{ app.request.host }}/{{ img.webPath|e }}" target="_blank">{{ img.name|e }}</a><br /></li>
+              {% else %}
+              <span class="noentries">Keine Bilder</span>
+              {% endfor %}
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>
+             {% if entity.isactive %}
+                   Aktiv
+                {% else %}
+                   Nicht aktiv
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_agendaitem') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_agendaitem_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_agendaitem_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<br />
+<br />
+<div class="actionswithborder actionsspacing">
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_agendaitem_edit', { 'id': entity.id }) }}'">Editieren</button>
+<form id="deleteitemform" action="{{ path('admin_agendaitem_delete', { 'id': entity.id }) }}" method="post" onsubmit="return DeleteElementGuard();" style="display: inline-block;">
+    {{ form_widget(delete_form) }}
+    <button class="actionbutton k-button" type="submit">Löschen</button> 
+</form> 
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_agendaitem') }}'">Liste</button>
+</div>
 
 {% endblock %}

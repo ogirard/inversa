@@ -29,7 +29,7 @@
         <tr>
             <th>Dokumente</th>
             <td>
-              <ul class="itemlist">
+              <ul class="itemlistdoc">
               {% for doc in entity.documents %}
               <li>
               <a href="http://{{ app.request.host }}/{{ doc.webPath|e }}" target="_blank">{{ doc.name|e }}</a><br />
@@ -43,7 +43,7 @@
         <tr>
             <th>URLs</th>
             <td>
-              <ul class="itemlist">
+              <ul class="itemlisturl">
               {% for link in entity.links %}
               <li><a href="{{ link.url|e }}" target="_blank">{{ link.name|e }}</a><br /></li>
               {% else %}
@@ -55,7 +55,7 @@
         <tr>
             <th>Bilder</th>
             <td>
-              <ul class="itemlist">
+              <ul class="itemlistimg">
               {% for img in entity.images %}
               <li><a href="http://{{ app.request.host }}/{{ img.webPath|e }}" target="_blank">{{ img.name|e }}</a><br /></li>
               {% else %}

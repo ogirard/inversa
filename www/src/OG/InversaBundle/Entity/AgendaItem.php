@@ -289,4 +289,29 @@ class AgendaItem
     {
         return $this->location;
     }
+    /**
+     * @var string $eventtime
+     */
+    private $eventtime;
+
+
+    /**
+     * Set eventtime
+     *
+     * @param string $eventtime
+     */
+    public function setEventtime($eventtime)
+    {
+        $this->eventtime = $eventtime;
+    }
+
+    /**
+     * Get eventtime
+     *
+     * @return string 
+     */
+    public function getEventtime()
+    {
+        return $this->eventtime;
+    }
 }

@@ -16,12 +16,15 @@ OG\InversaBundle\Entity\ProjectItem:
         day:
             type: datetime
             nullable: true
-        location:
-            type: text
-            nullable: true
         isactive:
             type: boolean
             nullable: true
+    manyToOne:
+        location:
+            targetEntity: Location
+            joinColumn:
+                name: location_id
+                referencedColumnName: id            
     oneToMany:
         documents:
             targetEntity: Document

@@ -2,21 +2,34 @@
 
 {% block body %}
   
-<h1>PressItem creation</h1>
+<h1>Neue Publikation</h1>
 
-<form action="{{ path('admin_pressitem_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
+<form id="createitemform" action="{{ path('admin_pressitem_create') }}" method="post" {{ form_enctype(form) }} style="display: inline-block;">   
+  {{ form_widget(form) }}
+  <br />
+  
+  <a href="#" id="add-document">Neues Dokument</a><br />
+  <a href="#" id="add-image">Neues Bild</a><br />  
+  <a href="#" id="add-link">Neuer Link</a><br />        
+ 
+  <div style="text-align: right; width:100%" class="actionswithborder">
+    <button type="submit" class="actionbutton k-button">Speichern</button>
+  </div>  
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_pressitem') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+<div class="actions">
+  <button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_pressitem') }}'">Liste</button>
+</div> 
+
+{% endblock %}
+
+{% block javascripts %}
+
+  {{ parent() }} 
+<script type="text/javascript">
+    InitDynamicEdit('{{ form.documents | length }}', '#add-document', '#og_inversabundle_pressitemtype_documents', 'Dokument');
+    InitDynamicEdit('{{ form.images | length }}', '#add-image', '#og_inversabundle_pressitemtype_images', 'Bild');
+    InitDynamicEdit('{{ form.links | length }}', '#add-link', '#og_inversabundle_pressitemtype_links', 'Link');
+</script>
 
 {% endblock %}

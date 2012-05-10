@@ -9,7 +9,8 @@
             <th column-width="25" data-field="id">ID</th>
             <th column-width="200" data-field="name">Name</th>
             <th column-width="350" data-field="descripition">Beschreibung</th>
-            <th column-width="75" data-field="status" >Status</th>
+            <th column-width="200" data-field="address">Adresse</th>
+            <th column-width="50" data-field="mapurl">Karte</th>
             <th column-width="200" data-field="actions">&nbsp;&nbsp;</th>
         </tr>
     </thead>
@@ -24,13 +25,8 @@
             <td>{{ entity.id }}</td>
             <td>{{ entity.name }}</td>
             <td>{{ entity.description }}</td>
-            <td>
-                {% if entity.isactive %}
-                   Aktiv
-                {% else %}
-                   Nicht aktiv
-                {% endif %}
-            </td>
+            <td>{{ entity.address }}</td>
+            <td><a href="{{ entity.mapurl | e }}" target="_blank">Karte</a></td>
             <td>
                 <div class="actionswithborder">
                   <button class="k-button" onclick="window.location.href='{{ path('admin_location_show', { 'id': entity.id }) }}'">anzeigen</button>
@@ -44,6 +40,7 @@
         <td>
            <span class="noentries">Keine Eintr&auml;ge</span>
         </td>
+        <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>

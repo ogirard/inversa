@@ -69,3 +69,33 @@ ul.itemlist {
 	list-style-image: url(images/arrow.png);	
 }
 
+ul.itemlistaudio {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/audio.png);	
+}
+
+ul.itemlistvideo {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/video.png);	
+}
+
+ul.itemlistdoc {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/doc.png);	
+}
+
+ul.itemlisturl {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/url.png);	
+}
+
+ul.itemlistimg {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/img.png);	
+}
+

@@ -1,28 +1,43 @@
 {% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
 
 {% block body %}
-  
-<h1>PressItem edit</h1>
 
-<form action="{{ path('admin_pressitem_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
+<h1>Publikation "{{ entity.name }}" Editieren</h1>
+
+<form id="edititemform" action="{{ path('admin_pressitem_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} style="display: inline-block;">
+  {{ form_widget(edit_form) }}
+  <br />
+  
+  <a href="#" id="add-document">Neues Dokument</a><br />
+  <a href="#" id="add-image">Neues Bild</a><br />  
+  <a href="#" id="add-link">Neuer Link</a><br />
+  <br />
+  
+  <div style="text-align: right; width:100%" class="actionswithborder">
+  <button type="submit" class="actionbutton k-button">Speichern</button>
+  </div>  
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_pressitem') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_pressitem_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<form id="deleteitemform" action="{{ path('admin_pressitem_delete', { 'id': entity.id }) }}" method="post" onsubmit="return DeleteElementGuard();" style="display: inline-block;">
+    {{ form_widget(delete_form) }}
+    <div class="actions" style="margin-left:-1px;">
+      <button class="actionbutton k-button" type="submit">Löschen</button>
+    </div> 
+</form>
+<div class="actions" style="margin-left: -4px">  
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_pressitem') }}'">Liste</button>
+</div> 
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  
+<script type="text/javascript">
+    InitDynamicEdit('{{ edit_form.documents | length }}', '#add-document', '#og_inversabundle_pressitemtype_documents', 'Dokument');
+    InitDynamicEdit('{{ edit_form.images | length }}', '#add-image', '#og_inversabundle_pressitemtype_images', 'Bild');
+    InitDynamicEdit('{{ edit_form.links | length }}', '#add-link', '#og_inversabundle_pressitemtype_links', 'Link');
+</script>
+
 
 {% endblock %}

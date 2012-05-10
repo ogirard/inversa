@@ -9,6 +9,8 @@
             <th column-width="25" data-field="id">ID</th>
             <th column-width="200" data-field="name">Name</th>
             <th column-width="350" data-field="descripition">Beschreibung</th>
+            <th column-width="120" data-field="day">Datum</th>
+            <th column-width="150" data-field="location">Ort</th>
             <th column-width="75" data-field="status" >Status</th>
             <th column-width="200" data-field="actions">&nbsp;&nbsp;</th>
         </tr>
@@ -24,6 +26,8 @@
             <td>{{ entity.id }}</td>
             <td>{{ entity.name }}</td>
             <td>{{ entity.description }}</td>
+            <td>{{ entity.day | date("d.m.Y") }}</td>
+            <td>{{ entity.location }}</td>            
             <td>
                 {% if entity.isactive %}
                    Aktiv
@@ -44,6 +48,8 @@
         <td>
            <span class="noentries">Keine Eintr&auml;ge</span>
         </td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
