@@ -37,7 +37,7 @@ $(window).load(function() {
 function GetAvailableHeight() {
     var menuHeight = GetElementHeight($('#menudiv'));
 	var footerHeight = GetElementHeight($('#footerdiv'));
-    return $(window).height() - menuHeight - footerHeight;
+    return $(window).height() - menuHeight - footerHeight - 5;
 }
 
 function GetAvailableWidth() {
