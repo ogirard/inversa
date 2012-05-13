@@ -1,37 +1,35 @@
 {% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
 
 {% block body %}
-  
+
 <h1>Hörbeispiele / Videos</h1>
-&raquo; <a href="{{ path('admin_mediaitem_new') }}" class="actionlink">Neuer Eintrag</a><br /><br />
 <table class="records_list">
     <thead>
         <tr>
-            <th width="25">ID</th>
-            <th width="200">Name</th>
-            <th width="350">Beschreibung</th>
-            <th width="75"><center>Aktiv?</center></th>
-            <th width="150">&nbsp;&nbsp;</th>
+            <th column-width="25" data-field="id">ID</th>
+            <th column-width="200" data-field="name">Name</th>
+            <th column-width="350" data-field="descripition">Beschreibung</th>
+            <th column-width="75" data-field="status">Status</th>
+            <th column-width="200" data-field="actions">&nbsp;&nbsp;</th>
         </tr>
     </thead>
+    <script type="text/x-kendo-template" id="listtoolbartemplate">
+       <div class="toolbar">
+         <button class="k-button" onclick="window.location.href='{{ path('admin_mediaitem_new') }}'">Neuer Eintrag</button>
+       </div>
+    </script>
     <tbody>
     {% for entity in entities %}
         <tr>
             <td>{{ entity.id }}</td>
             <td>{{ entity.name }}</td>
-            <td>{{ entity.description }}</td>
+            <td>{{ entity.description }}</td>           
+            <td>{% if entity.isactive %}Aktiv{% else %}Nicht aktiv{% endif %}</td>
             <td>
-                {% if entity.isactive %}
-                   Aktiv
-                {% else %}
-                   Nicht aktiv
-                {% endif %}
-            </td>
-            <td>
-               <span class="actionlist">
-                   &raquo; <a href="{{ path('admin_mediaitem_show', { 'id': entity.id }) }}" class="actionlink">anzeigen</a>&nbsp;&nbsp;|&nbsp;  
-                   &raquo; <a href="{{ path('admin_mediaitem_edit', { 'id': entity.id }) }}" class="actionlink">editieren</a>
-               </span>
+                <div class="actionswithborder">
+                  <button class="k-button" onclick="window.location.href='{{ path('admin_mediaitem_show', { 'id': entity.id }) }}'">anzeigen</button>
+                  <button class="k-button" onclick="window.location.href='{{ path('admin_mediaitem_edit', { 'id': entity.id }) }}'">editieren</button>
+                </div>
             </td>
         </tr>
     {% else %}

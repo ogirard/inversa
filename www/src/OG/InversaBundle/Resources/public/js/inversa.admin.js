@@ -94,6 +94,9 @@ function ApplyKendoPageInit() {
 			toolbar : kendo.template($('#listtoolbartemplate').html())
 		});
 	}
+	
+	// remove filter for actions column
+	$('a', $('th[data-field="actions"]')).hide();
 }
 
 function ApplyKendoFields($scope) {

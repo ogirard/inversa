@@ -1,13 +1,13 @@
 {% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
 
 {% block body %}
-  
-<h1>MediaItem</h1>
 
-<table class="record_properties">
+<h1>Hörbeispiel / Video "{{ entity.name }}"</h1>
+
+<table class="entitytable">
     <tbody>
         <tr>
-            <th>Id</th>
+            <th>ID</th>
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
@@ -15,33 +15,30 @@
             <td>{{ entity.name }}</td>
         </tr>
         <tr>
-            <th>Description</th>
+            <th>Beschreibung</th>
             <td>{{ entity.description }}</td>
         </tr>
         <tr>
-            <th>Isactive</th>
-            <td>{{ entity.isactive }}</td>
+            <th>Status</th>
+            <td>
+             {% if entity.isactive %}
+                   Aktiv
+                {% else %}
+                   Nicht aktiv
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_mediaitem') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_mediaitem_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_mediaitem_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<br />
+<br />
+<div class="actionswithborder actionsspacing">
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_mediaitem_edit', { 'id': entity.id }) }}'">Editieren</button>
+<form id="deleteitemform" action="{{ path('admin_mediaitem_delete', { 'id': entity.id }) }}" method="post" onsubmit="return DeleteElementGuard();" style="display: inline-block;">
+    {{ form_widget(delete_form) }}
+    <button class="actionbutton k-button" type="submit">Löschen</button> 
+</form> 
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_mediaitem') }}'">Liste</button>
+</div>
 
 {% endblock %}

@@ -10,7 +10,7 @@
             <th column-width="350" data-field="descripition">Beschreibung</th>
             <th column-width="120" data-field="eventdate">Datum</th>
             <th column-width="150" data-field="location">Ort</th>
-            <th column-width="75" data-field="status" >Status</th>
+            <th column-width="75" data-field="status">Status</th>
             <th column-width="200" data-field="actions">&nbsp;&nbsp;</th>
         </tr>
     </thead>
@@ -27,13 +27,7 @@
             <td>{{ entity.description }}</td>
             <td>{{ entity.eventdate | date("d.m.Y") }}</td>
             <td>{{ entity.location }}</td>
-            <td>
-                {% if entity.isactive %}
-                   Aktiv
-                {% else %}
-                   Nicht aktiv
-                {% endif %}
-            </td>
+            <td>{% if entity.isactive %}Aktiv{% else %}Nicht aktiv{% endif %}</td>
             <td>
                 <div class="actionswithborder">
                   <button class="k-button" onclick="window.location.href='{{ path('admin_agendaitem_show', { 'id': entity.id }) }}'">anzeigen</button>

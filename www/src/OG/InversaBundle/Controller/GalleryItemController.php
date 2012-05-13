@@ -49,9 +49,7 @@ class GalleryItemController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+        return array('entity' => $entity, 'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -63,12 +61,9 @@ class GalleryItemController extends Controller
     public function newAction()
     {
         $entity = new GalleryItem();
-        $form   = $this->createForm(new GalleryItemType(), $entity);
+        $form = $this->createForm(new GalleryItemType(), $entity);
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
+        return array('entity' => $entity, 'form' => $form->createView());
     }
 
     /**
@@ -80,9 +75,9 @@ class GalleryItemController extends Controller
      */
     public function createAction()
     {
-        $entity  = new GalleryItem();
+        $entity = new GalleryItem();
         $request = $this->getRequest();
-        $form    = $this->createForm(new GalleryItemType(), $entity);
+        $form = $this->createForm(new GalleryItemType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -91,13 +86,10 @@ class GalleryItemController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_galleryitem_show', array('id' => $entity->getId())));
-            
+
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
+        return array('entity' => $entity, 'form' => $form->createView());
     }
 
     /**
@@ -119,11 +111,8 @@ class GalleryItemController extends Controller
         $editForm = $this->createForm(new GalleryItemType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return array('entity' => $entity, 'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -143,25 +132,43 @@ class GalleryItemController extends Controller
             throw $this->createNotFoundException('Unable to find GalleryItem entity.');
         }
 
-        $editForm   = $this->createForm(new GalleryItemType(), $entity);
+        $originalImages = Util::asArray($entity->getImages());
+
+        $editForm = $this->createForm(new GalleryItemType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        if ('POST' === $request->getMethod()) {
+            $editForm->bindRequest($this->getRequest());
 
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
+            if ($editForm->isValid()) {
+                $this->updateReferences($entity);
 
-            return $this->redirect($this->generateUrl('admin_galleryitem_edit', array('id' => $id)));
+                Util::syncItems($em, $originalImages, $entity->getImages());
+
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('admin_galleryitem_edit', array('id' => $id)));
+            }
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return array('entity' => $entity,
+                     'edit_form' => $editForm->createView(),
+                     'delete_form' => $deleteForm->createView());
+    }
+
+    /**
+     * Update the references of the collections
+     * 
+     * @param \OG\InversaBundle\Entity\GalleryItem $entity
+     */
+    private function updateReferences(\OG\InversaBundle\Entity\GalleryItem $entity)
+    {
+        foreach ($entity->getImages() as $img) {
+            $img->setGalleryitem($entity);
+        }
     }
 
     /**
@@ -194,9 +201,6 @@ class GalleryItemController extends Controller
 
     private function createDeleteForm($id)
     {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
+        return $this->createFormBuilder(array('id' => $id))->add('id', 'hidden')->getForm();
     }
 }

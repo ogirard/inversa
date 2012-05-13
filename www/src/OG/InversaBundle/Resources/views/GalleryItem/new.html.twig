@@ -2,21 +2,30 @@
 
 {% block body %}
   
-<h1>GalleryItem creation</h1>
+<h1>Neue Gallerie</h1>
 
-<form action="{{ path('admin_galleryitem_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
+<form id="createitemform" action="{{ path('admin_galleryitem_create') }}" method="post" {{ form_enctype(form) }} style="display: inline-block;">   
+  {{ form_widget(form) }}
+  <br />
+  
+  <a href="#" id="add-image">Neues Bild</a><br />          
+ 
+  <div style="text-align: right; width:100%" class="actionswithborder">
+    <button type="submit" class="actionbutton k-button">Speichern</button>
+  </div>  
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_galleryitem') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+<div class="actions">
+  <button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_galleryitem') }}'">Liste</button>
+</div> 
+
+{% endblock %}
+
+{% block javascripts %}
+
+  {{ parent() }} 
+<script type="text/javascript">
+    InitDynamicEdit('{{ form.images | length }}', '#add-image', '#og_inversabundle_galleryitemtype_images', 'Bild');
+</script>
 
 {% endblock %}

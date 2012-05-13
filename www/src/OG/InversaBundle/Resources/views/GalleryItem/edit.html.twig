@@ -1,28 +1,36 @@
 {% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
 
 {% block body %}
+ 
+<h1>Gallerie "{{ entity.name }}" Editieren</h1>
+
+<form id="edititemform" action="{{ path('admin_galleryitem_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} style="display: inline-block;">
+  {{ form_widget(edit_form) }}
+  <br />  
+  <a href="#" id="add-image">Neues Bild</a><br />  
+  <br />
   
-<h1>GalleryItem edit</h1>
-
-<form action="{{ path('admin_galleryitem_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
+  <div style="text-align: right; width:100%" class="actionswithborder">
+  <button type="submit" class="actionbutton k-button">Speichern</button>
+  </div>  
 </form>
+<form id="deleteitemform" action="{{ path('admin_galleryitem_delete', { 'id': entity.id }) }}" method="post" onsubmit="return DeleteElementGuard();" style="display: inline-block;">
+    {{ form_widget(delete_form) }}
+    <div class="actions" style="margin-left:-1px;">
+      <button class="actionbutton k-button" type="submit">Löschen</button>
+    </div> 
+</form>
+<div class="actions" style="margin-left: -4px">  
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_galleryitem') }}'">Liste</button>
+</div> 
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_galleryitem') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_galleryitem_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  
+<script type="text/javascript">
+    InitDynamicEdit('{{ edit_form.images | length }}', '#add-image', '#og_inversabundle_galleryitemtype_images', 'Bild');
+</script>
 
 {% endblock %}

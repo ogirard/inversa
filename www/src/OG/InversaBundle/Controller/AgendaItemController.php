@@ -49,9 +49,7 @@ class AgendaItemController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+        return array('entity' => $entity, 'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -63,12 +61,9 @@ class AgendaItemController extends Controller
     public function newAction()
     {
         $entity = new AgendaItem();
-        $form   = $this->createForm(new AgendaItemType(), $entity);
+        $form = $this->createForm(new AgendaItemType(), $entity);
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
+        return array('entity' => $entity, 'form' => $form->createView());
     }
 
     /**
@@ -80,9 +75,9 @@ class AgendaItemController extends Controller
      */
     public function createAction()
     {
-        $entity  = new AgendaItem();
+        $entity = new AgendaItem();
         $request = $this->getRequest();
-        $form    = $this->createForm(new AgendaItemType(), $entity);
+        $form = $this->createForm(new AgendaItemType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -91,13 +86,10 @@ class AgendaItemController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_agendaitem_show', array('id' => $entity->getId())));
-            
+
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
+        return array('entity' => $entity, 'form' => $form->createView());
     }
 
     /**
@@ -119,11 +111,8 @@ class AgendaItemController extends Controller
         $editForm = $this->createForm(new AgendaItemType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return array('entity' => $entity, 'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -143,25 +132,55 @@ class AgendaItemController extends Controller
             throw $this->createNotFoundException('Unable to find AgendaItem entity.');
         }
 
-        $editForm   = $this->createForm(new AgendaItemType(), $entity);
+        $originalDocs = Util::asArray($entity->getDocuments());
+        $originalLinks = Util::asArray($entity->getLinks());
+        $originalImages = Util::asArray($entity->getImages());
+
+        $editForm = $this->createForm(new AgendaItemType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        if ('POST' === $request->getMethod()) {
+            $editForm->bindRequest($this->getRequest());
 
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
+            if ($editForm->isValid()) {
+                $this->updateReferences($entity);
 
-            return $this->redirect($this->generateUrl('admin_agendaitem_edit', array('id' => $id)));
+                Util::syncItems($em, $originalDocs, $entity->getDocuments());
+                Util::syncItems($em, $originalLinks, $entity->getLinks());
+                Util::syncItems($em, $originalImages, $entity->getImages());
+
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('admin_agendaitem_edit', array('id' => $id)));
+            }
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return array('entity' => $entity,
+                     'edit_form' => $editForm->createView(),
+                     'delete_form' => $deleteForm->createView());
+    }
+
+    /**
+     * Update the references of the collections
+     *
+     * @param \OG\InversaBundle\Entity\AgendaItem $entity
+     */
+    private function updateReferences(\OG\InversaBundle\Entity\AgendaItem $entity)
+    {
+        foreach ($entity->getDocuments() as $doc) {
+            $doc->setAgendaitem($entity);
+        }
+
+        foreach ($entity->getImages() as $img) {
+            $img->setAgendaitem($entity);
+        }
+
+        foreach ($entity->getLinks() as $link) {
+            $link->setAgendaitem($entity);
+        }
     }
 
     /**
@@ -194,9 +213,6 @@ class AgendaItemController extends Controller
 
     private function createDeleteForm($id)
     {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
+        return $this->createFormBuilder(array('id' => $id))->add('id', 'hidden')->getForm();
     }
 }

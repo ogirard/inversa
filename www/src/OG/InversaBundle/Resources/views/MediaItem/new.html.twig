@@ -2,21 +2,20 @@
 
 {% block body %}
   
-<h1>MediaItem creation</h1>
 
-<form action="{{ path('admin_mediaitem_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
+<h1>Neues Hörbeispiel / Video</h1>
+
+<form id="createitemform" action="{{ path('admin_mediaitem_create') }}" method="post" {{ form_enctype(form) }} style="display: inline-block;">   
+  {{ form_widget(form) }}
+  <br />    
+ 
+  <div style="text-align: right; width:100%" class="actionswithborder">
+    <button type="submit" class="actionbutton k-button">Speichern</button>
+  </div>  
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_mediaitem') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+<div class="actions">
+  <button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_mediaitem') }}'">Liste</button>
+</div> 
 
 {% endblock %}

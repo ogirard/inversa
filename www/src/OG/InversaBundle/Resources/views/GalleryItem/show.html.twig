@@ -1,13 +1,13 @@
 {% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
 
 {% block body %}
-  
-<h1>GalleryItem</h1>
 
-<table class="record_properties">
+<h1>Gallerie "{{ entity.name }}"</h1>
+
+<table class="entitytable">
     <tbody>
         <tr>
-            <th>Id</th>
+            <th>ID</th>
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
@@ -15,29 +15,42 @@
             <td>{{ entity.name }}</td>
         </tr>
         <tr>
-            <th>Description</th>
+            <th>Beschreibung</th>
             <td>{{ entity.description }}</td>
+        </tr>
+        <tr>
+            <th>Bilder</th>
+            <td>
+              <ul class="itemlistimg">
+              {% for img in entity.images %}
+              <li><a href="http://{{ app.request.host }}/{{ img.webPath|e }}" target="_blank">{{ img.name|e }}</a><br /></li>
+              {% else %}
+              <span class="noentries">Keine Bilder</span>
+              {% endfor %}
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>
+             {% if entity.isactive %}
+                   Aktiv
+                {% else %}
+                   Nicht aktiv
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_galleryitem') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_galleryitem_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_galleryitem_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<br />
+<br />
+<div class="actionswithborder actionsspacing">
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_galleryitem_edit', { 'id': entity.id }) }}'">Editieren</button>
+<form id="deleteitemform" action="{{ path('admin_galleryitem_delete', { 'id': entity.id }) }}" method="post" onsubmit="return DeleteElementGuard();" style="display: inline-block;">
+    {{ form_widget(delete_form) }}
+    <button class="actionbutton k-button" type="submit">Löschen</button> 
+</form> 
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_galleryitem') }}'">Liste</button>
+</div>
 
 {% endblock %}

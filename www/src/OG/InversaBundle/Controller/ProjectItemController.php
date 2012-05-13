@@ -147,8 +147,6 @@ class ProjectItemController extends Controller
         if ('POST' === $request->getMethod()) {
             $editForm->bindRequest($this->getRequest());
 
-            $logger->info('$$MY: ' . date_format($entity->getDay(), 'dd.MM.yyyy'));
-
             if ($editForm->isValid()) {
                 $this->updateReferences($entity);
 
@@ -164,8 +162,9 @@ class ProjectItemController extends Controller
             }
         }
 
-        return array('entity' => $entity, 'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),);
+        return array('entity' => $entity,
+                     'edit_form' => $editForm->createView(),
+                     'delete_form' => $deleteForm->createView());
     }
 
     /**

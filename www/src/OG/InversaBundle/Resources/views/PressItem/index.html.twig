@@ -10,7 +10,7 @@
             <th column-width="200" data-field="name">Name</th>
             <th column-width="350" data-field="descripition">Beschreibung</th>
             <th column-width="120" data-field="published">Publiziert</th>
-            <th column-width="75" data-field="status" >Status</th>
+            <th column-width="75" data-field="status">Status</th>
             <th column-width="200" data-field="actions">&nbsp;&nbsp;</th>
         </tr>
     </thead>
@@ -26,13 +26,7 @@
             <td>{{ entity.name }}</td>
             <td>{{ entity.description }}</td>
             <td>{{ entity.published | date("d.m.Y") }}</td>  
-            <td>
-                {% if entity.isactive %}
-                   Aktiv
-                {% else %}
-                   Nicht aktiv
-                {% endif %}
-            </td>
+            <td>{% if entity.isactive %}Aktiv{% else %}Nicht aktiv{% endif %}</td>
             <td>
                 <div class="actionswithborder">
                   <button class="k-button" onclick="window.location.href='{{ path('admin_pressitem_show', { 'id': entity.id }) }}'">anzeigen</button>
