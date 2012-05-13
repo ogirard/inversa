@@ -72,7 +72,7 @@ class ContentController extends Controller
      */
     public function agendaAction()
     {
-        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'agendacurrent'));
+        return $this->render('OGInversaBundle:Content:agendacurrent.html.twig', array('name' => 'agendacurrent'));
     }
 
     /**
@@ -81,7 +81,7 @@ class ContentController extends Controller
      */
     public function agendaarchiveAction()
     {
-        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'agendaarchive'));
+        return $this->render('OGInversaBundle:Content:agendaarchive.html.twig', array('name' => 'agendaarchive'));
     }
 
     /**
@@ -90,7 +90,7 @@ class ContentController extends Controller
      */
     public function projectsAction()
     {
-        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'projects'));
+        return $this->render('OGInversaBundle:Content:projects.html.twig', array('name' => 'projects'));
     }
 
     /**
@@ -99,7 +99,7 @@ class ContentController extends Controller
      */
     public function mediaAction()
     {
-        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'examples'));
+        return $this->render('OGInversaBundle:Content:audiosamples.html.twig', array('name' => 'examples'));
     }
 
     /**
@@ -108,7 +108,7 @@ class ContentController extends Controller
      */
     public function mediaVideosAction()
     {
-        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'videos'));
+        return $this->render('OGInversaBundle:Content:videos.html.twig', array('name' => 'videos'));
     }
 
     /**
@@ -117,7 +117,7 @@ class ContentController extends Controller
      */
     public function mediaPressAction()
     {
-        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'press'));
+        return $this->render('OGInversaBundle:Content:press.html.twig', array('name' => 'press'));
     }
 
     /**
@@ -126,7 +126,7 @@ class ContentController extends Controller
      */
     public function mediaSamplesAction()
     {
-        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'downloads'));
+        return $this->render('OGInversaBundle:Content:downloads.html.twig', array('name' => 'downloads'));
     }
 
     /**
@@ -135,7 +135,7 @@ class ContentController extends Controller
      */
     public function galleryAction()
     {
-        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'gallery'));
+        return $this->render('OGInversaBundle:Content:galleries.html.twig', array('name' => 'gallery'));
     }
 
     /**
@@ -144,7 +144,7 @@ class ContentController extends Controller
      */
     public function cdsAction()
     {
-        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'cds'));
+        return $this->render('OGInversaBundle:Content:cds.html.twig', array('name' => 'cds'));
     }
 
     /**
@@ -153,6 +153,6 @@ class ContentController extends Controller
      */
     public function contactAction()
     {
-        return $this->render('OGInversaBundle:Content:underconstruction.html.twig', array('name' => 'contact'));
+        return $this->render('OGInversaBundle:Content:contact.html.twig', array('name' => 'contact'));
     }
 }

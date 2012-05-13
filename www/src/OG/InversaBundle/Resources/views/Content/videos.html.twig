@@ -1,0 +1,29 @@
+{# src/OG/InversaBundle/Resources/views/Default/index.html.twig #}
+{% extends 'OGInversaBundle:Content:base.html.twig' %}
+
+{% block title %}
+    Ensemble Inversa | Videos
+{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/oginversa/css/inversa.simple.css') }}" />
+{% endblock %}
+
+{% block js %}
+  <script src="{{ asset('bundles/oginversa/js/inversa.simple.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+<div class="content" style="width:1220px;">
+    <div class="defaultcontent">
+      <div id="membertitle" class="fixdiv" style="z-index:5; top: 123px; left:160px;">
+        <img src="{{ asset('bundles/oginversa/images/simple/typo_videos.png') }}" />
+      </div>
+      <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
+        <div class="textcontent">
+          <p>under construction</p>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
