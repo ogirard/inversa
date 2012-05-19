@@ -6,4 +6,5 @@ php app/console doctrine:schema:update --force
 php app/console assets:install web
 rmdir /S /Q app\cache\dev
 rmdir /S /Q app\cache\prod
+del /F app\logs\*.log
 pause
