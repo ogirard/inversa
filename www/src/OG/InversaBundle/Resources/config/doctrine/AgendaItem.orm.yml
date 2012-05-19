@@ -26,19 +26,22 @@ OG\InversaBundle\Entity\AgendaItem:
         isactive:
             type: boolean
             nullable: true
-    oneToMany:
-        documents:
-            targetEntity: Document
-            mappedBy: agendaitem
-        images:
-            targetEntity: Image
-            mappedBy: agendaitem
-        links:
-            targetEntity: WebUrl
-            mappedBy: agendaitem
     manyToOne:
         location:
             targetEntity: Location
             joinColumn:
                 name: location_id
-                referencedColumnName: id
+                referencedColumnName: id            
+    oneToMany:
+        documents:
+            targetEntity: Document
+            mappedBy: agendaitem
+            cascade: ["persist", "remove"]
+        images:
+            targetEntity: Image
+            mappedBy: agendaitem
+            cascade: ["persist", "remove"]
+        links:
+            targetEntity: WebUrl
+            mappedBy: agendaitem
+            cascade: ["persist", "remove"]            

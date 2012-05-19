@@ -22,9 +22,13 @@ OG\InversaBundle\Entity\PressItem:
         documents:
             targetEntity: Document
             mappedBy: pressitem
+            cascade: ["persist", "remove"]            
         images:
             targetEntity: Image
             mappedBy: pressitem
+            cascade: ["persist", "remove"]            
         links:
             targetEntity: WebUrl
             mappedBy: pressitem
+            cascade: ["persist", "remove"]
+                        
