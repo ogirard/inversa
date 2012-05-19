@@ -5,6 +5,8 @@ OnLoaded = PositionAndSize;
 
 function InitializeContent() {
   $('#mainMenu').addClass('defaultmenu');
+  $('#memberwww').hide();
+  $('#memberaddress').hide();
 }
 
 function PositionAndSize() {
@@ -20,7 +22,7 @@ function SizeMainContentDiv() {
 }
 
 function PositionFixDivs() {
-	var $memberimage = $('#memberimage');
+	var $memberimage = $('#memberimage');	
 	var $maincontent = $('#maincontent');
 	var $defaultcontent = $('.defaultcontent');
 	var left = $memberimage.offset().left - $defaultcontent.offset().left;
@@ -32,4 +34,7 @@ function PositionFixDivs() {
     $('#memberaddress').css('left', contentleft + 'px');
 	$('#memberaddress').css('top', bottom + 'px');
     $('.footertext').css('left', $maincontent.offset().left + 'px');
+
+    $('#memberwww').show(0);
+    $('#memberaddress').show(0);
 }
