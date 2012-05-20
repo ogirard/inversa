@@ -1,12 +1,57 @@
 {# src/OG/InversaBundle/Resources/views/Default/index.html.twig #}
 {% extends 'OGInversaBundle:Content:base.html.twig' %}
+{% form_theme form _self %}
+
+{% block field_row  %}
+    {{ form_label(form) }}
+    <div>
+    {{ form_widget(form) }}
+    {{ form_errors(form) }}
+    </div>
+{% endblock field_row %}
+
+{% block field_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    <br />
+    <div class="errors" style="display:inline-block;margin-left:104px;">
+    {% for error in errors %}
+      &gt;&gt; {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}<br />
+    {% endfor %}
+    </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
+
+{% block captcha_row %}
+{% spaceless %}
+    <br />
+    {{ form_widget(form) }}
+{% endspaceless %}
+{% endblock %}
+
+{% block captcha_widget %}
+{% spaceless %}
+<div>
+    <label>Prüfcode</label>
+    <div><img src="{{ captcha_code }}" title="Prüfcode übertragen!" width="{{ captcha_width }}" height="{{ captcha_height }}" style="display:inline-block; margin: 4px"/></div>
+    <div style="display:inline-block;margin-left:100px;">{{ form_widget(form) }}</div>
+    {% if errors %}
+    <div class="errors" style="display:inline-block;margin-left:104px;">&gt;&gt; Bitte korrekten Prüfcode eingeben!</div>
+    {% endif  %}
+    </div>
+{% endspaceless %}
+{% endblock %}
 
 {% block title %}
-    Ensemble Inversa | {{ name }}
+    Ensemble Inversa | Kontakt
 {% endblock %}
 
 {% block css %}
-  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/oginversa/css/inversa.simple.css') }}" />
+  <link href="{{ asset('bundles/oginversa/css/inversa.simple.css') }}" type="text/css" rel="stylesheet" />
+  <link href="{{ asset('bundles/oginversa/css/inversa.mail.css') }}" type="text/css" rel="stylesheet" />
+  <link href="{{ asset('bundles/oginversa/css/kendo/kendo.common.min.css') }}" type="text/css" rel="stylesheet" />
+  <link href="{{ asset('bundles/oginversa/css/kendo/kendo.default.min.css') }}" type="text/css" rel="stylesheet" />  
 {% endblock %}
 
 {% block js %}
@@ -21,7 +66,15 @@
       </div>
       <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
         <div class="textcontent">
-          <p>{{ name }}</p>
+          <form id="contactform" action="{{ path('_content_contact') }}" method="post" {{ form_enctype(form) }} style="display: inline-block;">   
+            {{ form_widget(form) }}
+            <br />
+             
+            <div style="text-align: right; width:100%" class="actionswithborder">
+              <button type="submit" class="actionbutton">Absenden</button>
+              <button type="reset" class="actionbutton">Zurücksetzen</button>
+            </div>  
+          </form>
         </div>
       </div>
     </div>

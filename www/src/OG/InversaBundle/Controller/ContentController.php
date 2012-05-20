@@ -1,11 +1,16 @@
 <?php
-
 namespace OG\InversaBundle\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\SwiftmailerBundle;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\MinLength;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Collection;
 
 class ContentController extends Controller
 {
@@ -150,6 +155,41 @@ class ContentController extends Controller
      */
     public function contactAction()
     {
-        return $this->render('OGInversaBundle:Content:contact.html.twig', array('name' => 'contact'));
+        $request = $this->getRequest();
+        $mailDataValidation = new Collection(array(
+                'name' => array(new NotBlank(array('message' => 'Bitte geben Sie Ihren Namen ein')), 
+                                new MinLength(array('limit' => 3, 'message' => 'Bitte geben Sie Ihren Namen ein'))),
+                'email' => array(new NotBlank(array('message' => 'Bitte geben Sie Ihre E-Mail ein')), 
+                                 new Email(array('message' => 'Bitte geben Sie eine gültige E-Mail ein'))),
+                'message' => new NotBlank(array('message' => 'Bitte geben Sie eine Nachricht ein'))
+                ));
+        
+        $mailData = array();
+        $form = $this->createFormBuilder($mailData, array('validation_constraint' => $mailDataValidation))
+                     ->add('name', 'text', array('required' => false, 'label' => 'Name'))
+                     ->add('email', 'email', array('required' => false, 'label' => 'E-Mail'))
+                     ->add('message', 'textarea', array('required' => false, 'label' => 'Nachricht'))
+                     ->add('captcha', 'captcha', array('width' => '100', 'height' => '32', 'required' => false))
+                     ->getForm();
+
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+            
+            if($form->isValid()) {
+
+              // data is an array with "name", "email", and "message" keys
+              $data = $form->getData();
+              $message = \Swift_Message::newInstance()
+                ->setSubject('Kontakt www.ensemble-inversa.ch')
+                ->setFrom($data['email'])
+                ->setTo('info@ensemble-inversa.ch')
+                ->setBody($this->renderView('OGInversaBundle:Content:email.txt.twig', $data));
+              
+              $this->get('mailer')->send($message);
+              return $this->render('OGInversaBundle:Content:mailconfirm.html.twig', array('name' => 'contact', 'email' => $data['email']));
+            }
+        }
+        
+        return $this->render('OGInversaBundle:Content:contact.html.twig', array('name' => 'contact', 'form' => $form->createView()));
     }
 }
