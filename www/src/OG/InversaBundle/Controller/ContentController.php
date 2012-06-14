@@ -74,7 +74,16 @@ class ContentController extends Controller
      */
     public function agendaAction()
     {
-        return $this->render('OGInversaBundle:Content:agendacurrent.html.twig', array('name' => 'agendacurrent'));
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$archiveDate = mktime(0, 0, 0, date("m") - 1, date("d"), date("Y"));
+    	$query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')
+                             ->where('a.eventdate > :archivedate')
+                             ->setParameter('archivedate', date('Y-m-d h:i:s' ,$archiveDate))
+                             ->orderBy('a.eventdate', 'ASC')
+                             ->getQuery();
+    	$entities = $query->getResult();
+    	
+        return $this->render('OGInversaBundle:Content:agendacurrent.html.twig', array('name' => 'agendacurrent', 'entities' => $entities));
     }
 
     /**

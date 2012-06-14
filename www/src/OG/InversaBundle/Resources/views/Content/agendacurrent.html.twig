@@ -21,7 +21,30 @@
       </div>
       <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
         <div class="textcontent">
-          <p>under construction</p>
+           {% for entity in entities %}
+           <div class="agendaentry">
+             {{ entity.eventdate | date("d.m.Y") }} <br />
+             <h2>{{ entity.name }}</h2>
+             
+             {{ entity.description }}<br />
+             Ort: {{ entity.location }} 
+             {% if entity.location.mapurl %}
+               <a href="{{ entity.location.mapurl|e }}" target="_blank">Karte</a>
+             {% endif %}<br />
+             Zeit: {{ entity.eventtime }}<br />
+             Teilnehmer: {{ entity.participants }} <br />
+             <p>
+             <h4>Informationen</h4>
+             {% for doc in entity.documents %}
+               <a href="http://{{ app.request.host }}/{{ doc.webPath|e }}" target="_blank">{{ doc.name|e }}</a><br />
+             {% endfor %}
+             {% for link in entity.links %}
+               <a href="{{ link.url|e }}" target="_blank">{{ link.name|e }}</a><br />
+             {% endfor %}
+             </p>
+             <br />
+           </div>
+           {% endfor %}
         </div>
       </div>
     </div>
