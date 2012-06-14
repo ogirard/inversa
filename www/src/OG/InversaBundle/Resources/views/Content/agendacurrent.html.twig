@@ -25,6 +25,9 @@
            <div class="agendaentry">
              {{ entity.eventdate | date("d.m.Y") }} <br />
              <h2>{{ entity.name }}</h2>
+             {% for img in entity.images %}
+               <img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" />
+             {% endfor %}
              
              {{ entity.description }}<br />
              Ort: {{ entity.location }} 

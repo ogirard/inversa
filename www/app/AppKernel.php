@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+        	new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),        		
             new OG\InversaBundle\OGInversaBundle(),
         );
 

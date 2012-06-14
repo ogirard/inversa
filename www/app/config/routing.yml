@@ -1,7 +1,11 @@
 OGInversaBundle:
     resource: "@OGInversaBundle/Controller"
     type:     annotation
-    
+
+_imagine:
+    resource: .
+    type:     imagine
+        
 # import routes from a controller class
 # admin:
 #     resource: "@OGInversaBundle/Controller/AdminController.php"
