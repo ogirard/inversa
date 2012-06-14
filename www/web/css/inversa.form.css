@@ -1,0 +1,101 @@
+@charset "utf-8";
+
+div.nestedItem {
+	margin: 5px;
+}
+
+label.headerLabel {
+	font-size: 10pt;
+	font-color: #696969;
+	font-weight: bold;
+	margin: 5px 0px;
+	display: block;
+}
+
+form div {
+	display: block;
+}
+
+form label {
+	display: block;
+	clear: left;
+	float: left;
+	width: 200px;
+}
+
+table.entitytable {
+	margin: 15px;
+}
+
+table.entitytable th {
+	margin: 10px 4px;
+	color: #898989;
+	font-weight: normal;
+	text-align: left;
+	padding-right: 16px;
+	vertical-align: top;
+}
+
+table.entitytable td {
+	margin: 4px;
+	color: #000000;
+	font-weight: normal;
+	text-align: left;
+	border-width: 0px;
+	border-style: none;
+	vertical-align: top;
+}
+
+div.actions {
+/*	background-color: #dbebf5; */
+	display: inline-block;
+}
+
+div.actionswithborder {
+/*	background-color: #dbebf5;
+	border-width: 0px 0px 0px 3px;
+	border-style: solid;
+	border-color: #0070ba; */ 
+}
+
+div.actionsspacing {
+	padding: 2px;
+	margin: 25px 10px;
+}
+
+ul.itemlist {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/arrow.png);	
+}
+
+ul.itemlistaudio {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/audio.png);	
+}
+
+ul.itemlistvideo {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/video.png);	
+}
+
+ul.itemlistdoc {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/doc.png);	
+}
+
+ul.itemlisturl {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/url.png);	
+}
+
+ul.itemlistimg {
+	margin-left: 18px;
+	list-style: square;
+	list-style-image: url(images/img.png);	
+}
+

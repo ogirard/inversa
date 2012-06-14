@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* CSS Document */
+
+div.homemenu {
+	margin: 0px auto;
+	padding: 0px;	
+	width: 1304px;
+}
+
+div.homecontent {
+	margin: 0px auto;
+	padding: 0px;
+	position:relative;
+	overflow:hidden;
+	width:1304px;
+	height: 640px;
+}
+div.imagediv {
+	position: absolute;
+	padding: 0px;
+	margin: 0px;
+}
