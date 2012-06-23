@@ -69,3 +69,6 @@ avalanche_imagine:
         inversaOverviewThumb:
             type:    thumbnail
             options: { size: [120, 90], mode: outbound, quality: 100, format: png }
+        inversaDetailedThumb:
+            type:    thumbnail
+            options: { size: [640, 480], mode: outbound, quality: 100, format: png }            

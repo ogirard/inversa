@@ -1,5 +1,19 @@
 @charset "utf-8";
 /* CSS Document */
+h4.date {
+	margin: 0px;
+	padding: 0px;
+	margin-left: -4px;
+	padding-left: 4px;
+	margin-bottom: 6px;
+	margin-bottom: 6px;
+	font-weight: normal;
+}
+
+h4.today {
+	font-size: 12pt;
+}
+
 div.defaultmenu {
 	margin: 0px auto;
 	padding: 0px;
@@ -66,16 +80,36 @@ div.smalltext {
 	font-size: 10pt;
 }
 
-a.inverse:link,a.inverse:visited {
+a.content:link,a.content:visited {
 	color: #ffffff;
 	text-decoration: none;
 }
 
-a.inverse:hover,a.inverse:active,a.inverse:focus {
+a.content:hover,a.content:active,a.content:focus {
 	text-decoration: none;
-	color: #696969;
+	color: #dfdfdf;
 }
 
 p {
 	margin-bottom: 22px;
+}
+
+p.description {
+	margin-top: 10px;
+	margin-bottom: 16px;
+	font-style: italic;
+}
+
+ul.itemlistdoc {
+	margin-left: 25px;
+	font-size: 9pt;
+	list-style-image: url(images/doc_white.png);
+	list-style: square;
+}
+
+ul.itemlisturl {
+	margin-left: 25px;
+	font-size: 9pt;
+	list-style: square;
+	list-style-image: url(images/url_white.png);
 }

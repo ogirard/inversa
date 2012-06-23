@@ -10,6 +10,7 @@ function InitializeContent() {
 function PositionAndSize() {
 	SizeMainContentDiv();
 	PositionFixDivs();
+	BindImagesWithDetails();
 }
 
 function SizeMainContentDiv() {
@@ -22,4 +23,13 @@ function SizeMainContentDiv() {
 function PositionFixDivs() {
 	var $maincontent = $('#maincontent');
 	$('.footertext').css('left', $maincontent.offset().left + 'px');
+}
+
+function BindImagesWithDetails() {
+	$.each($('img.with-details'), function(i, img) {
+		var $img = $(img);
+		$img.click(function() {
+			alert($img.attr('detailSrc'));
+		});
+	});	
 }
