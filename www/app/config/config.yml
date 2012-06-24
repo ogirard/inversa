@@ -66,6 +66,9 @@ gregwar_captcha: ~
 
 avalanche_imagine:
     filters:
+        inversaMiniThumb:
+            type:    thumbnail
+            options: { size: [80, 60], mode: inset, quality: 100, format: png }
         inversaOverviewThumb:
             type:    thumbnail
             options: { size: [120, 90], mode: outbound, quality: 100, format: png }

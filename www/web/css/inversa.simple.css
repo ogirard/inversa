@@ -103,13 +103,11 @@ p.description {
 ul.itemlistdoc {
 	margin-left: 25px;
 	font-size: 9pt;
-	list-style-image: url(images/doc_white.png);
-	list-style: square;
+	list-style-image: url(images/doc_white.png);	
 }
 
 ul.itemlisturl {
 	margin-left: 25px;
 	font-size: 9pt;
-	list-style: square;
 	list-style-image: url(images/url_white.png);
 }
