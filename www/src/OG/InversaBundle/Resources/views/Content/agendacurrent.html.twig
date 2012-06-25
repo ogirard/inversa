@@ -35,10 +35,7 @@
                <img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" title="{{ img.name }}" detailSrc="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" class="with-details" />
              {% endfor %}           
              <p class="description">{{ entity.description | nl2br }}</p>
-             Ort: {{ entity.location.name }}
-             {% if entity.location.mapurl %}
-               (<a href="{{ entity.location.mapurl|e }}" target="_blank" class="content">Karte</a>)
-             {% endif %}<br />
+             Ort: {{ entity.location.name }} (<a href="{{ path('_content_location_show', { 'id': entity.location.id, 'name' : name }) }}" class="content">Infos</a>)<br />
              Zeit: {{ entity.eventtime }}<br />
              Teilnehmer: {{ entity.participants }} <br />
              <p>
