@@ -76,7 +76,7 @@ class ContentController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $archiveDate = mktime(0, 0, 0, date("m") - 1, date("d"), date("Y"));
-        $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate > :archivedate')
+        $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate > :archivedate AND a.isactive = true')
                 ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->orderBy('a.eventdate', 'ASC')->getQuery();
         $entities = $query->getResult();
         $nextEntity = -1;
@@ -98,9 +98,7 @@ class ContentController extends Controller
             array_unshift($entities, $e);
         }
 
-        return $this
-                ->render('OGInversaBundle:Content:agendacurrent.html.twig',
-                        array('name' => 'agendacurrent', 'entities' => $entities));
+        return $this->render('OGInversaBundle:Content:agendacurrent.html.twig', array('name' => 'agendacurrent', 'entities' => $entities));
     }
 
     /**
@@ -111,13 +109,12 @@ class ContentController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $archiveDate = mktime(0, 0, 0, date("m") - 1, date("d"), date("Y"));
-        $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate <= :archivedate')
+        $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate <= :archivedate AND a.isactive = true')
                 ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->orderBy('a.eventdate', 'DESC')->getQuery();
         $entities = $query->getResult();
 
         return $this
-                ->render('OGInversaBundle:Content:agendaarchive.html.twig',
-                        array('name' => 'agendaarchive', 'entities' => $entities));
+                ->render('OGInversaBundle:Content:agendaarchive.html.twig', array('name' => 'agendaarchive', 'entities' => $entities));
     }
 
     /**
@@ -192,14 +189,10 @@ class ContentController extends Controller
         $request = $this->getRequest();
         $mailDataValidation = new Collection(
                 array(
-                        'name' => array(
-                                new NotBlank(array('message' => 'Bitte geben Sie Ihren Namen ein')),
-                                new MinLength(
-                                        array('limit' => 3, 'message' => 'Bitte geben Sie Ihren Namen ein'))),
-                        'email' => array(
-                                new NotBlank(array('message' => 'Bitte geben Sie Ihre E-Mail ein')),
-                                new Email(
-                                        array('message' => 'Bitte geben Sie eine gültige E-Mail ein'))),
+                        'name' => array(new NotBlank(array('message' => 'Bitte geben Sie Ihren Namen ein')),
+                                new MinLength(array('limit' => 3, 'message' => 'Bitte geben Sie Ihren Namen ein'))),
+                        'email' => array(new NotBlank(array('message' => 'Bitte geben Sie Ihre E-Mail ein')),
+                                new Email(array('message' => 'Bitte geben Sie eine gültige E-Mail ein'))),
                         'message' => new NotBlank(array('message' => 'Bitte geben Sie eine Nachricht ein'))));
 
         $mailData = array();
@@ -218,20 +211,16 @@ class ContentController extends Controller
                 $data = $form->getData();
                 $message = \Swift_Message::newInstance()->setSubject('Kontakt www.ensemble-inversa.ch')->setFrom($data['email'])
                         ->setTo('info@ensemble-inversa.ch')
-                        ->setBody(
-                                $this
-                                        ->renderView('OGInversaBundle:Content:email.txt.twig', $data));
+                        ->setBody($this->renderView('OGInversaBundle:Content:email.txt.twig', $data));
 
                 $this->get('mailer')->send($message);
                 return $this
-                        ->render('OGInversaBundle:Content:mailconfirm.html.twig',
-                                array('name' => 'contact', 'email' => $data['email']));
+                        ->render('OGInversaBundle:Content:mailconfirm.html.twig', array('name' => 'contact', 'email' => $data['email']));
             }
         }
 
         return $this
-                ->render('OGInversaBundle:Content:contact.html.twig',
-                        array('name' => 'contact', 'form' => $form->createView()));
+                ->render('OGInversaBundle:Content:contact.html.twig', array('name' => 'contact', 'form' => $form->createView()));
     }
 
     /**
