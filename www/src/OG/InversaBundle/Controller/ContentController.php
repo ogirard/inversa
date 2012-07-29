@@ -128,7 +128,7 @@ class ContentController extends Controller
 
     /**
      *
-     * @Route("/media", name="_content_media")
+     * @Route("/media/samples", name="_content_media")
      */
     public function mediaAction()
     {
