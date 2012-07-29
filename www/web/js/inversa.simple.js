@@ -5,6 +5,12 @@ OnLoaded = PositionAndSize;
 
 function InitializeContent() {
 	$('#mainMenu').addClass('defaultmenu');
+	$.each($('a.backlink'), function(i, backlink) {
+		$(backlink).click(function() {
+			parent.history.back();
+			return false;
+		});
+	});
 }
 
 function PositionAndSize() {
@@ -31,5 +37,5 @@ function BindImagesWithDetails() {
 		$img.click(function() {
 			alert($img.attr('detailSrc'));
 		});
-	});	
+	});
 }

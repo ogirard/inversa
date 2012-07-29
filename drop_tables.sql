@@ -1,0 +1,12 @@
+SET foreign_key_checks = 0;
+drop table agendaitem;
+drop table document;
+drop table galleryitem;
+drop table image;
+drop table inversauser;
+drop table location;
+drop table mediaitem;
+drop table pressitem;
+drop table projectitem;
+drop table weburl;
+SET foreign_key_checks = 1;

@@ -226,7 +226,7 @@ class ContentController extends Controller
     /**
      * Finds and displays a Location entity.
      *
-     * @Route("/{name}/location/{id}/show", name="_content_location_show")
+     * @Route("/{name}/eventlocation/{id}/show", name="_content_location_show")
      */
     public function showAction($name, $id)
     {

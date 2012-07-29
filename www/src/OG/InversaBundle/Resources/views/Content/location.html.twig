@@ -17,12 +17,26 @@
 <div class="content" style="width:1220px;">
     <div class="defaultcontent">
       <div id="membertitle" class="fixdiv" style="z-index:5; top: 123px; left:160px;">
-        <img src="/images/simple/typo_presse.png" />
+        <img src="/images/simple/typo_location.png" />
       </div>
       <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
         <div class="textcontent">
-          <p>under construction</p>
-          {{ entity.name }}
+          {% if entity.image  %}
+             <img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}" title="{{ entity.image.name }}" detailSrc="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" class="with-details" />
+          {% endif %}
+          <br />
+          <br />
+          <h4>{{ entity.name }}</h4>
+          <p>
+          {{ entity.address }}
+          {% if entity.mapurl  %}
+            <br />
+            <a href="{{ entity.mapurl|e }}" target="_blank" class="content">Karte</a>
+          {% endif %}
+          </p>
+          <p class="description">{{ entity.description | nl2br }}</p>          
+          <br />
+          <a href="#" class="backlink content">Zurück</a><br />
         </div>
       </div>
     </div>
