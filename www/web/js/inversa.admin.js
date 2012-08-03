@@ -165,8 +165,6 @@ function DeleteElementGuard() {
 }
 
 function ReplaceWebPathByLink() {
-	// var $webPathInput = $(listId + '_' + (nr - 1) + '_webpath');
-
 	$.each($('input.webpathinput'),function(i, input) {
 			var $webPathInput = $(input);
 			if ($webPathInput.attr('isHandled') != 'true') {
@@ -176,16 +174,17 @@ function ReplaceWebPathByLink() {
 				var webPath = $webPathInput.val();
 				$webPathInput.parent().hide(0);
 
-				var fileHyperlink = '<span class="noFileSelected">Keine Datei vorhanden</span>';
+				var fileHyperlink = '<div class="noFileSelected"><p>Keine Datei vorhanden</p></div>';
 
 				if (!IsNullOrEmpty(webPath)) {
-					fileHyperlink = '<a id="path' 
+					fileHyperlink = '<div><a id="path' 
 						    + i
 							+ '" href="'
 							+ GetHost()
 							+ webPath
 							+ '" target="_blank" class="inversa-formlink">'
-							+ GetFileName(webPath) + '</a>';
+							+ GetFileName(webPath) + '</a> ' 
+							+ '<a href="removeImage(\'path' + i + '\')">Entfernen</a></div>';
 				}
 
 				var $currentFile = $('<div><label for="path' + i

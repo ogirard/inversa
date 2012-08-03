@@ -14,8 +14,7 @@ class LocationType extends AbstractType
             ->add('description', null, array('required' => false, 'label' => 'Beschreibung'))
             ->add('address', null, array('required' => false, 'label' => 'Adresse'))
             ->add('image', new ImageType(), array('required' => false, 'label' => 'Bild'))
-            ->add('mapurl', null, array('required' => false, 'label' => 'Karte (URL)'))
-            ->add('isactive', null, array('required' => false, 'label' => 'Aktiv?'));
+            ->add('mapurl', null, array('required' => false, 'label' => 'Karte (URL)'));
     }
 
     public function getName()

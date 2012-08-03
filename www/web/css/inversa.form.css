@@ -12,8 +12,12 @@ label.headerLabel {
 	display: block;
 }
 
-form div {
-	display: block;
+div.form_row {
+	display: inline-block;
+}
+
+div.form_row div {
+	display: inline-block;
 }
 
 form label {
@@ -46,16 +50,15 @@ table.entitytable td {
 	vertical-align: top;
 }
 
-div.actions {
-/*	background-color: #dbebf5; */
+div.actions { /*	background-color: #dbebf5; */
 	display: inline-block;
 }
 
-div.actionswithborder {
-/*	background-color: #dbebf5;
+div.actionswithborder { /*	background-color: #dbebf5;
 	border-width: 0px 0px 0px 3px;
 	border-style: solid;
-	border-color: #0070ba; */ 
+	border-color: #0070ba; */
+	
 }
 
 div.actionsspacing {
@@ -66,36 +69,35 @@ div.actionsspacing {
 ul.itemlist {
 	margin-left: 18px;
 	list-style: square;
-	list-style-image: url(images/arrow.png);	
+	list-style-image: url(images/arrow.png);
 }
 
 ul.itemlistaudio {
 	margin-left: 18px;
 	list-style: square;
-	list-style-image: url(images/audio.png);	
+	list-style-image: url(images/audio.png);
 }
 
 ul.itemlistvideo {
 	margin-left: 18px;
 	list-style: square;
-	list-style-image: url(images/video.png);	
+	list-style-image: url(images/video.png);
 }
 
 ul.itemlistdoc {
 	margin-left: 18px;
 	list-style: square;
-	list-style-image: url(images/doc.png);	
+	list-style-image: url(images/doc.png);
 }
 
 ul.itemlisturl {
 	margin-left: 18px;
 	list-style: square;
-	list-style-image: url(images/url.png);	
+	list-style-image: url(images/url.png);
 }
 
 ul.itemlistimg {
 	margin-left: 18px;
 	list-style: square;
-	list-style-image: url(images/img.png);	
+	list-style-image: url(images/img.png);
 }
-

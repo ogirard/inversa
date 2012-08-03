@@ -74,10 +74,11 @@ a img {
 	border: none;
 }
 /* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
-a:link,a:visited  {
+a:link,a:visited {
 	color: #0070ba;
 	text-decoration: none;
 }
+
 a:hover,a:active,a:focus {
 	/* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
 	text-decoration: none;
@@ -180,10 +181,18 @@ span.adminmenu {
 	margin-right: .8em;
 }
 
-span.noFileSelected {
+div.noFileSelected {
+	margin: 4px;
+	vertical-align: middle;
+	display: table;
+}
+
+div.noFileSelected p {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
 	font-style: italic;
 	font-size: 9pt;
-	margin: 4px;
 }
 
 /* ~~ action link ~~ */
