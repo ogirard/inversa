@@ -13,6 +13,19 @@ OG\InversaBundle\Entity\MediaItem:
         description:
             type: text
             nullable: true
+        doctype:
+            type: string
+            length: 8
+            nullable: true  
+        path:
+            type: string
+            length: 255                 
         isactive:
             type: boolean
             nullable: true
+    lifecycleCallbacks:
+        prePersist: [preUpload]
+        preUpdate: [preUpload]
+        postPersist: [upload]
+        postUpdate: [upload]
+        postRemove: [removeUpload]            

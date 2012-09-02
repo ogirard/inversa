@@ -71,7 +71,7 @@ avalanche_imagine:
             options: { size: [80, 60], mode: inset, quality: 100, format: png }
         inversaOverviewThumb:
             type:    thumbnail
-            options: { size: [120, 90], mode: outbound, quality: 100, format: png }
+            options: { size: [120, 90], mode: inset, quality: 100, format: png }
         inversaDetailedThumb:
             type:    thumbnail
-            options: { size: [640, 480], mode: outbound, quality: 100, format: png }            
+            options: { size: [640, 480], mode: inset, quality: 100, format: png }            

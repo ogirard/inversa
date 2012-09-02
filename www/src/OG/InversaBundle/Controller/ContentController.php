@@ -123,7 +123,10 @@ class ContentController extends Controller
      */
     public function projectsAction()
     {
-        return $this->render('OGInversaBundle:Content:projects.html.twig', array('name' => 'projects'));
+    	  $em = $this->getDoctrine()->getEntityManager();
+    	  $query = $em->getRepository('OGInversaBundle:ProjectItem')->createQueryBuilder('p')->where('p.isactive = true')->orderBy('p.day', 'DESC')->getQuery();
+    	  $entities = $query->getResult();
+        return $this->render('OGInversaBundle:Content:projects.html.twig', array('name' => 'projects', 'entities' => $entities));
     }
 
     /**
@@ -150,7 +153,10 @@ class ContentController extends Controller
      */
     public function mediaPressAction()
     {
-        return $this->render('OGInversaBundle:Content:press.html.twig', array('name' => 'press'));
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$query = $em->getRepository('OGInversaBundle:PressItem')->createQueryBuilder('p')->where('p.isactive = true')->orderBy('p.published', 'DESC')->getQuery();
+    	$entities = $query->getResult();    	
+      return $this->render('OGInversaBundle:Content:press.html.twig', array('name' => 'press', 'entities' => $entities));
     }
 
     /**

@@ -21,7 +21,40 @@
       </div>
       <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
         <div class="textcontent">
-          <p>under construction</p>
+           {% for entity in entities %}
+           <div class="pressentry">
+             {% if entity.published|date("d.m.Y") == "now"|date("d.m.Y")  %}
+             <h4 class="date today">Heute publiziert!</h4>
+             {% else %}
+             <h4 class="date">Publikation vom {{ entity.published | date("d.m.Y") }}</h4>
+             {% endif %}
+             <h2>{{ entity.name }}</h2>
+             {% for img in entity.images %}
+               <img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" title="{{ img.name }}" detailSrc="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" class="with-details" />
+             {% endfor %}           
+             <p class="description">{{ entity.description | nl2br }}</p>
+             <p>
+             {% if entity.documents|length > 0 or entity.links|length > 0 %}
+             <h5>Zur Publikation</h5>
+             {% if entity.documents|length > 0 %}
+             <ul class="itemlistdoc">
+             {% for doc in entity.documents %}
+               <li><a href="http://{{ app.request.host }}/{{ doc.webPath|e }}" target="_blank" class="content">{{ doc.name|e }}</a></li>
+             {% endfor %}
+             </ul>
+             {% endif %}
+             {% if entity.links|length > 0 %}
+             <ul class="itemlisturl">
+             {% for link in entity.links %}
+               <li><a href="{{ link.url|e }}" target="_blank" class="content">{{ link.name|e }}</a></li>
+             {% endfor %}
+             </ul>
+             {% endif %}
+             {% endif %}
+             </p>
+             <br />
+           </div>
+           {% endfor %}
         </div>
       </div>
     </div>
