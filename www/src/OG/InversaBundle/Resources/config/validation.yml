@@ -19,8 +19,8 @@ OG\InversaBundle\Entity\Image:
                 mimeTypesMessage: Bild Datei (PNG, JPEG, GIF, <2MB)
 OG\InversaBundle\Entity\MediaItem:
     properties:            
-        file:
-            - MediaFile:
+        mediafile:
+            - File:
                 maxSize: 15360k
-                mimeTypes: [audio/mpeg, video/avi, video/mpeg]
-                mimeTypesMessage: Audio oder Video Datei (MP3, AVI, MPEG, <15MB)
+                mimeTypes: [audio/mpeg, audio/wav, video/avi, video/mpeg]
+                mimeTypesMessage: Audio oder Video Datei (MP3/WAV, AVI/MPEG, <15MB)

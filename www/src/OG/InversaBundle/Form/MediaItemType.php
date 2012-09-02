@@ -9,11 +9,11 @@ class MediaItemType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder
-            ->add('name', null, array('required' => true, 'label' => 'Name'))
-            ->add('description', null, array('required' => false, 'label' => 'Beschreibung'))
-            ->add('isactive', null, array('required' => false, 'label' => 'Aktiv?'))
-        ;
+        $builder->add('name', null, array('label' => 'Name'))
+                ->add('description', null, array('label' => 'Beschreibung'))
+                ->add('mediafile', null, array('label' => 'Audio oder Video Datei'))
+                ->add('webpath', null, array('attr' => array('class' => 'webpathinput'), 'required' => false))
+                ->add('isactive', null, array('required' => false, 'label' => 'Aktiv?'));
     }
 
     public function getName()

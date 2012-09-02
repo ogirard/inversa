@@ -5,12 +5,12 @@
 <table class="records_list">
     <thead>
         <tr>
-            <th column-width="25" data-field="id">ID</th>
-            <th column-width="200" data-field="name">Name</th>
-            <th column-width="350" data-field="descripition">Beschreibung</th>
-            <th column-width="120" data-field="eventdate">Datum</th>
-            <th column-width="150" data-field="location">Ort</th>
-            <th column-width="75" data-field="status">Status</th>
+            <th column-width="25" data-field="ID" data-type="number" data-filterable="false">ID</th>
+            <th column-width="200" data-field="Name" data-type="string" data-filterable="true">Name</th>
+            <th column-width="350" data-field="Beschreibung" data-type="string" data-filterable="true">Beschreibung</th>
+            <th column-width="120" data-field="Datum" data-type="date" data-template="#= kendo.toString(Datum,'dd.MM.yyyy') #" data-filterable="true">Datum</th>
+            <th column-width="150" data-field="Ort" data-type="string" data-filterable="true">Ort</th>
+            <th column-width="75" data-field="Status" data-type="string" data-filterable="true">Status</th>
             <th column-width="200" data-field="actions">&nbsp;&nbsp;</th>
         </tr>
     </thead>

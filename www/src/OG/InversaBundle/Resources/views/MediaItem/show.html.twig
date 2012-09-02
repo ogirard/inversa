@@ -19,6 +19,18 @@
             <td>{{ entity.description }}</td>
         </tr>
         <tr>
+            <th>Typ</th>
+            <td>
+            {{ entity.mediatype }}            
+            </td>
+        </tr>        
+        <tr>
+            <th>Datei</th>
+            <td>            
+            <a href="http://{{ app.request.host }}/{{ entity.webPath|e }}" target="_blank">{{ entity.webPath|e }}</a><br />
+            </td>
+        </tr>
+        <tr>
             <th>Status</th>
             <td>
              {% if entity.isactive %}

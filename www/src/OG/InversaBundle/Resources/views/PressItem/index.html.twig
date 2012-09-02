@@ -6,11 +6,11 @@
 <table class="records_list">
     <thead>
         <tr>
-            <th column-width="25" data-field="id">ID</th>
-            <th column-width="200" data-field="name">Name</th>
-            <th column-width="350" data-field="descripition">Beschreibung</th>
-            <th column-width="120" data-field="published">Publiziert</th>
-            <th column-width="75" data-field="status">Status</th>
+            <th column-width="25" data-field="ID" data-type="number">ID</th>
+            <th column-width="200" data-field="Name" data-type="string">Name</th>
+            <th column-width="350" data-field="Beschreibung" data-type="string">Beschreibung</th>
+            <th column-width="120" data-field="Publiziert" data-type="date" data-template="#= kendo.toString(Datum,'dd.MM.yyyy') #">Publiziert</th>
+            <th column-width="75" data-field="Status" data-type="string">Status</th>
             <th column-width="200" data-field="actions">&nbsp;&nbsp;</th>
         </tr>
     </thead>

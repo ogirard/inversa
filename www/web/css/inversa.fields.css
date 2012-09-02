@@ -23,9 +23,14 @@
 	font-size: 10pt;
 }
 
-.k-datepicker,.k-combobox {
+.k-datepicker,.k-combobox,.k-dropdown,.k-numerictextbox {
 	margin: 4px !important;
 	min-width: 400px;
+}
+
+.k-numerictextbox .k-numeric-wrap .inversa-textbox {
+	min-width: 0px !important;
+	min-height: 24px !important;
 }
 
 a.inversa-formlink {

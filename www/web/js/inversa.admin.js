@@ -85,12 +85,13 @@ function ApplyKendoPageInit() {
 	// grid
 	if ($('#listtoolbartemplate').length > 0) {
 		$('.records_list').kendoGrid({
-			height : 600,
+			height : 700,
 			groupable : true,
 			sortable : true,
-			pageable : true,
+			pageable : false,
 			scrollable : false,
-			filterable : true,
+			filterable :  true,
+			columnMenu: true,
 			toolbar : kendo.template($('#listtoolbartemplate').html())
 		});
 	}
@@ -128,10 +129,7 @@ function ApplyKendoFields($scope) {
 			'k-checkbox inversa-checkbox');
 
 	// select
-	$scope.find('select').kendoComboBox({
-		filter : "contains",
-		suggest : true
-	});
+	$scope.find('select').kendoDropDownList();
 
 	// password
 	$scope.find('input[type="password"]').addClass(
