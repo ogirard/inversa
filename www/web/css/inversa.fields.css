@@ -33,6 +33,10 @@
 	min-height: 24px !important;
 }
 
+.k-filter-menu div span {
+	display: block !important;
+}
+
 a.inversa-formlink {
 	margin: 4px !important;
 }
