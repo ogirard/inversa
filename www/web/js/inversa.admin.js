@@ -82,7 +82,7 @@ function InitKendo() {
 }
 
 function ApplyKendoPageInit() {
-	// grid
+	// grid	
 	if ($('#listtoolbartemplate').length > 0) {
 		$('.records_list').kendoGrid({
 			height : 700,
@@ -95,9 +95,6 @@ function ApplyKendoPageInit() {
 			toolbar : kendo.template($('#listtoolbartemplate').html())
 		});
 	}
-	
-	// remove filter for actions column
-	$('a', $('th[data-field="actions"]')).hide();
 }
 
 function ApplyKendoFields($scope) {

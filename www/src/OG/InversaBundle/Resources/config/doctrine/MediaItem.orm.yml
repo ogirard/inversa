@@ -23,6 +23,13 @@ OG\InversaBundle\Entity\MediaItem:
         isactive:
             type: boolean
             nullable: true
+    oneToOne:
+        image:
+            targetEntity: Image
+            joinColumn:
+                name: image_id
+                referencedColumnName: id
+            cascade: [ "persist", "remove" ]            
     lifecycleCallbacks:
         prePersist: [preUpload]
         preUpdate: [preUpload]

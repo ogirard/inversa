@@ -31,6 +31,14 @@
             </td>
         </tr>
         <tr>
+            <th>Bild</th>
+            <td>
+            {% if entity.image.webpath %}           
+              <img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}" title="{{ entity.image.name }}" detailSrc="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" class="with-details" />
+            {% endif %}
+            </td>
+        </tr>        
+        <tr>
             <th>Status</th>
             <td>
              {% if entity.isactive %}

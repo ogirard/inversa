@@ -21,7 +21,38 @@
       </div>
       <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
         <div class="textcontent">
-          <p>under construction</p>
+           {% for entity in entities %}
+           <div class="mediaitemaudio">
+             <h2>{{ entity.name }}</h2>
+             {% if entity.image  %}
+             <img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}" title="{{ entity.image.name }}" detailSrc="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" class="with-details" />
+             {% endif %}
+             <p class="description">{{ entity.description | nl2br }}</p>
+             <p>
+
+             {% if entity.doctype == 'mp3'  %}
+             <object class="playerpreview" type="application/x-shockwave-flash" data="/js/player/player_mp3_maxi.swf" width="200" height="20">
+               <param name="movie" value="/js/player/player_mp3_maxi.swf" />
+               <param name="FlashVars" value="mp3=http://{{ app.request.host }}/{{ entity.webPath|e }}&amp;showstop=1&amp;showvolume=1&amp;bgcolor1=333333&amp;bgcolor2=333333&amp;buttoncolor=696969&amp;buttonovercolor=ffffff&amp;slidercolor1=696969&amp;slidercolor2=696969&amp;sliderovercolor=ffffff&amp;bgcolor=696969" />
+               <object  data="http://{{ app.request.host }}/{{ entity.webPath|e }}" type="audio/{{ entity.doctype }}" width="320" height="60" style="background-color: #696969; vertical-align: top">
+                 <param name="src" value="http://{{ app.request.host }}/{{ entity.webPath|e }}">
+                 <param name="autoplay" value="false" />
+                 <param name="autoStart" value="0">
+                 <param name="wmode" value="window" />
+               </object>
+             </object><br/>
+             {% else %}
+             <object  data="http://{{ app.request.host }}/{{ entity.webPath|e }}" type="audio/{{ entity.doctype }}" width="320" height="60" style="background-color: #696969; vertical-align: top">
+               <param name="src" value="http://{{ app.request.host }}/{{ entity.webPath|e }}">
+               <param name="autoplay" value="false" />
+               <param name="autoStart" value="0">
+               <param name="wmode" value="window" />
+             </object>
+             {% endif %}
+             </p>
+             <br />
+           </div>
+           {% endfor %}
         </div>
       </div>
     </div>

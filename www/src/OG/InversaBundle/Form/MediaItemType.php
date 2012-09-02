@@ -13,6 +13,7 @@ class MediaItemType extends AbstractType
                 ->add('description', null, array('label' => 'Beschreibung'))
                 ->add('mediafile', null, array('label' => 'Audio oder Video Datei'))
                 ->add('webpath', null, array('attr' => array('class' => 'webpathinput'), 'required' => false))
+                ->add('image', new ImageType(), array('required' => false, 'label' => 'Bild'))
                 ->add('isactive', null, array('required' => false, 'label' => 'Aktiv?'));
     }
 

@@ -254,4 +254,29 @@ class MediaItem
       }
     }
   }
+    /**
+     * @var OG\InversaBundle\Entity\Image
+     */
+    private $image;
+
+
+    /**
+     * Set image
+     *
+     * @param OG\InversaBundle\Entity\Image $image
+     */
+    public function setImage(\OG\InversaBundle\Entity\Image $image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * Get image
+     *
+     * @return OG\InversaBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 }
