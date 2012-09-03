@@ -3,6 +3,8 @@
 OnStartup = InitializeContent;
 OnLoaded = PositionAndSize;
 
+var PageOnStartup = null;
+
 function InitializeContent() {
 	$('#mainMenu').addClass('defaultmenu');
 	$.each($('a.backlink'), function(i, backlink) {
@@ -11,6 +13,10 @@ function InitializeContent() {
 			return false;
 		});
 	});
+	
+	if(PageOnStartup) {
+		PageOnStartup();
+	}
 }
 
 function PositionAndSize() {
