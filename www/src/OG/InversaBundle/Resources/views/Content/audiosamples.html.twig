@@ -7,7 +7,7 @@
 
 {% block css %}
   <link rel="stylesheet" type="text/css" href="/css/inversa.simple.css" />
-  <link rel="stylesheet" type="text/css" href="/css/jplayer/jplayer.blue.monday.css" />  
+  <link rel="stylesheet" type="text/css" href="/css/jplayer/inversa.jplayer.css" />  
 {% endblock %}
 
 {% block js %}
@@ -54,22 +54,22 @@ function CreatePlayer(id, media, supplied) {
                 <div class="jp-gui jp-interface">
                     <ul class="jp-controls">                        
                         <!-- comment out any of the following <li>s to remove these buttons -->                        
-                        <li><a href="javascript:;" class="jp-play" tabindex="1">Play</a></li>
-                        <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
-                        <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
-                        <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
-                        <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
-                        <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+                        <li><a href="javascript:;" class="jp-play" tabindex="1" title="Wiedergabe">Wiedergabe</a></li>
+                        <li><a href="javascript:;" class="jp-pause" tabindex="1" title="Anhalten">Anhalten</a></li>
+                        <li><a href="javascript:;" class="jp-stop" tabindex="1" title="Stopp">Stopp</a></li>
+                        <li><a href="javascript:;" class="jp-mute" tabindex="1" title="Ton aus">Ton aus</a></li>
+                        <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="Ton an">Ton an</a></li>
+                        <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="Volle Lautstärke">Volle Lautstärke</a></li>
                     </ul>
                     
                     <!-- you can comment out any of the following <div>s too -->                    
                     <div class="jp-progress">
-                        <div class="jp-seek-bar">
+                        <div class="jp-seek-bar" title="Suchleiste">
                             <div class="jp-play-bar"></div>
                         </div>
                     </div>
                     <div class="jp-volume-bar">
-                        <div class="jp-volume-bar-value"></div>
+                        <div class="jp-volume-bar-value" title="Lautstärke"></div>
                     </div>
                     <div class="jp-current-time"></div>
                     <div class="jp-duration"></div>                   
