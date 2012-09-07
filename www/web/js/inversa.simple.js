@@ -13,8 +13,8 @@ function InitializeContent() {
 			return false;
 		});
 	});
-	
-	if(PageOnStartup) {
+
+	if (PageOnStartup) {
 		PageOnStartup();
 	}
 }
@@ -38,10 +38,15 @@ function PositionFixDivs() {
 }
 
 function BindImagesWithDetails() {
-	$.each($('img.with-details'), function(i, img) {
-		var $img = $(img);
-		$img.click(function() {
-			alert($img.attr('detailSrc'));
-		});
+	$('a[rel*=lightbox]').lightBox({
+		overlayBgColor : '#ffffff',
+		overlayOpacity : 0.3,
+		imageBlank : '/css/lightbox/images/blank.gif',
+		imageLoading : '/css/lightbox/images/loading.gif',
+		imageBtnClose : '/css/lightbox/images/close.png',
+		imageBtnPrev : '/css/lightbox/images/prev.png',
+		imageBtnNext : '/css/lightbox/images/next.png',
+		txtOf : 'von',
+		txtImage : 'Bild'
 	});
 }

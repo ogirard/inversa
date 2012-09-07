@@ -34,7 +34,7 @@
             <th>Bild</th>
             <td>
             {% if entity.image.webpath %}           
-              <img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}" title="{{ entity.image.name }}" detailSrc="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" class="with-details" />
+              <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}" title="{{ entity.image.name }}"/></a>
             {% endif %}
             </td>
         </tr>

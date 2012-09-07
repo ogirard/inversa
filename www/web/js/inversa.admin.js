@@ -22,6 +22,7 @@ $(document).ready(function() {
 	InitKendo();
 	ApplyKendoPageInit();
 	ReplaceWebPathByLink();
+	InitLightbox();
 
 	$(window).resize(function() {
 		SetMinHeight();
@@ -82,7 +83,7 @@ function InitKendo() {
 }
 
 function ApplyKendoPageInit() {
-	// grid	
+	// grid
 	if ($('#listtoolbartemplate').length > 0) {
 		$('.records_list').kendoGrid({
 			height : 700,
@@ -90,8 +91,8 @@ function ApplyKendoPageInit() {
 			sortable : true,
 			pageable : false,
 			scrollable : false,
-			filterable :  true,
-			columnMenu: true,
+			filterable : true,
+			columnMenu : true,
 			toolbar : kendo.template($('#listtoolbartemplate').html())
 		});
 	}
@@ -160,32 +161,50 @@ function DeleteElementGuard() {
 }
 
 function ReplaceWebPathByLink() {
-	$.each($('input.webpathinput'),function(i, input) {
-			var $webPathInput = $(input);
-			if ($webPathInput.attr('isHandled') != 'true') {
+	$
+			.each(
+					$('input.webpathinput'),
+					function(i, input) {
+						var $webPathInput = $(input);
+						if ($webPathInput.attr('isHandled') != 'true') {
 
-				$webPathInput.attr('isHandled', 'true');
+							$webPathInput.attr('isHandled', 'true');
 
-				var webPath = $webPathInput.val();
-				$webPathInput.parent().hide(0);
+							var webPath = $webPathInput.val();
+							$webPathInput.parent().hide(0);
 
-				var fileHyperlink = '<div class="noFileSelected"><p>Keine Datei vorhanden</p></div>';
+							var fileHyperlink = '<div class="noFileSelected"><p>Keine Datei vorhanden</p></div>';
 
-				if (!IsNullOrEmpty(webPath)) {
-					fileHyperlink = '<div><a id="path' 
-						    + i
-							+ '" href="'
-							+ GetHost()
-							+ webPath
-							+ '" target="_blank" class="inversa-formlink">'
-							+ GetFileName(webPath) + '</a> ' 
-							+ '<a href="removeImage(\'path' + i + '\')">Entfernen</a></div>';
-				}
+							if (!IsNullOrEmpty(webPath)) {
+								fileHyperlink = '<div><a id="path'
+										+ i
+										+ '" href="'
+										+ GetHost()
+										+ webPath
+										+ '" target="_blank" class="inversa-formlink">'
+										+ GetFileName(webPath) + '</a> '
+										+ '<a href="removeImage(\'path' + i
+										+ '\')">Entfernen</a></div>';
+							}
 
-				var $currentFile = $('<div><label for="path' + i
-						+ '">Aktuelle Datei</label>'
-						+ fileHyperlink + '</div>');
-				$currentFile.insertAfter($webPathInput.parent());
-			}
-		});
+							var $currentFile = $('<div><label for="path' + i
+									+ '">Aktuelle Datei</label>'
+									+ fileHyperlink + '</div>');
+							$currentFile.insertAfter($webPathInput.parent());
+						}
+					});
+}
+
+function InitLightbox() {
+	$('a[rel*=lightbox]').lightBox({
+		overlayBgColor : '#ffffff',
+		overlayOpacity : 0.3,
+		imageBlank : '/css/lightbox/images/blank.gif',
+		imageLoading : '/css/lightbox/images/loading.gif',
+		imageBtnClose : '/css/lightbox/images/close.png',
+		imageBtnPrev : '/css/lightbox/images/prev.png',
+		imageBtnNext : '/css/lightbox/images/next.png',
+		txtOf : 'von',
+		txtImage : 'Bild'
+	});
 }
