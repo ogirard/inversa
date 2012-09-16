@@ -19,7 +19,8 @@ OG\InversaBundle\Entity\MediaItem:
             nullable: true  
         path:
             type: string
-            length: 255                 
+            length: 255        
+            nullable: true         
         isactive:
             type: boolean
             nullable: true

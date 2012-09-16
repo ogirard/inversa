@@ -10,6 +10,7 @@ OG\InversaBundle\Entity\Image:
         name:
             type: string
             length: 255
+            nullable: true
         description:
             type: text
             nullable: true
@@ -19,7 +20,8 @@ OG\InversaBundle\Entity\Image:
             nullable: true  
         path:
             type: string
-            length: 255      
+            length: 255
+            nullable: true   
     manyToOne:
         agendaitem:
             targetEntity: AgendaItem
@@ -50,4 +52,4 @@ OG\InversaBundle\Entity\Image:
         preUpdate: [preUpload]
         postPersist: [upload]
         postUpdate: [upload]
-        postRemove: [removeUpload]
+        preRemove: [removeUpload]

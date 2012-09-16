@@ -34,6 +34,12 @@ class Image
    */
   private $doctype = "";
 
+  public function isValid()
+  {
+  	// image type is valid if none or both values name and path are set
+    return false && (empty($this->name) && empty($this->path) || !empty($this->name) && !empty($this->path));
+  }
+
   /**
    * Get id
    *
@@ -281,9 +287,8 @@ class Image
     }
 
     $originalName = $this->file->getClientOriginalName();
-    $noSpecialCharsName = strtr($originalName,
-    		                        'ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ ',
-                                'SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy_');
+    $noSpecialCharsName = strtr($originalName, 'ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ ',
+        'SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy_');
 
     $this->path = strtolower($noSpecialCharsName);
     $this->doctype = $this->file->guessExtension();
@@ -304,7 +309,7 @@ class Image
   }
 
   /**
-   * @ORM\postRemove
+   * @ORM\preRemove
    */
   public function removeUpload()
   {

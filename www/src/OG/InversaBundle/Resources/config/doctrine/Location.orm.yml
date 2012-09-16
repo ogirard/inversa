@@ -19,6 +19,7 @@ OG\InversaBundle\Entity\Location:
         mapurl:
             type: string
             length: 1024
+            nullable: true
     oneToOne:
         image:
             targetEntity: Image

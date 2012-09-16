@@ -5,3 +5,7 @@ services:
 #    og_inversa.example:
 #        class: %og_inversa.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+    text.twig.extension:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            -  { name: twig.extension }    

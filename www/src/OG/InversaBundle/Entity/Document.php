@@ -101,7 +101,7 @@ class Document
   }
 
   /**
-   * @ORM\postRemove
+   * @ORM\preRemove
    */
   public function removeUpload()
   {

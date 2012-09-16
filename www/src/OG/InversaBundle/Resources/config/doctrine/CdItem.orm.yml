@@ -1,0 +1,32 @@
+# src/OG/InversaBundle/Resources/config/doctrine/CdItem.orm.yml
+OG\InversaBundle\Entity\CdItem:
+    type: entity
+    table: cditem
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 100
+        description:
+            type: text
+            nullable: true
+        songs:
+            type: text
+            nullable: true
+        published:
+            type: datetime
+            nullable: true
+        isactive:
+            type: boolean
+            nullable: true
+    oneToOne:
+        image:
+            targetEntity: Image
+            joinColumn:
+                name: image_id
+                referencedColumnName: id
+            cascade: [ "persist", "remove" ]     
+                        

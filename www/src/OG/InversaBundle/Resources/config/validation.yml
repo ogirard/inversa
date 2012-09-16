@@ -1,8 +1,30 @@
 OG\InversaBundle\Entity\AgendaItem:
     properties:
         name:
-            - NotBlank: ~
+            - NotBlank: { message: "Bitte einen gültigen Namen eingeben" }
             - MinLength: 3
+OG\InversaBundle\Entity\CdItem:
+    properties:
+        name:
+            - NotBlank: { message: "Bitte einen gültigen Namen eingeben" }
+            - MinLength: 3
+OG\InversaBundle\Entity\Document:
+    properties:
+        name:
+            - NotBlank: { message: "Bitte einen gültigen Dokument Namen eingeben" }
+            - MinLength: 3    
+        file:
+            - NotBlank: { message: "Bitte eine Datei angeben" }
+            - MinLength: 3 
+OG\InversaBundle\Entity\GalleryItem:
+    properties:
+        name:
+            - NotBlank: { message: "Bitte einen gültigen Namen eingeben" }
+            - MinLength: 3
+OG\InversaBundle\Entity\Image:
+    getters:
+        valid:
+            - "True": { message: "Bild Angaben sind unvollständig" }
 OG\InversaBundle\Entity\Document:
     properties:            
         file:

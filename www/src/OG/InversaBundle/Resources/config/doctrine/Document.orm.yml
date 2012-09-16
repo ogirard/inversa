@@ -42,4 +42,4 @@ OG\InversaBundle\Entity\Document:
         preUpdate: [preUpload]
         postPersist: [upload]
         postUpdate: [upload]
-        postRemove: [removeUpload]
+        preRemove: [removeUpload]

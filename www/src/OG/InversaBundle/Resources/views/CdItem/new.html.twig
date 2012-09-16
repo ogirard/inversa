@@ -1,0 +1,21 @@
+{% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
+
+{% block body %}
+  
+
+<h1>Neue CD</h1>
+
+<form id="createitemform" action="{{ path('admin_cditem_create') }}" method="post" {{ form_enctype(form) }} style="display: inline-block;">   
+  {{ form_widget(form) }}
+  <br />    
+ 
+  <div style="text-align: right; width:100%" class="actionswithborder">
+    <button type="submit" class="actionbutton k-button">Speichern</button>
+  </div>  
+</form>
+
+<div class="actions">
+  <button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_cditem') }}'">Liste</button>
+</div> 
+
+{% endblock %}

@@ -15,6 +15,7 @@ OG\InversaBundle\Entity\AgendaItem:
             nullable: true
         eventdate:
             type: datetime
+            nullable: true
         eventtime:
             type: string
             length: 50

@@ -15,6 +15,7 @@ OG\InversaBundle\Entity\PressItem:
             nullable: true
         published:
             type: datetime
+            nullable: true
         isactive:
             type: boolean
             nullable: true
