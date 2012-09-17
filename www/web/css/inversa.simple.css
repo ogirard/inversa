@@ -111,3 +111,22 @@ ul.itemlisturl {
 	font-size: 9pt;
 	list-style-image: url(images/url_white.png);
 }
+
+table.songlist td {
+	padding: 2px;
+	padding-right: 8px;
+	padding-left: 0px;
+}
+
+table.songlist td.col0 {
+	font-weight: bold;
+}
+
+table.songlist td.col1 {
+	padding-right: 24px;	
+}
+
+table.songlist td.col2 {
+	font-style: italic;
+	padding-right: 24px;	
+}

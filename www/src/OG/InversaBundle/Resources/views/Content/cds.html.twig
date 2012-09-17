@@ -21,7 +21,24 @@
       </div>
       <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
         <div class="textcontent">
-          <p>under construction</p>
+           {% for entity in entities %}
+           <div class="cditem">
+             {% if date(entity.published) > date('-60days') %}
+               <h4 class="date today">Neue CD!</h4>
+             {% else %}
+             <h4 class="date">Publikation vom {{ entity.published | date("d.m.Y") }}</h4>
+             {% endif %}
+             <h2>{{ entity.name }}</h2>
+             {% if entity.image %}
+               <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ entity.image.name }}"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}"/></a>
+             {% endif %}           
+             <p class="description">{{ entity.description | nl2br }}</p>
+             <p class="songs">
+             {{ entity.formattedsongs | raw }} 
+             </p>
+             <br />
+           </div>
+           {% endfor %}
         </div>
       </div>
     </div>

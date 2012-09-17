@@ -178,4 +178,21 @@ class CdItem
   {
     $this->isactive = true;
   }
+
+  public function getFormattedsongs()
+  {
+    $text = str_replace("\r\n", "\n", $this->getSongs());
+    $text = str_replace("\r", "\n", $text);
+
+    $formattedSongs = "<table class='songlist'>";
+    foreach (explode("\n", $text) as $line) {
+      $formattedSongs .= "<tr>";
+      foreach (explode(";", $line) as $i => $part) {
+        $formattedSongs .= "<td class='col" .  $i . "'>" . $part . "</td>";
+      }
+      $formattedSongs .= "</tr>";
+    }
+
+    return $formattedSongs . "</table>";
+  }
 }

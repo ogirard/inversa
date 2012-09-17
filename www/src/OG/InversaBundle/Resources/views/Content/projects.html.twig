@@ -32,7 +32,7 @@
              {% endif %}
              <h2>{{ entity.name }}</h2>
              {% for img in entity.images %}
-               <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox"><img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" title="{{ img.name }}" /></a>
+               <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ entity.image.name }}"><img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" /></a>
              {% endfor %}           
              <p class="description">{{ entity.description | nl2br }}</p>
              Ort: {{ entity.location.name }} (<a href="{{ path('_content_location_show', { 'id': entity.location.id, 'name' : name }) }}" class="content">Infos</a>)<br />

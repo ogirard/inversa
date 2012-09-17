@@ -25,7 +25,7 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 
 	function MoveAddLink() {
 		$addLink.insertBefore($list);
-		$addLink.addClass('inversa-formlink');
+		$addLink.addClass('inversa-formlink inversa-add-link');
 	}
 
 	function RegisterDynAdd() {
@@ -67,7 +67,7 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 
 		// add remove link
 		$removeLinkDiv = $('<div style="margin-top:7px; margin-bottom:10px;"></div>');
-		$removeLink = $('<a href="#" class="inversa-formlink" style="float:right">Entfernen</a><br style="clear:all"/>');
+		$removeLink = $('<a href="#" class="inversa-formlink" style="float:right"><b>x</b> Entfernen</a><br style="clear:all"/>');
 		$removeLink.click(function(event) {
 			event.preventDefault();
 			RemoveNestedDiv($div);

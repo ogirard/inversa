@@ -204,7 +204,10 @@ class ContentController extends Controller
    */
   public function cdsAction()
   {
-    return $this->render('OGInversaBundle:Content:cds.html.twig', array('name' => 'cds'));
+  	$em = $this->getDoctrine()->getEntityManager();
+  	$query = $em->getRepository('OGInversaBundle:CdItem')->createQueryBuilder('c')->where('c.isactive = true')->orderBy('c.published', 'DESC')->getQuery();
+  	$entities = $query->getResult();
+    return $this->render('OGInversaBundle:Content:cds.html.twig', array('name' => 'cds', 'entities' => $entities));
   }
 
   /**

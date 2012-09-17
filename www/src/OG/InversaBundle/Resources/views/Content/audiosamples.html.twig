@@ -44,7 +44,7 @@ function CreatePlayer(id, media, supplied) {
            <div class="mediaitemaudio">
              <h2>{{ entity.name }}</h2>
              {% if entity.image  %}
-             <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}" title="{{ entity.image.name }}" /></a>
+             <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ entity.image.name }}"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}" /></a>
              {% endif %}
              <p class="description">{{ entity.description | nl2br }}</p>
              <p>

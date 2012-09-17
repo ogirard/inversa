@@ -22,7 +22,7 @@
       <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
         <div class="textcontent">
           {% if entity.image  %}
-             <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}" title="{{ entity.image.name }}" /></a>
+             <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ entity.image.name }}"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}" /></a>
           {% endif %}
           <br />
           <br />

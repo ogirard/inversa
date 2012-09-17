@@ -39,8 +39,8 @@ function PositionFixDivs() {
 
 function BindImagesWithDetails() {
 	$('a[rel*=lightbox]').lightBox({
-		overlayBgColor : '#ffffff',
-		overlayOpacity : 0.3,
+		overlayBgColor : '#444444',
+		overlayOpacity : 0.4,
 		imageBlank : '/css/lightbox/images/blank.gif',
 		imageLoading : '/css/lightbox/images/loading.gif',
 		imageBtnClose : '/css/lightbox/images/close.png',

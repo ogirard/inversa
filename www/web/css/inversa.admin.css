@@ -316,3 +316,8 @@ td.noentries {
 	font-size: 1px;
 	line-height: 0px;
 }
+
+a.inversa-add-link {
+	padding: 4px;
+  display: table-cell;
+}
