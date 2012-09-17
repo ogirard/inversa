@@ -8,10 +8,10 @@
         <tr>
             <th column-width="25" data-field="ID" data-type="number">ID</th>
             <th column-width="200" data-field="Name" data-type="string">Name</th>
-            <th column-width="350" data-field="Beschreibung" data-type="string">Beschreibung</th>
+            <th column-width="200" data-field="Beschreibung" data-type="string" data-filterable="false" data-sortable="false" data-groupable="false">Beschreibung</th>
             <th column-width="120" data-type="number">Anzahl Bilder</th>
             <th column-width="75" data-field="Status" data-type="string">Status</th>
-            <th column-width="200" data-field="Aktionen" data-filterable="false" data-sortable="false">&nbsp;&nbsp;</th>
+            <th column-width="200" data-field="Aktionen" data-filterable="false" data-sortable="false" data-groupable="false">&nbsp;&nbsp;</th>
         </tr>
     </thead>
     <script type="text/x-kendo-template" id="listtoolbartemplate">
@@ -24,7 +24,7 @@
         <tr>
             <td>{{ entity.id }}</td>
             <td>{{ entity.name }}</td>
-            <td>{{ entity.description }}</td>
+            <td><span class="cellwithtooltip" title="{{ entity.description | e }}">{{ entity.description | truncate }}</span></td>
             <td>{{ entity.images | length }}</td>    
             <td>{% if entity.isactive %}Aktiv{% else %}Nicht aktiv{% endif %}</td>
             <td>
@@ -34,17 +34,6 @@
                 </div>
             </td>
         </tr>
-    {% else %}
-    <tr>
-        <td>&nbsp;</td>
-        <td>
-           <span class="noentries">Keine Eintr&auml;ge</span>
-        </td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
     {% endfor %}
     </tbody>
 </table>

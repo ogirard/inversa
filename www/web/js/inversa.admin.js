@@ -95,6 +95,15 @@ function ApplyKendoPageInit() {
 			columnMenu : true,
 			toolbar : kendo.template($('#listtoolbartemplate').html())
 		});
+		
+		$.each($('.records_list'), function(i, grid) {
+			var $grid = $(grid);
+			if($('tbody tr', $grid).length == 0) {
+				var colsCount = $('thead th', $grid).length;
+				// no rows
+				$('tbody', $grid).append('<tr><td colspan="' + colsCount + '" class="no-entries"><br />Keine Einträge</td></tr>');
+			}
+		});
 	}
 }
 
@@ -120,7 +129,7 @@ function ApplyKendoFields($scope) {
 	});
 
 	// multi-line text field
-	$scope.find('textarea').addClass('k-textbox inversa-textarea');
+	$scope.find('textarea').addClass('inversa-textarea');
 
 	// check box
 	$scope.find('input[type="checkbox"]').addClass(

@@ -10,7 +10,20 @@
 }
 
 .inversa-textarea {
-	min-height: 100px;
+	color: #222;
+	font-size: 100%;
+	font-family: inherit;
+	min-width: 392px;
+	min-height: 80px;
+	height: 80px;
+	line-height: 1.6em;
+	margin: 4px !important;
+	padding-top: 2px;
+	padding-right: 0.3em;
+	display: inline-block;
+	border: 1px solid #ABABAB;
+	border-radius: 0px;
+	resize: none; 
 }
 
 .inversa-checkbox {
@@ -46,7 +59,13 @@ form label {
 	color: #898989;
 }
 
-span.noentries {
+td.no-entries {
 	font-style: italic;
 	color: #898989;
+	margin-top: 20px;
+	text-align: center;
+}
+
+td span.cellwithtooltip {
+	color: #222222;
 }
