@@ -5,10 +5,10 @@ div.nestedItem {
 }
 
 label.headerLabel {
-	font-size: 10pt;
+	font-size: 12pt;
 	font-color: #696969;
-	font-weight: bold;
-	margin: 5px 0px;
+	margin: 10px 4px;
+	text-transform: uppercase;
 	display: block;
 }
 

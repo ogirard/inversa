@@ -41,6 +41,10 @@
 	min-width: 400px;
 }
 
+.k-upload-files {
+	margin: 4px !important;
+}
+
 .k-numerictextbox .k-numeric-wrap .inversa-textbox {
 	min-width: 0px !important;
 	min-height: 24px !important;

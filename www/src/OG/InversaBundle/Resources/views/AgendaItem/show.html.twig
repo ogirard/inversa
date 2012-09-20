@@ -65,7 +65,7 @@
             <td>
               <ul class="itemlistimg">
               {% for img in entity.images %}
-              <li><a href="http://{{ app.request.host }}/{{ img.webPath|e }}" target="_blank">{{ img.name|e }}</a><br /></li>
+              <li><a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ img.name }}"><img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" /></a><br /></li>
               {% else %}
               <span class="noentries">Keine Bilder</span>
               {% endfor %}

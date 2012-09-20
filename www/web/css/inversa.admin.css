@@ -296,6 +296,13 @@ td.noentries {
 	font-style: italic;
 }
 
+span.noentries {
+	margin-left: -17px;
+	font-style: italic;
+	color: #696969;
+	font-size: 10pt;
+}
+
 /* ~~ miscellaneous float/clear classes ~~ */
 .fltrt {
 	/* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */

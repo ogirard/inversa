@@ -61,13 +61,15 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 		$headerLabel.addClass('headerLabel');
 		$div.addClass('nestedItem');
 		$('<br />').insertAfter($headerLabel);
+		
+		$headerLabel.prepend('<img src="/css/images/arrow_gray.png" /> ');
 
 		// remove webpath / add current file link
 		ReplaceWebPathByLink();
 
 		// add remove link
 		$removeLinkDiv = $('<div style="margin-top:7px; margin-bottom:10px;"></div>');
-		$removeLink = $('<a href="#" class="inversa-formlink" style="float:right"><b>x</b> Entfernen</a><br style="clear:all"/>');
+		$removeLink = $('<a href="#" class="inversa-formlink" style="float:right"><img src="/css/images/remove.png" /> Entfernen</a><br style="clear:all"/>');
 		$removeLink.click(function(event) {
 			event.preventDefault();
 			RemoveNestedDiv($div);

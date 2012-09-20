@@ -191,9 +191,9 @@ function ReplaceWebPathByLink() {
 										+ GetHost()
 										+ webPath
 										+ '" target="_blank" class="inversa-formlink">'
-										+ GetFileName(webPath) + '</a> '
-										+ '<a href="removeImage(\'path' + i
-										+ '\')">Entfernen</a></div>';
+										+ GetFileName(webPath) + '</a>';
+										/* + '<a href="removeImage(\'path' + i
+										+ '\')">Entfernen</a></div>'; */
 							}
 
 							var $currentFile = $('<div><label for="path' + i

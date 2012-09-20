@@ -20,11 +20,6 @@ class Image
   private $name = "";
 
   /**
-   * @var text $description
-   */
-  private $description;
-
-  /**
    * @var string $path
    */
   private $path;
@@ -69,27 +64,7 @@ class Image
   {
     return $this->name;
   }
-
-  /**
-   * Set description
-   *
-   * @param text $description
-   */
-  public function setDescription($description)
-  {
-    $this->description = $description;
-  }
-
-  /**
-   * Get description
-   *
-   * @return text 
-   */
-  public function getDescription()
-  {
-    return $this->description;
-  }
-
+  
   /**
    * Set path
    *
