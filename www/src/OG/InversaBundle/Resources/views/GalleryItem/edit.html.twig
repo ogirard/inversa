@@ -2,12 +2,12 @@
 
 {% block body %}
  
-<h1>Gallerie "{{ entity.name }}" Editieren</h1>
+<h1>Galerie "{{ entity.name }}" Editieren</h1>
 
 <form id="edititemform" action="{{ path('admin_galleryitem_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} style="display: inline-block;">
   {{ form_widget(edit_form) }}
   <br />  
-  <a href="#" id="add-image">Neues Bild</a><br />  
+  <a href="#" id="add-image"><img src="/css/images/add.png" />Neues Bild</a><br />  
   <br />
   
   <div style="text-align: right; width:100%" class="actionswithborder">

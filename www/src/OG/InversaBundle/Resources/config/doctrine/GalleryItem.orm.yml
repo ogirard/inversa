@@ -13,8 +13,16 @@ OG\InversaBundle\Entity\GalleryItem:
         description:
             type: text
             nullable: true
+        published:
+            type: datetime
+            nullable: true
+        isactive:
+            type: boolean
+            nullable: true
     oneToMany:
         images:
             targetEntity: Image
             mappedBy: galleryitem
             cascade: ["persist", "remove"]
+    lifecycleCallbacks:
+        prePersist: [ setCreatedValue ]            

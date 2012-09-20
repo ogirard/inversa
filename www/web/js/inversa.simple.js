@@ -50,3 +50,17 @@ function BindImagesWithDetails() {
 		txtImage : 'Bild'
 	});
 }
+
+function CreateGallery(galleryRel) {
+	$('a[rel*=' + galleryRel + ']').lightBox({
+		overlayBgColor : '#444444',
+		overlayOpacity : 0.4,
+		imageBlank : '/css/lightbox/images/blank.gif',
+		imageLoading : '/css/lightbox/images/loading.gif',
+		imageBtnClose : '/css/lightbox/images/close.png',
+		imageBtnPrev : '/css/lightbox/images/prev.png',
+		imageBtnNext : '/css/lightbox/images/next.png',
+		txtOf : 'von',
+		txtImage : 'Bild'
+	});
+}

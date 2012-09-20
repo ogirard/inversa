@@ -184,7 +184,7 @@ class ContentController extends Controller
    *
    * @Route("/media/downloads", name="_content_media_downloads")
    */
-  public function mediaSamplesAction()
+  public function downloadsAction()
   {
     return $this->render('OGInversaBundle:Content:downloads.html.twig', array('name' => 'downloads'));
   }
@@ -195,7 +195,10 @@ class ContentController extends Controller
    */
   public function galleryAction()
   {
-    return $this->render('OGInversaBundle:Content:galleries.html.twig', array('name' => 'gallery'));
+  	$em = $this->getDoctrine()->getEntityManager();
+  	$query = $em->getRepository('OGInversaBundle:GalleryItem')->createQueryBuilder('g')->where('g.isactive = true')->orderBy('g.published', 'DESC')->getQuery();
+  	$entities = $query->getResult();
+    return $this->render('OGInversaBundle:Content:galleries.html.twig', array('name' => 'gallery', 'entities' => $entities));
   }
 
   /**

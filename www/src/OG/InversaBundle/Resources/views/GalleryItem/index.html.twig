@@ -2,13 +2,14 @@
 
 {% block body %}
  
-<h1>Gallerien</h1>
+<h1>Galerien</h1>
 <table class="records_list">
     <thead>
         <tr>
             <th column-width="25" data-field="ID" data-type="number">ID</th>
             <th column-width="200" data-field="Name" data-type="string">Name</th>
             <th column-width="200" data-field="Beschreibung" data-type="string" data-filterable="false" data-sortable="false" data-groupable="false">Beschreibung</th>
+            <th column-width="120" data-field="Publiziert" data-type="published" data-template="#= kendo.toString(Publiziert,'dd.MM.yyyy') #" data-filterable="true">Publiziert</th>
             <th column-width="120" data-type="number">Anzahl Bilder</th>
             <th column-width="75" data-field="Status" data-type="string">Status</th>
             <th column-width="200" data-field="Aktionen" data-filterable="false" data-sortable="false" data-groupable="false">&nbsp;&nbsp;</th>
@@ -25,6 +26,7 @@
             <td>{{ entity.id }}</td>
             <td>{{ entity.name }}</td>
             <td><span class="cellwithtooltip" title="{{ entity.description | e }}">{{ entity.description | truncate }}</span></td>
+            <td>{{ entity.published | date("d.m.Y") }}</td>
             <td>{{ entity.images | length }}</td>    
             <td>{% if entity.isactive %}Aktiv{% else %}Nicht aktiv{% endif %}</td>
             <td>

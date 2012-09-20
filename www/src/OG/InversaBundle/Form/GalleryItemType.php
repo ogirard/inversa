@@ -12,6 +12,7 @@ class GalleryItemType extends AbstractType
         $builder
             ->add('name', null, array('required' => true, 'label' => 'Name'))
             ->add('description', null, array('required' => false, 'label' => 'Beschreibung'))
+            ->add('isactive', null, array('required' => true, 'label' => 'Aktiv?'))
             ->add('images', 'collection',
                     array('type' => new ImageType(),
                           'allow_add' => true,

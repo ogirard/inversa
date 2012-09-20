@@ -21,9 +21,31 @@
       </div>
       <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
         <div class="textcontent">
-          <p>under construction</p>
+          {% for entity in entities %}
+           <div class="galleryentry">
+             <h4 class="date">{{ entity.published | date("d.m.Y") }}</h4>
+             <h2>{{ entity.name }}</h2>
+             <p class="description">{{ entity.description | nl2br }}</p>
+             {% for img in entity.images %}
+               {% if loop.first %}
+                 <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="gallery_{{ entity.id }}" title="{{ img.name }}"><img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" /></a>
+               {%  else %}
+                 <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="gallery_{{ entity.id }}" title="{{ img.name }}" style="display:none;"><img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" /></a>
+               {% endif %}
+             {% endfor %}
+             <br />
+           </div>
+           {% endfor %}
         </div>
       </div>
     </div>
 </div>
+
+<script type='text/javascript'>
+PageOnStartup = function() {
+	 {% for entity in entities %}
+	   CreateGallery("gallery_{{ entity.id }}");
+	 {% endfor %}
+};
+</script>
 {% endblock %}
