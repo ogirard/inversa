@@ -23,16 +23,28 @@
         <div class="textcontent">
           {% for entity in entities %}
            <div class="galleryentry">
-             <h4 class="date">{{ entity.published | date("d.m.Y") }}</h4>
              <h2>{{ entity.name }}</h2>
-             <p class="description">{{ entity.description | nl2br }}</p>
+             <h4 class="date">
+             {% if  entity.images | length == 0  %} Bild vom 
+             {% else %}
+             {{ entity.images | length }} Bilder vom
+             {% endif %}
+             {{ entity.published | date("d.m.Y") }}</h4>
+             {% if entity.images | length == 0 %}
+             {% elseif entity.images | length > 4 %}
+             <div id="inversa-gallery_{{ entity.id }}" class="inversa-gallery">
              {% for img in entity.images %}
-               {% if loop.first %}
-                 <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="gallery_{{ entity.id }}" title="{{ img.name }}"><img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" /></a>
-               {%  else %}
-                 <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="gallery_{{ entity.id }}" title="{{ img.name }}" style="display:none;"><img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" /></a>
-               {% endif %}
+               <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="gallery_{{ entity.id }}" title="{{ img.name }}"><img src="{{ img.webPath | apply_filter('inversaGalleryThumb') }}" class="inversa-gallery-image" /></a>
              {% endfor %}
+             </div>      
+             {% else %}
+             <div class="inversa-gallery">
+             {% for img in entity.images %}
+               <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="gallery_{{ entity.id }}" title="{{ img.name }}"><img src="{{ img.webPath | apply_filter('inversaGalleryThumb') }}" class="inversa-gallery-image" /></a>
+             {% endfor %}
+             </div>
+             {% endif %}
+             <p class="description">{{ entity.description | nl2br }}</p>
              <br />
            </div>
            {% endfor %}
@@ -40,11 +52,19 @@
       </div>
     </div>
 </div>
-
 <script type='text/javascript'>
 PageOnStartup = function() {
 	 {% for entity in entities %}
 	   CreateGallery("gallery_{{ entity.id }}");
+
+	   $("#inversa-gallery_{{ entity.id }}").smoothDivScroll({
+		   manualContinuousScrolling: true,
+		   mousewheelScrollingStep: 100,
+		   mousewheelScrolling: "allDirections",
+		   hotSpotScrollingStep: 15,
+		   hotSpotScrollingInterval: 50
+		 });
+		   
 	 {% endfor %}
 };
 </script>

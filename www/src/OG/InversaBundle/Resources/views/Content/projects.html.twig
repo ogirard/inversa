@@ -31,9 +31,20 @@
              <h4 class="date">{{ entity.day | date("d.m.Y") }}</h4>
              {% endif %}
              <h2>{{ entity.name }}</h2>
+             {% if entity.images | length == 0 %}
+             {% elseif entity.images | length > 4 %}
+             <div class="inversa-gallery inversa-smoothScrollArea">
              {% for img in entity.images %}
-               <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ entity.image.name }}"><img src="{{ img.webPath | apply_filter('inversaOverviewThumb') }}" /></a>
-             {% endfor %}           
+               <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ img.name }}"><img src="{{ img.webPath | apply_filter('inversaGalleryThumb') }}" class="inversa-gallery-image" /></a>
+             {% endfor %}
+             </div>      
+             {% else %}
+             <div class="inversa-gallery">
+             {% for img in entity.images %}
+               <a href="{{ img.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ img.name }}"><img src="{{ img.webPath | apply_filter('inversaGalleryThumb') }}" class="inversa-gallery-image" /></a>
+             {% endfor %}
+             </div>
+             {% endif %}           
              <p class="description">{{ entity.description | nl2br }}</p>
              Ort: {{ entity.location.name }} (<a href="{{ path('_content_location_show', { 'id': entity.location.id, 'name' : name }) }}" class="content">Infos</a>)<br />
              <p>

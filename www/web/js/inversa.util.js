@@ -68,3 +68,12 @@ function GetFileName(filePath) {
 	var parts = filePath.split('/');
 	return parts[parts.length - 1];
 }
+
+$.fx.prototype.cur = function() {
+	if (this.elem[this.prop] != null
+			&& (!this.elem.style || this.elem.style[this.prop] == null)) {
+		return this.elem[this.prop];
+	}
+	var r = parseFloat(jQuery.css(this.elem, this.prop));
+	return typeof r == 'undefined' ? 0 : r;
+}

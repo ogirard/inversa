@@ -49,6 +49,14 @@ function BindImagesWithDetails() {
 		txtOf : 'von',
 		txtImage : 'Bild'
 	});
+
+	$(".inversa-smoothScrollArea").smoothDivScroll({
+		manualContinuousScrolling : true,
+		mousewheelScrollingStep : 100,
+		mousewheelScrolling : "allDirections",
+		hotSpotScrollingStep : 15,
+		hotSpotScrollingInterval : 50
+	});
 }
 
 function CreateGallery(galleryRel) {
