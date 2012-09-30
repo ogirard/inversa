@@ -94,16 +94,37 @@ p {
 	margin-bottom: 22px;
 }
 
+p.noentries {
+	font-style: italic;
+	color: #cccccc;
+}
+
 p.description {
 	margin-top: 10px;
 	margin-bottom: 16px;
 	font-style: italic;
+	color: #ffffff;
+}
+
+p.entry {
+	margin-top: 4px;
+	margin-bottom: 4px;
+	color: #dedede;
+}
+
+span.content {
+	color: #ffffff;
+	font-size: 11pt;
+}
+
+span.details {
+	font-size: 10pt;
 }
 
 ul.itemlistdoc {
 	margin-left: 25px;
 	font-size: 9pt;
-	list-style-image: url(images/doc_white.png);	
+	list-style-image: url(images/doc_white.png);
 }
 
 ul.itemlisturl {
@@ -123,10 +144,10 @@ table.songlist td.col0 {
 }
 
 table.songlist td.col1 {
-	padding-right: 24px;	
+	padding-right: 24px;
 }
 
 table.songlist td.col2 {
 	font-style: italic;
-	padding-right: 24px;	
+	padding-right: 24px;
 }

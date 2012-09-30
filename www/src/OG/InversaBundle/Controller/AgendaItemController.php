@@ -76,12 +76,23 @@ class AgendaItemController extends Controller
     public function createAction()
     {
         $entity = new AgendaItem();
+        
+        $originalDocs = Util::asArray($entity->getDocuments());
+        $originalLinks = Util::asArray($entity->getLinks());
+        $originalImages = Util::asArray($entity->getImages());
+        
         $request = $this->getRequest();
         $form = $this->createForm(new AgendaItemType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+        	  $em = $this->getDoctrine()->getEntityManager();
+        	  $this->updateReferences($entity);
+        	  
+        	  Util::syncItems($em, $originalDocs, $entity->getDocuments());
+        	  Util::syncItems($em, $originalLinks, $entity->getLinks());
+        	  Util::syncItems($em, $originalImages, $entity->getImages());        	  
+            
             $em->persist($entity);
             $em->flush();
 

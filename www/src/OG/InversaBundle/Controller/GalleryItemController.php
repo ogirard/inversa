@@ -16,191 +16,194 @@ use OG\InversaBundle\Form\GalleryItemType;
  */
 class GalleryItemController extends Controller
 {
-    /**
-     * Lists all GalleryItem entities.
-     *
-     * @Route("/", name="admin_galleryitem")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+  /**
+   * Lists all GalleryItem entities.
+   *
+   * @Route("/", name="admin_galleryitem")
+   * @Template()
+   */
+  public function indexAction()
+  {
+    $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('OGInversaBundle:GalleryItem')->findAll();
+    $entities = $em->getRepository('OGInversaBundle:GalleryItem')->findAll();
 
-        return array('entities' => $entities);
+    return array('entities' => $entities);
+  }
+
+  /**
+   * Finds and displays a GalleryItem entity.
+   *
+   * @Route("/{id}/show", name="admin_galleryitem_show")
+   * @Template()
+   */
+  public function showAction($id)
+  {
+    $em = $this->getDoctrine()->getEntityManager();
+
+    $entity = $em->getRepository('OGInversaBundle:GalleryItem')->find($id);
+
+    if (!$entity) {
+      throw $this->createNotFoundException('Unable to find GalleryItem entity.');
     }
 
-    /**
-     * Finds and displays a GalleryItem entity.
-     *
-     * @Route("/{id}/show", name="admin_galleryitem_show")
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+    $deleteForm = $this->createDeleteForm($id);
 
-        $entity = $em->getRepository('OGInversaBundle:GalleryItem')->find($id);
+    return array('entity' => $entity, 'delete_form' => $deleteForm->createView(),);
+  }
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find GalleryItem entity.');
-        }
+  /**
+   * Displays a form to create a new GalleryItem entity.
+   *
+   * @Route("/new", name="admin_galleryitem_new")
+   * @Template()
+   */
+  public function newAction()
+  {
+    $entity = new GalleryItem();
+    $form = $this->createForm(new GalleryItemType(), $entity);
 
-        $deleteForm = $this->createDeleteForm($id);
+    return array('entity' => $entity, 'form' => $form->createView());
+  }
 
-        return array('entity' => $entity, 'delete_form' => $deleteForm->createView(),);
+  /**
+   * Creates a new GalleryItem entity.
+   *
+   * @Route("/create", name="admin_galleryitem_create")
+   * @Method("post")
+   * @Template("OGInversaBundle:GalleryItem:new.html.twig")
+   */
+  public function createAction()
+  {
+    $entity = new GalleryItem();
+    $originalImages = Util::asArray($entity->getImages());
+
+    $request = $this->getRequest();
+    $form = $this->createForm(new GalleryItemType(), $entity);
+    $form->bindRequest($request);
+
+    if ($form->isValid()) {
+      $em = $this->getDoctrine()->getEntityManager();
+      $this->updateReferences($entity);
+
+      Util::syncItems($em, $originalImages, $entity->getImages());
+
+      $em->persist($entity);
+      $em->flush();
+
+      return $this->redirect($this->generateUrl('admin_galleryitem_show', array('id' => $entity->getId())));
+
     }
 
-    /**
-     * Displays a form to create a new GalleryItem entity.
-     *
-     * @Route("/new", name="admin_galleryitem_new")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new GalleryItem();
-        $form = $this->createForm(new GalleryItemType(), $entity);
+    return array('entity' => $entity, 'form' => $form->createView());
+  }
 
-        return array('entity' => $entity, 'form' => $form->createView());
+  /**
+   * Displays a form to edit an existing GalleryItem entity.
+   *
+   * @Route("/{id}/edit", name="admin_galleryitem_edit")
+   * @Template()
+   */
+  public function editAction($id)
+  {
+    $em = $this->getDoctrine()->getEntityManager();
+
+    $entity = $em->getRepository('OGInversaBundle:GalleryItem')->find($id);
+
+    if (!$entity) {
+      throw $this->createNotFoundException('Unable to find GalleryItem entity.');
     }
 
-    /**
-     * Creates a new GalleryItem entity.
-     *
-     * @Route("/create", name="admin_galleryitem_create")
-     * @Method("post")
-     * @Template("OGInversaBundle:GalleryItem:new.html.twig")
-     */
-    public function createAction()
-    {
-        $entity = new GalleryItem();
-        $request = $this->getRequest();
-        $form = $this->createForm(new GalleryItemType(), $entity);
-        $form->bindRequest($request);
+    $editForm = $this->createForm(new GalleryItemType(), $entity);
+    $deleteForm = $this->createDeleteForm($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
-            $em->flush();
+    return array('entity' => $entity, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),);
+  }
 
-            return $this->redirect($this->generateUrl('admin_galleryitem_show', array('id' => $entity->getId())));
+  /**
+   * Edits an existing GalleryItem entity.
+   *
+   * @Route("/{id}/update", name="admin_galleryitem_update")
+   * @Method("post")
+   * @Template("OGInversaBundle:GalleryItem:edit.html.twig")
+   */
+  public function updateAction($id)
+  {
+    $em = $this->getDoctrine()->getEntityManager();
 
-        }
+    $entity = $em->getRepository('OGInversaBundle:GalleryItem')->find($id);
 
-        return array('entity' => $entity, 'form' => $form->createView());
+    if (!$entity) {
+      throw $this->createNotFoundException('Unable to find GalleryItem entity.');
     }
 
-    /**
-     * Displays a form to edit an existing GalleryItem entity.
-     *
-     * @Route("/{id}/edit", name="admin_galleryitem_edit")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+    $originalImages = Util::asArray($entity->getImages());
 
-        $entity = $em->getRepository('OGInversaBundle:GalleryItem')->find($id);
+    $editForm = $this->createForm(new GalleryItemType(), $entity);
+    $deleteForm = $this->createDeleteForm($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find GalleryItem entity.');
-        }
+    $request = $this->getRequest();
 
-        $editForm = $this->createForm(new GalleryItemType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
+    if ('POST' === $request->getMethod()) {
+      $editForm->bindRequest($this->getRequest());
 
-        return array('entity' => $entity, 'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),);
+      if ($editForm->isValid()) {
+        $this->updateReferences($entity);
+
+        Util::syncItems($em, $originalImages, $entity->getImages());
+
+        $em->persist($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_galleryitem_edit', array('id' => $id)));
+      }
     }
 
-    /**
-     * Edits an existing GalleryItem entity.
-     *
-     * @Route("/{id}/update", name="admin_galleryitem_update")
-     * @Method("post")
-     * @Template("OGInversaBundle:GalleryItem:edit.html.twig")
-     */
-    public function updateAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+    return array('entity' => $entity, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView());
+  }
 
-        $entity = $em->getRepository('OGInversaBundle:GalleryItem')->find($id);
+  /**
+   * Update the references of the collections
+   * 
+   * @param \OG\InversaBundle\Entity\GalleryItem $entity
+   */
+  private function updateReferences(\OG\InversaBundle\Entity\GalleryItem $entity)
+  {
+    foreach ($entity->getImages() as $img) {
+      $img->setGalleryitem($entity);
+    }
+  }
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find GalleryItem entity.');
-        }
+  /**
+   * Deletes a GalleryItem entity.
+   *
+   * @Route("/{id}/delete", name="admin_galleryitem_delete")
+   * @Method("post")
+   */
+  public function deleteAction($id)
+  {
+    $form = $this->createDeleteForm($id);
+    $request = $this->getRequest();
 
-        $originalImages = Util::asArray($entity->getImages());
+    $form->bindRequest($request);
 
-        $editForm = $this->createForm(new GalleryItemType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
+    if ($form->isValid()) {
+      $em = $this->getDoctrine()->getEntityManager();
+      $entity = $em->getRepository('OGInversaBundle:GalleryItem')->find($id);
 
-        $request = $this->getRequest();
+      if (!$entity) {
+        throw $this->createNotFoundException('Unable to find GalleryItem entity.');
+      }
 
-        if ('POST' === $request->getMethod()) {
-            $editForm->bindRequest($this->getRequest());
-
-            if ($editForm->isValid()) {
-                $this->updateReferences($entity);
-
-                Util::syncItems($em, $originalImages, $entity->getImages());
-
-                $em->persist($entity);
-                $em->flush();
-
-                return $this->redirect($this->generateUrl('admin_galleryitem_edit', array('id' => $id)));
-            }
-        }
-
-        return array('entity' => $entity,
-                     'edit_form' => $editForm->createView(),
-                     'delete_form' => $deleteForm->createView());
+      $em->remove($entity);
+      $em->flush();
     }
 
-    /**
-     * Update the references of the collections
-     * 
-     * @param \OG\InversaBundle\Entity\GalleryItem $entity
-     */
-    private function updateReferences(\OG\InversaBundle\Entity\GalleryItem $entity)
-    {
-        foreach ($entity->getImages() as $img) {
-            $img->setGalleryitem($entity);
-        }
-    }
+    return $this->redirect($this->generateUrl('admin_galleryitem'));
+  }
 
-    /**
-     * Deletes a GalleryItem entity.
-     *
-     * @Route("/{id}/delete", name="admin_galleryitem_delete")
-     * @Method("post")
-     */
-    public function deleteAction($id)
-    {
-        $form = $this->createDeleteForm($id);
-        $request = $this->getRequest();
-
-        $form->bindRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('OGInversaBundle:GalleryItem')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find GalleryItem entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('admin_galleryitem'));
-    }
-
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))->add('id', 'hidden')->getForm();
-    }
+  private function createDeleteForm($id)
+  {
+    return $this->createFormBuilder(array('id' => $id))->add('id', 'hidden')->getForm();
+  }
 }

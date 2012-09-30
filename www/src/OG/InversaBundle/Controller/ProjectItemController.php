@@ -15,208 +15,215 @@ use OG\InversaBundle\Form\ProjectItemType;
  */
 class ProjectItemController extends Controller
 {
-    /**
-     * Lists all ProjectItem entities.
-     *
-     * @Route("/", name="admin_projectitem")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+  /**
+   * Lists all ProjectItem entities.
+   *
+   * @Route("/", name="admin_projectitem")
+   * @Template()
+   */
+  public function indexAction()
+  {
+    $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('OGInversaBundle:ProjectItem')->findAll();
+    $entities = $em->getRepository('OGInversaBundle:ProjectItem')->findAll();
 
-        return array('entities' => $entities);
+    return array('entities' => $entities);
+  }
+
+  /**
+   * Finds and displays a ProjectItem entity.
+   *
+   * @Route("/{id}/show", name="admin_projectitem_show")
+   * @Template()
+   */
+  public function showAction($id)
+  {
+    $em = $this->getDoctrine()->getEntityManager();
+
+    $entity = $em->getRepository('OGInversaBundle:ProjectItem')->find($id);
+
+    if (!$entity) {
+      throw $this->createNotFoundException('Unable to find ProjectItem entity.');
     }
 
-    /**
-     * Finds and displays a ProjectItem entity.
-     *
-     * @Route("/{id}/show", name="admin_projectitem_show")
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+    $deleteForm = $this->createDeleteForm($id);
 
-        $entity = $em->getRepository('OGInversaBundle:ProjectItem')->find($id);
+    return array('entity' => $entity, 'delete_form' => $deleteForm->createView(),);
+  }
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ProjectItem entity.');
-        }
+  /**
+   * Displays a form to create a new ProjectItem entity.
+   *
+   * @Route("/new", name="admin_projectitem_new")
+   * @Template()
+   */
+  public function newAction()
+  {
+    $entity = new ProjectItem();
+    $form = $this->createForm(new ProjectItemType(), $entity);
 
-        $deleteForm = $this->createDeleteForm($id);
+    return array('entity' => $entity, 'form' => $form->createView());
+  }
 
-        return array('entity' => $entity, 'delete_form' => $deleteForm->createView(),);
+  /**
+   * Creates a new ProjectItem entity.
+   *
+   * @Route("/create", name="admin_projectitem_create")
+   * @Method("post")
+   * @Template("OGInversaBundle:ProjectItem:new.html.twig")
+   */
+  public function createAction()
+  {
+    $entity = new ProjectItem();
+    $originalDocs = Util::asArray($entity->getDocuments());
+    $originalLinks = Util::asArray($entity->getLinks());
+    $originalImages = Util::asArray($entity->getImages());
+
+    $request = $this->getRequest();
+    $form = $this->createForm(new ProjectItemType(), $entity);
+    $form->bindRequest($request);
+
+    if ($form->isValid()) {
+      $em = $this->getDoctrine()->getEntityManager();
+      $this->updateReferences($entity);
+
+      Util::syncItems($em, $originalDocs, $entity->getDocuments());
+      Util::syncItems($em, $originalLinks, $entity->getLinks());
+      Util::syncItems($em, $originalImages, $entity->getImages());
+
+      $em->persist($entity);
+      $em->flush();
+
+      return $this->redirect($this->generateUrl('admin_projectitem_show', array('id' => $entity->getId())));
+
     }
 
-    /**
-     * Displays a form to create a new ProjectItem entity.
-     *
-     * @Route("/new", name="admin_projectitem_new")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new ProjectItem();
-        $form = $this->createForm(new ProjectItemType(), $entity);
+    return array('entity' => $entity, 'form' => $form->createView());
+  }
 
-        return array('entity' => $entity, 'form' => $form->createView());
+  /**
+   * Displays a form to edit an existing ProjectItem entity.
+   *
+   * @Route("/{id}/edit", name="admin_projectitem_edit")
+   * @Template()
+   */
+  public function editAction($id)
+  {
+    $em = $this->getDoctrine()->getEntityManager();
+
+    $entity = $em->getRepository('OGInversaBundle:ProjectItem')->find($id);
+
+    if (!$entity) {
+      throw $this->createNotFoundException('Unable to find ProjectItem entity.');
     }
 
-    /**
-     * Creates a new ProjectItem entity.
-     *
-     * @Route("/create", name="admin_projectitem_create")
-     * @Method("post")
-     * @Template("OGInversaBundle:ProjectItem:new.html.twig")
-     */
-    public function createAction()
-    {
-        $entity = new ProjectItem();
-        $request = $this->getRequest();
-        $form = $this->createForm(new ProjectItemType(), $entity);
-        $form->bindRequest($request);
+    $editForm = $this->createForm(new ProjectItemType(), $entity);
+    $deleteForm = $this->createDeleteForm($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
-            $em->flush();
+    return array('entity' => $entity, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),);
+  }
 
-            return $this->redirect($this->generateUrl('admin_projectitem_show', array('id' => $entity->getId())));
+  /**
+   * Edits an existing ProjectItem entity.
+   *
+   * @Route("/{id}/update", name="admin_projectitem_update")
+   * @Method("post")
+   * @Template("OGInversaBundle:ProjectItem:edit.html.twig")
+   */
+  public function updateAction($id)
+  {
+    $em = $this->getDoctrine()->getEntityManager();
 
-        }
+    // EXAMPLE FOR LOGGING
+    $logger = $this->get('logger');
+    $logger->info('$$MY: TEST for logging');
 
-        return array('entity' => $entity, 'form' => $form->createView());
+    $entity = $em->getRepository('OGInversaBundle:ProjectItem')->find($id);
+
+    if (!$entity) {
+      throw $this->createNotFoundException('Unable to find ProjectItem entity.');
     }
 
-    /**
-     * Displays a form to edit an existing ProjectItem entity.
-     *
-     * @Route("/{id}/edit", name="admin_projectitem_edit")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+    $originalDocs = Util::asArray($entity->getDocuments());
+    $originalLinks = Util::asArray($entity->getLinks());
+    $originalImages = Util::asArray($entity->getImages());
 
-        $entity = $em->getRepository('OGInversaBundle:ProjectItem')->find($id);
+    $editForm = $this->createForm(new ProjectItemType(), $entity);
+    $deleteForm = $this->createDeleteForm($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ProjectItem entity.');
-        }
+    $request = $this->getRequest();
 
-        $editForm = $this->createForm(new ProjectItemType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
+    if ('POST' === $request->getMethod()) {
+      $editForm->bindRequest($this->getRequest());
 
-        return array('entity' => $entity, 'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),);
+      if ($editForm->isValid()) {
+        $this->updateReferences($entity);
+
+        Util::syncItems($em, $originalDocs, $entity->getDocuments());
+        Util::syncItems($em, $originalLinks, $entity->getLinks());
+        Util::syncItems($em, $originalImages, $entity->getImages());
+
+        $em->persist($entity);
+        $em->flush();
+
+        // redirect back to edit page
+        return $this->redirect($this->generateUrl('admin_projectitem_edit', array('id' => $id)));
+      }
     }
 
-    /**
-     * Edits an existing ProjectItem entity.
-     *
-     * @Route("/{id}/update", name="admin_projectitem_update")
-     * @Method("post")
-     * @Template("OGInversaBundle:ProjectItem:edit.html.twig")
-     */
-    public function updateAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+    return array('entity' => $entity, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView());
+  }
 
-        // EXAMPLE FOR LOGGING
-        $logger = $this->get('logger');
-        $logger->info('$$MY: TEST for logging');
-
-        $entity = $em->getRepository('OGInversaBundle:ProjectItem')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ProjectItem entity.');
-        }
-
-        $originalDocs = Util::asArray($entity->getDocuments());
-        $originalLinks = Util::asArray($entity->getLinks());
-        $originalImages = Util::asArray($entity->getImages());
-
-        $editForm = $this->createForm(new ProjectItemType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        $request = $this->getRequest();
-
-        if ('POST' === $request->getMethod()) {
-            $editForm->bindRequest($this->getRequest());
-
-            if ($editForm->isValid()) {
-                $this->updateReferences($entity);
-
-                Util::syncItems($em, $originalDocs, $entity->getDocuments());
-                Util::syncItems($em, $originalLinks, $entity->getLinks());
-                Util::syncItems($em, $originalImages, $entity->getImages());
-
-                $em->persist($entity);
-                $em->flush();
-
-                // redirect back to edit page
-                return $this->redirect($this->generateUrl('admin_projectitem_edit', array('id' => $id)));
-            }
-        }
-
-        return array('entity' => $entity,
-                     'edit_form' => $editForm->createView(),
-                     'delete_form' => $deleteForm->createView());
+  /**
+   * Update the references of the collections
+   * 
+   * @param \OG\InversaBundle\Entity\ProjectItem $entity
+   */
+  private function updateReferences(\OG\InversaBundle\Entity\ProjectItem $entity)
+  {
+    foreach ($entity->getDocuments() as $doc) {
+      $doc->setProjectitem($entity);
     }
 
-    /**
-     * Update the references of the collections
-     * 
-     * @param \OG\InversaBundle\Entity\ProjectItem $entity
-     */
-    private function updateReferences(\OG\InversaBundle\Entity\ProjectItem $entity)
-    {
-        foreach ($entity->getDocuments() as $doc) {
-            $doc->setProjectitem($entity);
-        }
-
-        foreach ($entity->getImages() as $img) {
-            $img->setProjectitem($entity);
-        }
-
-        foreach ($entity->getLinks() as $link) {
-            $link->setProjectitem($entity);
-        }
+    foreach ($entity->getImages() as $img) {
+      $img->setProjectitem($entity);
     }
 
-    /**
-     * Deletes a ProjectItem entity.
-     *
-     * @Route("/{id}/delete", name="admin_projectitem_delete")
-     * @Method("post")
-     */
-    public function deleteAction($id)
-    {
-        $form = $this->createDeleteForm($id);
-        $request = $this->getRequest();
+    foreach ($entity->getLinks() as $link) {
+      $link->setProjectitem($entity);
+    }
+  }
 
-        $form->bindRequest($request);
+  /**
+   * Deletes a ProjectItem entity.
+   *
+   * @Route("/{id}/delete", name="admin_projectitem_delete")
+   * @Method("post")
+   */
+  public function deleteAction($id)
+  {
+    $form = $this->createDeleteForm($id);
+    $request = $this->getRequest();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('OGInversaBundle:ProjectItem')->find($id);
+    $form->bindRequest($request);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find ProjectItem entity.');
-            }
+    if ($form->isValid()) {
+      $em = $this->getDoctrine()->getEntityManager();
+      $entity = $em->getRepository('OGInversaBundle:ProjectItem')->find($id);
 
-            $em->remove($entity);
-            $em->flush();
-        }
+      if (!$entity) {
+        throw $this->createNotFoundException('Unable to find ProjectItem entity.');
+      }
 
-        return $this->redirect($this->generateUrl('admin_projectitem'));
+      $em->remove($entity);
+      $em->flush();
     }
 
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))->add('id', 'hidden')->getForm();
-    }
+    return $this->redirect($this->generateUrl('admin_projectitem'));
+  }
+
+  private function createDeleteForm($id)
+  {
+    return $this->createFormBuilder(array('id' => $id))->add('id', 'hidden')->getForm();
+  }
 }

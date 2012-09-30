@@ -9,4 +9,5 @@ drop table mediaitem;
 drop table pressitem;
 drop table projectitem;
 drop table weburl;
+drop table cditem;
 SET foreign_key_checks = 1;

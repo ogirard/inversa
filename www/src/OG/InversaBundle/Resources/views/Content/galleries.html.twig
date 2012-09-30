@@ -47,6 +47,8 @@
              <p class="description">{{ entity.description | nl2br }}</p>
              <br />
            </div>
+           {% else %}
+           <p class="noentries">Zurzeit keine Galerien</p>
            {% endfor %}
         </div>
       </div>

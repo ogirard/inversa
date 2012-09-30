@@ -31,7 +31,7 @@ class Image
 
   public function isValid()
   {
-  	// image type is valid if none or both values name and path are set
+    // image type is valid if none or both values name and path are set
     return false && (empty($this->name) && empty($this->path) || !empty($this->name) && !empty($this->path));
   }
 
@@ -64,7 +64,7 @@ class Image
   {
     return $this->name;
   }
-  
+
   /**
    * Set path
    *
@@ -262,8 +262,51 @@ class Image
     }
 
     $originalName = $this->file->getClientOriginalName();
-    $noSpecialCharsName = strtr($originalName, 'ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ ',
-        'SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy_');
+    $noSpecialCharsName = str_replace("\'", "", $originalName);
+    $noSpecialCharsName = str_replace("\"", "", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace(" ", "_", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("è", "e", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("é", "e", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ê", "e", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ë", "e", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("à", "a", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("á", "a", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ä", "a", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("â", "a", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("î", "i", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ï", "i", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ì", "i", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("í", "i", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ô", "o", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ò", "o", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ó", "o", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ö", "o", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ù", "u", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ú", "u", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ü", "u", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("û", "u", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("É", "E", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("È", "E", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ë", "E", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ê", "E", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("À", "A", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Á", "A", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ä", "A", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Â", "A", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ì", "I", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Î", "I", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ï", "I", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Í", "I", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ô", "O", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ò", "O", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ó", "O", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ö", "O", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ü", "U", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Û", "U", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ú", "U", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("Ù", "U", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ç", "C", $noSpecialCharsName);
+    $noSpecialCharsName = str_replace("ç", "C", $noSpecialCharsName);
 
     $this->path = strtolower($noSpecialCharsName);
     $this->doctype = $this->file->guessExtension();

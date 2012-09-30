@@ -16,203 +16,210 @@ use OG\InversaBundle\Form\PressItemType;
  */
 class PressItemController extends Controller
 {
-    /**
-     * Lists all PressItem entities.
-     *
-     * @Route("/", name="admin_pressitem")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+  /**
+   * Lists all PressItem entities.
+   *
+   * @Route("/", name="admin_pressitem")
+   * @Template()
+   */
+  public function indexAction()
+  {
+    $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('OGInversaBundle:PressItem')->findAll();
+    $entities = $em->getRepository('OGInversaBundle:PressItem')->findAll();
 
-        return array('entities' => $entities);
+    return array('entities' => $entities);
+  }
+
+  /**
+   * Finds and displays a PressItem entity.
+   *
+   * @Route("/{id}/show", name="admin_pressitem_show")
+   * @Template()
+   */
+  public function showAction($id)
+  {
+    $em = $this->getDoctrine()->getEntityManager();
+
+    $entity = $em->getRepository('OGInversaBundle:PressItem')->find($id);
+
+    if (!$entity) {
+      throw $this->createNotFoundException('Unable to find PressItem entity.');
     }
 
-    /**
-     * Finds and displays a PressItem entity.
-     *
-     * @Route("/{id}/show", name="admin_pressitem_show")
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+    $deleteForm = $this->createDeleteForm($id);
 
-        $entity = $em->getRepository('OGInversaBundle:PressItem')->find($id);
+    return array('entity' => $entity, 'delete_form' => $deleteForm->createView(),);
+  }
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find PressItem entity.');
-        }
+  /**
+   * Displays a form to create a new PressItem entity.
+   *
+   * @Route("/new", name="admin_pressitem_new")
+   * @Template()
+   */
+  public function newAction()
+  {
+    $entity = new PressItem();
+    $form = $this->createForm(new PressItemType(), $entity);
 
-        $deleteForm = $this->createDeleteForm($id);
+    return array('entity' => $entity, 'form' => $form->createView());
+  }
 
-        return array('entity' => $entity, 'delete_form' => $deleteForm->createView(),);
+  /**
+   * Creates a new PressItem entity.
+   *
+   * @Route("/create", name="admin_pressitem_create")
+   * @Method("post")
+   * @Template("OGInversaBundle:PressItem:new.html.twig")
+   */
+  public function createAction()
+  {
+    $entity = new PressItem();
+    $originalDocs = Util::asArray($entity->getDocuments());
+    $originalLinks = Util::asArray($entity->getLinks());
+    $originalImages = Util::asArray($entity->getImages());
+
+    $request = $this->getRequest();
+    $form = $this->createForm(new PressItemType(), $entity);
+    $form->bindRequest($request);
+
+    if ($form->isValid()) {
+      $em = $this->getDoctrine()->getEntityManager();
+      $this->updateReferences($entity);
+
+      Util::syncItems($em, $originalDocs, $entity->getDocuments());
+      Util::syncItems($em, $originalLinks, $entity->getLinks());
+      Util::syncItems($em, $originalImages, $entity->getImages());
+
+      $em->persist($entity);
+      $em->flush();
+
+      return $this->redirect($this->generateUrl('admin_pressitem_show', array('id' => $entity->getId())));
+
     }
 
-    /**
-     * Displays a form to create a new PressItem entity.
-     *
-     * @Route("/new", name="admin_pressitem_new")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new PressItem();
-        $form = $this->createForm(new PressItemType(), $entity);
+    return array('entity' => $entity, 'form' => $form->createView());
+  }
 
-        return array('entity' => $entity, 'form' => $form->createView());
+  /**
+   * Displays a form to edit an existing PressItem entity.
+   *
+   * @Route("/{id}/edit", name="admin_pressitem_edit")
+   * @Template()
+   */
+  public function editAction($id)
+  {
+    $em = $this->getDoctrine()->getEntityManager();
+
+    $entity = $em->getRepository('OGInversaBundle:PressItem')->find($id);
+
+    if (!$entity) {
+      throw $this->createNotFoundException('Unable to find PressItem entity.');
     }
 
-    /**
-     * Creates a new PressItem entity.
-     *
-     * @Route("/create", name="admin_pressitem_create")
-     * @Method("post")
-     * @Template("OGInversaBundle:PressItem:new.html.twig")
-     */
-    public function createAction()
-    {
-        $entity = new PressItem();
-        $request = $this->getRequest();
-        $form = $this->createForm(new PressItemType(), $entity);
-        $form->bindRequest($request);
+    $editForm = $this->createForm(new PressItemType(), $entity);
+    $deleteForm = $this->createDeleteForm($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
-            $em->flush();
+    return array('entity' => $entity, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),);
+  }
 
-            return $this->redirect($this->generateUrl('admin_pressitem_show', array('id' => $entity->getId())));
+  /**
+   * Edits an existing PressItem entity.
+   *
+   * @Route("/{id}/update", name="admin_pressitem_update")
+   * @Method("post")
+   * @Template("OGInversaBundle:PressItem:edit.html.twig")
+   */
+  public function updateAction($id)
+  {
+    $em = $this->getDoctrine()->getEntityManager();
 
-        }
+    $entity = $em->getRepository('OGInversaBundle:PressItem')->find($id);
 
-        return array('entity' => $entity, 'form' => $form->createView());
+    if (!$entity) {
+      throw $this->createNotFoundException('Unable to find PressItem entity.');
     }
 
-    /**
-     * Displays a form to edit an existing PressItem entity.
-     *
-     * @Route("/{id}/edit", name="admin_pressitem_edit")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+    $originalDocs = Util::asArray($entity->getDocuments());
+    $originalLinks = Util::asArray($entity->getLinks());
+    $originalImages = Util::asArray($entity->getImages());
 
-        $entity = $em->getRepository('OGInversaBundle:PressItem')->find($id);
+    $editForm = $this->createForm(new PressItemType(), $entity);
+    $deleteForm = $this->createDeleteForm($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find PressItem entity.');
-        }
+    $request = $this->getRequest();
 
-        $editForm = $this->createForm(new PressItemType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
+    if ('POST' === $request->getMethod()) {
+      $editForm->bindRequest($this->getRequest());
 
-        return array('entity' => $entity, 'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),);
+      if ($editForm->isValid()) {
+        $this->updateReferences($entity);
+
+        Util::syncItems($em, $originalDocs, $entity->getDocuments());
+        Util::syncItems($em, $originalLinks, $entity->getLinks());
+        Util::syncItems($em, $originalImages, $entity->getImages());
+
+        $em->persist($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_pressitem_edit', array('id' => $id)));
+      }
     }
 
-    /**
-     * Edits an existing PressItem entity.
-     *
-     * @Route("/{id}/update", name="admin_pressitem_update")
-     * @Method("post")
-     * @Template("OGInversaBundle:PressItem:edit.html.twig")
-     */
-    public function updateAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
+    return array('entity' => $entity, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView());
+  }
 
-        $entity = $em->getRepository('OGInversaBundle:PressItem')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find PressItem entity.');
-        }
-
-        $originalDocs = Util::asArray($entity->getDocuments());
-        $originalLinks = Util::asArray($entity->getLinks());
-        $originalImages = Util::asArray($entity->getImages());
-
-        $editForm = $this->createForm(new PressItemType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        $request = $this->getRequest();
-
-        if ('POST' === $request->getMethod()) {
-            $editForm->bindRequest($this->getRequest());
-
-            if ($editForm->isValid()) {
-                $this->updateReferences($entity);
-                
-                Util::syncItems($em, $originalDocs, $entity->getDocuments());
-                Util::syncItems($em, $originalLinks, $entity->getLinks());
-                Util::syncItems($em, $originalImages, $entity->getImages());
-                
-                $em->persist($entity);
-                $em->flush();
-
-                return $this->redirect($this->generateUrl('admin_pressitem_edit', array('id' => $id)));
-            }
-        }
-
-        return array('entity' => $entity, 
-                     'edit_form' => $editForm->createView(),
-                     'delete_form' => $deleteForm->createView());
+  /**
+   * Update the references of the collections
+   * 
+   * @param \OG\InversaBundle\Entity\PressItem $entity
+   */
+  private function updateReferences(\OG\InversaBundle\Entity\PressItem $entity)
+  {
+    foreach ($entity->getDocuments() as $doc) {
+      $doc->setPressItem($entity);
     }
 
-    /**
-     * Update the references of the collections
-     * 
-     * @param \OG\InversaBundle\Entity\PressItem $entity
-     */
-    private function updateReferences(\OG\InversaBundle\Entity\PressItem $entity)
-    {
-        foreach ($entity->getDocuments() as $doc) {
-            $doc->setPressItem($entity);
-        }
-
-        foreach ($entity->getImages() as $img) {
-            $img->setPressItem($entity);
-        }
-
-        foreach ($entity->getLinks() as $link) {
-            $link->setPressItem($entity);
-        }
+    foreach ($entity->getImages() as $img) {
+      $img->setPressItem($entity);
     }
 
-    /**
-     * Deletes a PressItem entity.
-     *
-     * @Route("/{id}/delete", name="admin_pressitem_delete")
-     * @Method("post")
-     */
-    public function deleteAction($id)
-    {
-        $form = $this->createDeleteForm($id);
-        $request = $this->getRequest();
+    foreach ($entity->getLinks() as $link) {
+      $link->setPressItem($entity);
+    }
+  }
 
-        $form->bindRequest($request);
+  /**
+   * Deletes a PressItem entity.
+   *
+   * @Route("/{id}/delete", name="admin_pressitem_delete")
+   * @Method("post")
+   */
+  public function deleteAction($id)
+  {
+    $form = $this->createDeleteForm($id);
+    $request = $this->getRequest();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('OGInversaBundle:PressItem')->find($id);
+    $form->bindRequest($request);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find PressItem entity.');
-            }
+    if ($form->isValid()) {
+      $em = $this->getDoctrine()->getEntityManager();
+      $entity = $em->getRepository('OGInversaBundle:PressItem')->find($id);
 
-            $em->remove($entity);
-            $em->flush();
-        }
+      if (!$entity) {
+        throw $this->createNotFoundException('Unable to find PressItem entity.');
+      }
 
-        return $this->redirect($this->generateUrl('admin_pressitem'));
+      $em->remove($entity);
+      $em->flush();
     }
 
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))->add('id', 'hidden')->getForm();
-    }
+    return $this->redirect($this->generateUrl('admin_pressitem'));
+  }
+
+  private function createDeleteForm($id)
+  {
+    return $this->createFormBuilder(array('id' => $id))->add('id', 'hidden')->getForm();
+  }
 }

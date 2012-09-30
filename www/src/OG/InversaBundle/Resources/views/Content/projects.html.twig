@@ -46,7 +46,9 @@
              </div>
              {% endif %}           
              <p class="description">{{ entity.description | nl2br }}</p>
-             Ort: {{ entity.location.name }} (<a href="{{ path('_content_location_show', { 'id': entity.location.id, 'name' : name }) }}" class="content">Infos</a>)<br />
+             {% if entity.location %} 
+             <p class="entry">Ort: <span class="content">{{ entity.location.name }} (<a href="{{ path('_content_location_show', { 'id': entity.location.id, 'name' : name }) }}" class="content"><span class="details">Details<img src="/css/images/location_white.png" /></span></a>)</span></p>
+             {% endif %}
              <p>
              {% if entity.documents|length > 0 or entity.links|length > 0 %}
              <h5>Zusätzliche Informationen</h5>
@@ -68,6 +70,8 @@
              </p>
              <br />
            </div>
+           {% else %}
+           <p class="noentries">Zurzeit keine Projekte</p>
            {% endfor %}
         </div>
       </div>
