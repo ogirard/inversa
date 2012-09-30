@@ -31,7 +31,7 @@
              {% endif %}
              {% endif %}
              <h2>{{ entity.name }}</h2>
-             {% if entity.image && entity.image.webPath %}
+             {% if entity.image and entity.image.webPath %}
                <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ entity.image.name }}"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}"/></a>
              {% endif %}           
              <p class="description">{{ entity.description | nl2br }}</p>

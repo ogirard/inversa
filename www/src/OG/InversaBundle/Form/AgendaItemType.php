@@ -18,7 +18,7 @@ class AgendaItemType extends AbstractType
         ->add('documents', 'collection', array('type' => new DocumentType(), 'allow_add' => true, 'allow_delete' => true, 'prototype' => true, 'by_reference' => false, 'label' => 'Dokumente'))
         ->add('links', 'collection', array('type' => new WebUrlType(), 'allow_add' => true, 'allow_delete' => true, 'prototype' => true, 'by_reference' => false, 'label' => 'Links'))
         ->add('images', 'collection', array('type' => new ImageType(), 'allow_add' => true, 'allow_delete' => true, 'prototype' => true, 'by_reference' => false, 'label' => 'Bilder'))
-        ->add('isactive', null, array('required' => true, 'label' => 'Aktiv?'));
+        ->add('isactive', null, array('required' => false, 'label' => 'Aktiv?'));
   }
 
   public function getName()

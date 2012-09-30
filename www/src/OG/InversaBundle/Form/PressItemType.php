@@ -36,7 +36,7 @@ class PressItemType extends AbstractType
                            'prototype' => true,
                            'by_reference' => false,
                            'label' => 'Bilder'))
-            ->add('isactive', null, array('required' => true, 'label' => 'Aktiv?'));
+            ->add('isactive', null, array('required' => false, 'label' => 'Aktiv?'));
     }
 
     public function getName()
