@@ -23,12 +23,14 @@
         <div class="textcontent">
            {% for entity in entities %}
            <div class="projectentry">
+             {% if entity.day %}
              {% if entity.day|date("d.m.Y") == "now"|date("d.m.Y")  %}
              <h4 class="date today">Heute</h4>
              {% elseif loop.index == 1 %}
              <h4 class="date today">Demnächst am {{ entity.day | date("d.m.Y") }}</h4>
              {% else %}
              <h4 class="date">{{ entity.day | date("d.m.Y") }}</h4>
+             {% endif %}
              {% endif %}
              <h2>{{ entity.name }}</h2>
              {% if entity.images | length == 0 %}

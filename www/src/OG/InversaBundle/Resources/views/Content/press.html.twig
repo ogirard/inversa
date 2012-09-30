@@ -23,10 +23,12 @@
         <div class="textcontent">
            {% for entity in entities %}
            <div class="pressentry">
+             {% if entity.published %}
              {% if entity.published|date("d.m.Y") == "now"|date("d.m.Y")  %}
              <h4 class="date today">Heute publiziert!</h4>
              {% else %}
              <h4 class="date">Publikation vom {{ entity.published | date("d.m.Y") }}</h4>
+             {% endif %}
              {% endif %}
              <h2>{{ entity.name }}</h2>
              {% for img in entity.images %}

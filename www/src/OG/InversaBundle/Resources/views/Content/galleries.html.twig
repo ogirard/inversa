@@ -25,11 +25,13 @@
            <div class="galleryentry">
              <h2>{{ entity.name }}</h2>
              <h4 class="date">
-             {% if  entity.images | length == 0  %} Bild vom 
+             {% if  entity.images | length == 0  %} Bild  
              {% else %}
-             {{ entity.images | length }} Bilder vom
+             {{ entity.images | length }} Bilder 
              {% endif %}
-             {{ entity.published | date("d.m.Y") }}</h4>
+             {% if entity.published %} 
+             {{ entity.published | date("d.m.Y") }}
+             {% endif %}</h4>
              {% if entity.images | length == 0 %}
              {% elseif entity.images | length > 4 %}
              <div id="inversa-gallery_{{ entity.id }}" class="inversa-gallery">

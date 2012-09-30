@@ -23,13 +23,15 @@
         <div class="textcontent">
            {% for entity in entities %}
            <div class="cditem">
+             {% if entity.published %}
              {% if date(entity.published) > date('-60days') %}
                <h4 class="date today">Neue CD!</h4>
              {% else %}
              <h4 class="date">Publikation vom {{ entity.published | date("d.m.Y") }}</h4>
              {% endif %}
+             {% endif %}
              <h2>{{ entity.name }}</h2>
-             {% if entity.image %}
+             {% if entity.image && entity.image.webPath %}
                <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ entity.image.name }}"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}"/></a>
              {% endif %}           
              <p class="description">{{ entity.description | nl2br }}</p>

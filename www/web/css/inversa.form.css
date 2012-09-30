@@ -4,12 +4,16 @@ div.nestedItem {
 	margin: 5px;
 }
 
-label.headerLabel {
+div.headerLabel {
+	display: block;
 	font-size: 12pt;
-	font-color: #696969;
+	color: #898989;
 	margin: 10px 4px;
 	text-transform: uppercase;
-	display: block;
+}
+
+div.headerLabel span {
+	color: #898989;
 }
 
 div.form_row {

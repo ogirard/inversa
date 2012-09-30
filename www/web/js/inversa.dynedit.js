@@ -1,8 +1,9 @@
 function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
-	var count = initCount;
 	var $addLink = $(addLinkId);
 	var $list = $(listId);
+	var $uniqueItemClass = listId.substring(1) + "_nestedItem";
 	var _this = this;
+	var $counterItem = $("<div style='margin: 4px' />");
 
 	this.transform = function($embeddedEntry) {
 		return false;
@@ -12,6 +13,7 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 		PrepareEmbeddedForm();
 		MoveAddLink();
 		RegisterDynAdd();
+		UpdateLabels();
 	};
 
 	function PrepareEmbeddedForm() {
@@ -24,8 +26,12 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 	}
 
 	function MoveAddLink() {
-		$addLink.insertBefore($list);
+		$counterItem.insertBefore($list);
+		$("<br />").insertBefore($list);
 		$addLink.addClass('inversa-formlink inversa-add-link');
+		$addDiv = $('<div style="margin-left:40px; display: block;"></div>');
+		$addLink.appendTo($addDiv);
+		$addDiv.insertAfter($list);
 	}
 
 	function RegisterDynAdd() {
@@ -34,13 +40,14 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 
 			// grab the prototype template
 			var newWidget = $list.attr('data-prototype');
+			var nextId = $("." + $uniqueItemClass).length + 1;
 
 			// replace the "$$name$$" with unique id
-			$itemFormDiv = $(newWidget.replace(/\$\$name\$\$/g, count));
-			count++;
+			$itemFormDiv = $(newWidget.replace(/\$\$name\$\$/g, nextId));
 			$itemFormDiv.appendTo($list);
-			FormatNestedDiv($itemFormDiv, count);
+			FormatNestedDiv($itemFormDiv.first(), nextId);
 			TransformEmbeddedEntry($itemFormDiv);
+			UpdateLabels();
 
 			// create a new list element and add it to our list
 			return false;
@@ -58,48 +65,48 @@ function DynamicEdit(initCount, addLinkId, listId, headerLabel) {
 	function FormatNestedDiv($div, nr) {
 		var $headerLabel = $($('label', $div)[0]);
 		$headerLabel.text(headerLabel + ' ' + nr);
-		$headerLabel.addClass('headerLabel');
-		$div.addClass('nestedItem');
-		$('<br />').insertAfter($headerLabel);
-		
-		$headerLabel.prepend('<img src="/css/images/arrow_gray.png" /> ');
+		$headerLabel.hide();
+		$headerDiv = $('<div class="headerLabel"><img style="display:block-inline;" src="/css/images/arrow_gray.png" /> <span class="headerLabel">'
+				+ headerLabel + ' ' + nr + '</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><br />');
+		$headerDiv.insertBefore($headerLabel);
+		$div.addClass($uniqueItemClass);
 
 		// remove webpath / add current file link
 		ReplaceWebPathByLink();
 
-		// add remove link
-		$removeLinkDiv = $('<div style="margin-top:7px; margin-bottom:10px;"></div>');
-		$removeLink = $('<a href="#" class="inversa-formlink" style="float:right"><img src="/css/images/remove.png" /> Entfernen</a><br style="clear:all"/>');
+		// add remove li
+		$removeLink = $('<a href="#" class="inversa-formlink" style="margin: 4px; text-transform: none;"><img src="/css/images/remove.png" /> Entfernen</a>');
 		$removeLink.click(function(event) {
 			event.preventDefault();
 			RemoveNestedDiv($div);
 			return false;
 		});
 
-		$removeLink.appendTo($removeLinkDiv);
-		$removeLinkDiv.appendTo($div);
+		$removeLink.appendTo($headerDiv.first());
 
 		// apply field transformations after load/reload/insert
 		ApplyKendoFields($div);
 	}
 
 	function RemoveNestedDiv($div) {
-		if (confirm('Soll "' + $('.headerLabel', $div).text()
+		if (confirm('Soll "' + $('span.headerLabel', $div).text()
 				+ '" gelöscht werden?')) {
+
+			$div.nextAll('br').first().remove();
 			$div.remove();
-			count--;
+
 			UpdateLabels();
 		}
 	}
 
 	function UpdateLabels() {
-		var maxCount = 0;
-		$.each($('.nestedItem', $list), function(index, div) {
+		$.each($("." + $uniqueItemClass, $list), function(index, div) {
 			$div = $(div);
-			var $headerLabel = $($('label', $div)[0]);
-			$headerLabel.text(headerLabel + ' ' + (index + 1));
+			var $headerLabel = $($('span.headerLabel', $div)[0]);
+			$headerLabel.html(headerLabel + ' ' + (index + 1));
 		});
-		count = maxCount;
+
+		$counterItem.text("(" + $("." + $uniqueItemClass).length + ")");
 	}
 }
 

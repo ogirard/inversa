@@ -391,11 +391,11 @@ class Image
     }
 
     if ($oldHeight > $oldWidth) {
-      $newHeight = $maxHeight;
-      $newWidth = round($oldWidth / $oldHeight * $maxHeight);
+      $newHeight = min($maxHeight, $oldHeight);
+      $newWidth = round($oldWidth / $oldHeight * $newHeight);
     } else {
-      $newWidth = $maxWidth;
-      $newHeight = round($oldHeight / $oldWidth * $maxWidth);
+      $newWidth = min($maxWidth, $oldWidth);
+      $newHeight = round($oldHeight / $oldWidth * $newWidth);
     }
 
     $newImg = imagecreatetruecolor($newWidth, $newHeight);
