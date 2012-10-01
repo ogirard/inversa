@@ -61,6 +61,7 @@ div.dropdownmenu {
 	margin: 0px;
 	padding: 0px;
 	position:absolute;
+	display:none;
 	z-index:99;
 }
 div.menuentry {

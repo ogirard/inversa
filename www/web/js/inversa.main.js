@@ -13,13 +13,15 @@ var OnStartup;
 
 var OnLoaded;
 
+var OnAfterLoaded;
+
 $(document).ready(function () {
     // when the DOM is ready...
     InitializeContentArea();
 	InitializeMenus();
 	$(window).resize(function() {
-      InitializeContentArea();
-    });
+	    InitializeContentArea();
+	  });	
 	
 	if(OnStartup) {
 	  OnStartup();
@@ -32,6 +34,14 @@ $(window).load(function() {
 	if(OnLoaded) {
 		OnLoaded();
 	}
+	
+	setTimeout(function() { 
+	  if(OnAfterLoaded) {
+	    OnAfterLoaded();	
+	  }
+		
+	  RePositionActiveMenuIfNeeded();
+	}, 1000);	
 });
 
 function GetAvailableHeight() {
@@ -52,4 +62,5 @@ function InitializeContentArea() {
 	var $content = $('.content');
 	var height =  GetAvailableHeight() - GetVerticalMargin($content);
 	$content.css('min-height', height);
+	RePositionActiveMenuIfNeeded();
 }

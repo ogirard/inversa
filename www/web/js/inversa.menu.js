@@ -25,13 +25,23 @@ function PositionActiveMenu() {
 	});
 }
 
+function RePositionActiveMenuIfNeeded() {
+	$.each(['inversa', 'agenda', 'media'], function(i, id) {
+	  var $menulink = $('#' + id);
+	  var $menu = $('#' + id + 'menu');
+      if(IsActiveMenu($menu, $menulink)) {
+        ShowMenu($menu, $menulink);      	  
+	  }
+	});
+}
+
 function RegisterMenu(id) {
 	var isMouseOver = false;
 	var isMouseOverMenu = false;	
 
 	var $menulink = $('#' + id);
 	var $menu = $('#' + id + 'menu');
-	
+		
 	$menulink.hover(function() {
 		isMouseOver = true;
 		ShowMenu($menu, $(this));
@@ -46,7 +56,7 @@ function RegisterMenu(id) {
 		
 		HideMenu($menu, $menulink, function() { return !isMouseOver && !isMouseOverMenu; });		
 		isMouseOverMenu = false;
-	});
+	});	
 }
 
 function HideMenu($menu, $menulink, check) {

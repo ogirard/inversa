@@ -76,4 +76,20 @@ $.fx.prototype.cur = function() {
 	}
 	var r = parseFloat(jQuery.css(this.elem, this.prop));
 	return typeof r == 'undefined' ? 0 : r;
+};
+
+function getViewport() {
+  var e = window, a = 'inner';
+  if ( !('innerWidth' in window )) {
+    a = 'client';
+    e = document.documentElement || document.body;
+  }
+  
+  return { width : e[ a+'Width' ] , height : e[ a+'Height' ] };
 }
+
+(function($) {
+    $.fn.hasScrollBar = function() {
+        return this.get(0).scrollHeight > this.height();
+    };
+})(jQuery);
