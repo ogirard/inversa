@@ -187,63 +187,67 @@ class CdItem
     $formattedSongs = "<table class='songlist'>";
     foreach (explode("\n", $text) as $line) {
       $formattedSongs .= "<tr>";
+      $parts = explode(";", $line);
       foreach (explode(";", $line) as $i => $part) {
-        $formattedSongs .= "<td class='col" .  $i . "'>" . $part . "</td>";
+        if ($i == count($parts) - 1) {
+        	$formattedSongs .= "</tr><tr><td></td><td class='col" . $i . "' colspan='" . ($i - 1) . "'>" . $part . "</td>";
+        } else {
+          $formattedSongs .= "<td class='col" . $i . "'>" . $part . "</td>";
+        }
       }
+      
       $formattedSongs .= "</tr>";
     }
 
     return $formattedSongs . "</table>";
   }
-  
-    /**
-     * @var boolean $canorder
-     */
-    private $canorder;
 
+  /**
+   * @var boolean $canorder
+   */
+  private $canorder;
 
-    /**
-     * Set canorder
-     *
-     * @param boolean $canorder
-     */
-    public function setCanorder($canorder)
-    {
-        $this->canorder = $canorder;
-    }
+  /**
+   * Set canorder
+   *
+   * @param boolean $canorder
+   */
+  public function setCanorder($canorder)
+  {
+    $this->canorder = $canorder;
+  }
 
-    /**
-     * Get canorder
-     *
-     * @return boolean 
-     */
-    public function getCanorder()
-    {
-        return $this->canorder;
-    }
-    /**
-     * @var text $price
-     */
-    private $price;
+  /**
+   * Get canorder
+   *
+   * @return boolean 
+   */
+  public function getCanorder()
+  {
+    return $this->canorder;
+  }
+  /**
+   * @var text $price
+   */
+  private $price;
 
+  /**
+   * Set price
+   *
+   * @param text $price
+   */
+  public function setPrice($price)
+  {
+    $this->price = $price;
+  }
 
-    /**
-     * Set price
-     *
-     * @param text $price
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-    }
-
-    /**
-     * Get price
-     *
-     * @return text 
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
+  /**
+   * Get price
+   *
+   * @return text 
+   */
+  public function getPrice()
+  {
+    return $this->price;
+  }
 }
