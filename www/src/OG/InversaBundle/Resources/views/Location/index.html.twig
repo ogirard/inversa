@@ -26,7 +26,7 @@
             <td>{{ entity.name }}</td>
             <td><span class="cellwithtooltip" title="{{ entity.description | e }}">{{ entity.description | truncate }}</span></td>
             <td>{{ entity.address }}</td>
-            <td><a href="{{ entity.mapurl | e }}" target="_blank">Karte</a></td>
+            <td>{% if entity.mapurl %}<a href="{{ entity.mapurl | e }}" target="_blank">Karte</a>{% endif %}</td>
             <td>
                 <div class="actionswithborder">
                   <button class="k-button" onclick="window.location.href='{{ path('admin_location_show', { 'id': entity.id }) }}'">anzeigen</button>
