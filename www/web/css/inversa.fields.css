@@ -73,3 +73,8 @@ td.no-entries {
 td span.cellwithtooltip {
 	color: #222222;
 }
+
+table.records_list tbody tr div button.k-button { 
+	margin: 0px !important;
+	padding: 0px 3px 0px;
+}
