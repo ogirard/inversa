@@ -10,6 +10,13 @@ textarea {
 	margin: 4px;
 }
 
+div.cdorder textarea {
+	min-height: 40px;
+	min-width: 288px;
+	font: 100%/1.4 Arial, Helvetica, sans-serif;
+	margin: 4px;
+}
+
 button {
 	margin: 4px;
 	min-width: 100px;

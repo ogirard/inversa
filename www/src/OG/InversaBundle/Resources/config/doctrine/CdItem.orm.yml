@@ -19,6 +19,13 @@ OG\InversaBundle\Entity\CdItem:
         published:
             type: datetime
             nullable: true
+        canorder:
+            type: boolean
+            nullable: true
+        price:
+            type: string
+            length: 40
+            nullable: true
         isactive:
             type: boolean
             nullable: true

@@ -17,6 +17,8 @@ class CdItemType extends AbstractType
                     array('attr' => array('class' => 'datetimefield'), 'required' => false, 'label' => 'Datum',
                             'widget' => 'single_text', 'format' => 'dd.MM.yyyy'))
             ->add('image', new ImageType(), array('required' => false, 'label' => 'Bild'))
+            ->add('canorder', null, array('required' => false, 'label' => 'Bestellformular aktiv?'))
+            ->add('price', null, array('required' => false, 'label' => 'Preis'))
             ->add('isactive', null, array('required' => false, 'label' => 'Aktiv?'));
     }
 

@@ -1,0 +1,90 @@
+{# src/OG/InversaBundle/Resources/views/Default/index.html.twig #}
+{% extends 'OGInversaBundle:Content:base.html.twig' %}
+{% form_theme form _self %}
+
+{% block field_row  %}
+    {{ form_label(form) }}
+    <div class="cdorder">
+    {{ form_widget(form) }}
+    {{ form_errors(form) }}
+    </div>
+{% endblock field_row %}
+
+{% block field_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    <br />
+    <div class="errors" style="display:inline-block;margin-left:104px;">
+    {% for error in errors %}
+      &gt;&gt; {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}<br />
+    {% endfor %}
+    </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
+
+{% block captcha_row %}
+{% spaceless %}
+    <br />
+    {{ form_widget(form) }}
+{% endspaceless %}
+{% endblock %}
+
+{% block captcha_widget %}
+{% spaceless %}
+<div>
+    <label>Prüfcode</label>
+    <div><img src="{{ captcha_code }}" title="Prüfcode übertragen!" width="{{ captcha_width }}" height="{{ captcha_height }}" style="display:inline-block; margin: 4px"/></div>
+    <div style="display:inline-block;margin-left:100px;">{{ form_widget(form) }}</div>
+    {% if errors %}
+    <div class="errors" style="display:inline-block;margin-left:104px;">&gt;&gt; Bitte korrekten Prüfcode eingeben!</div>
+    {% endif  %}
+    </div>
+{% endspaceless %}
+{% endblock %}
+
+{% block title %}
+    Ensemble Inversa | Kontakt
+{% endblock %}
+
+{% block css %}
+  <link href="/css/inversa.simple.css" type="text/css" rel="stylesheet" />
+  <link href="/css/inversa.mail.css" type="text/css" rel="stylesheet" />
+  <link href="/css/kendo/kendo.common.min.css" type="text/css" rel="stylesheet" />
+  <link href="/css/kendo/kendo.default.min.css" type="text/css" rel="stylesheet" />  
+{% endblock %}
+
+{% block js %}
+  <script src="/js/inversa.simple.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+<div class="content" style="width:1220px;">
+    <div class="defaultcontent">
+      <div id="membertitle" class="fixdiv" style="z-index:5; top: 123px; left:160px;">
+        <img src="/images/simple/typo_cds.png" />
+      </div>
+      <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
+        <div class="textcontent">
+          <h2>Bestellung "{{ cditem.name }}"</h2>
+          {% if cditem.image and cditem.image.webPath %}
+            <a href="{{ cditem.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ cditem.image.name }}"><img src="{{ cditem.image.webPath | apply_filter('inversaOverviewThumb') }}"/></a>
+          {% endif %}
+          &nbsp;&nbsp;&nbsp; Erhältlich für <b>{{ cditem.price }}</b>
+          <br /><br />
+          <form id="contactform" action="{{ path('_content_cd_order', { 'id': cditem.id }) }}" method="post" {{ form_enctype(form) }} style="display: inline-block;">   
+            {{ form_widget(form) }}
+            <br />
+             
+            <div style="text-align: right; width:100%" class="actionswithborder">
+              <button type="submit" class="actionbutton">Bestellen</button>
+              <button type="reset" class="actionbutton">Zurücksetzen</button>
+            </div>  
+          </form>
+          
+          <a href="{{ path('_content_cds') }}" class="content"><img src="/css/images/back_white.png" /> Zurück</a><br />
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

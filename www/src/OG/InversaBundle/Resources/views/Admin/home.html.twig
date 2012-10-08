@@ -1,7 +1,7 @@
 {% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
 
 {% block body %}
-    <h1>Willkommen {{ app.user.username }}</h1>
+    <h1>Willkommen {% if app.user.name is defined and app.user.firstname is defined %}{{ app.user.firstname }} {{ app.user.name }} {% else %} {{ app.user.username }} {% endif %}</h1>
     <p>
     Dies ist der <b>Verwaltungsbereich</b> für die Webseite <a href="http://www.ensemble-inversa.ch">www.ensemble-inversa.ch</a>.<br /><br /><br />
     Folgende Elemente können erfasst, editiert oder wieder gelöscht werden:

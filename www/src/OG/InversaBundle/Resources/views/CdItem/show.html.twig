@@ -31,6 +31,20 @@
             </td>
         </tr>        
         <tr>
+            <th>Bestellformular</th>
+            <td>
+             {% if entity.canorder %}
+                   Aktiv
+                {% else %}
+                   Nicht aktiv
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>Preis</th>
+            <td>{{ entity.price }}</td>
+        </tr>
+        <tr>
             <th>Status</th>
             <td>
              {% if entity.isactive %}

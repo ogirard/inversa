@@ -2,9 +2,34 @@
 {% spaceless %}
     <div class="form_row">
         {{ form_label(form) }}
-        {{ form_errors(form) }}
         {{ form_widget(form) }}
+        {{ form_errors(form) }}
     </div>
     <br />
 {% endspaceless %}
 {% endblock field_row %}
+
+{% block form_errors %}
+{% spaceless %}
+{% if errors|length > 0 %}
+   <div class="inversa-formerrorlist">
+       <img src="/css/images/error_big.png" style="margin-right:16px" /><b>Eingabefehler</b><br />
+       {% for error in errors %}
+       {{ error.messageTemplate|trans(error.messageParameters, 'validators') }} <br />
+       {% endfor %}
+   </div>
+{% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% block field_errors %}
+{% spaceless %}
+{% if errors|length > 0 %}
+   <div class="inversa-errorlist">
+       {% for error in errors %}
+       <img src="/css/images/error.png" style="margin-right:4px" /> {{ error.messageTemplate|trans(error.messageParameters, 'validators') }} <br />
+       {% endfor %}
+   </div>
+{% endif %}
+{% endspaceless %}
+{% endblock field_errors %}

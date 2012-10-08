@@ -14,46 +14,59 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
  */
 class AdminController extends Controller
 {
-    /**
-     * @Route("/login", name="_admin_login")
-     * @Template()
-     */
-    public function loginAction()
-    {
-        $request = $this->getRequest();
+  /**
+   * @Route("/login", name="_admin_login")
+   * @Template()
+   */
+  public function loginAction()
+  {
+    $request = $this->getRequest();
+    $session = $request->getSession();
 
-        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-        } else {
-            $error = $request->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
-        }
-
-        return array('last_username' => $request->getSession()->get(SecurityContext::LAST_USERNAME), 'error' => $error,);
+    if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+      $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+    } else {
+      $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+      $session->remove(SecurityContext::AUTHENTICATION_ERROR);
     }
 
-    /**
-     * @Route("/login_check", name="_security_check")
-     */
-    public function securityCheckAction()
-    {
-        // The security layer will intercept this request
+    $errorMessage = null;
+    if ($error !== null && strpos($error->getMessage(), "The presented") === 0) {
+      $errorMessage = "Password ungültig";
+    } else if ($error !== null && strpos($error->getMessage(), "Bad credentials") === 0) {
+      $errorMessage = "Login Daten ungültig";
+    } else if ($error !== null) {
+      $errorMessage = $error->getMessage();
     }
 
-    /**
-     * @Route("/logout", name="_admin_logout")
-     */
-    public function logoutAction()
-    {
-        // The security layer will intercept this request
-    }
+    return array('last_username' => $session->get(SecurityContext::LAST_USERNAME), 'errorMessage' => $errorMessage);
+  }
 
-    /**
-     * @Route("/", name="_admin_home")
-     * @Template()
-     */
-    public function homeAction()
-    {
-        $request = $this->getRequest();
-        return array('name' => $request->getSession()->get(SecurityContext::LAST_USERNAME));
-    }
+  /**
+   * @Route("/login_check", name="_security_check")
+   */
+  public function securityCheckAction()
+  {
+    // The security layer will intercept this request
+  }
+
+  /**
+   * @Route("/logout", name="_admin_logout")
+   */
+  public function logoutAction()
+  {
+    // The security layer will intercept this request
+  }
+
+  /**
+   * @Route("/", name="_admin_home")
+   * @Template()
+   */
+  public function homeAction()
+  {
+    $request = $this->getRequest();
+    $session = $request->getSession();
+
+    return array('name' => $session->get(SecurityContext::LAST_USERNAME));
+  }
 }

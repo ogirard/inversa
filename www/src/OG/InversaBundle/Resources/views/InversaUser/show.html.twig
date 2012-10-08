@@ -1,17 +1,17 @@
 {% extends 'OGInversaBundle:Admin:adminbase.html.twig' %}
 
 {% block body %}
-  
-<h1>InversaUser</h1>
 
-<table class="record_properties">
+<h1>Benutzer "{% if entity.name and entity.firstname %}{{ entity.firstname }} {{ entity.name }}{% else  %}{{ entity.username }}{% endif %}"</h1>
+
+<table class="entitytable">
     <tbody>
         <tr>
-            <th>Id</th>
+            <th>ID</th>
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
-            <th>Username</th>
+            <th>Benutzername</th>
             <td>{{ entity.username }}</td>
         </tr>
         <tr>
@@ -19,45 +19,34 @@
             <td>{{ entity.name }}</td>
         </tr>
         <tr>
-            <th>Firstname</th>
+            <th>Vorname</th>
             <td>{{ entity.firstname }}</td>
         </tr>
         <tr>
-            <th>Email</th>
+            <th>E-Mail</th>
             <td>{{ entity.email }}</td>
-        </tr>
+        </tr>        
         <tr>
-            <th>Password</th>
-            <td>{{ entity.password }}</td>
-        </tr>
-        <tr>
-            <th>Lastlogin</th>
-            <td>{{ entity.lastlogin|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Isactive</th>
-            <td>{{ entity.isactive }}</td>
+            <th>Status</th>
+            <td>
+             {% if entity.isactive %}
+                   Aktiv
+                {% else %}
+                   Nicht aktiv
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_user') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_user_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<br />
+<br />
+<div class="actionswithborder actionsspacing">
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_user_edit', { 'id': entity.id }) }}'">Editieren</button>
+<form id="deleteitemform" action="{{ path('admin_user_delete', { 'id': entity.id }) }}" method="post" onsubmit="return DeleteElementGuard();" style="display: inline-block;">
+    {{ form_widget(delete_form) }}
+    <button class="actionbutton k-button" type="submit">Löschen</button> 
+</form> 
+<button class="actionbutton k-button" onclick="window.location.href='{{ path('admin_user') }}'">Liste</button>
+</div>
 
 {% endblock %}

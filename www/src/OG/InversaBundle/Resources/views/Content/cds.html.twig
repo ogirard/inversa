@@ -32,12 +32,21 @@
              {% endif %}
              <h2>{{ entity.name }}</h2>
              {% if entity.image and entity.image.webPath %}
-               <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ entity.image.name }}"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}"/></a>
+               <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ entity.image.name }}"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}"/></a><br />
              {% endif %}           
+             {% if entity.description %}
              <p class="description">{{ entity.description | nl2br }}</p>
+             {% endif %}
+             {% if entity.songs %}
              <p class="songs">
              {{ entity.formattedsongs | raw }} 
              </p>
+             {% endif %}
+             {% if entity.canorder %}
+             <p class="orderlink" style="margin-top:5px">
+             <a href="{{ path('_content_cd_order', { 'id': entity.id }) }}" class="content"><img src="/css/images/cart.png" /> CD erhältlich für {{ entity.price }} (Bestellformular)</a>
+             </p>             
+             {% endif %}
              <br />
            </div>
            {% else %}

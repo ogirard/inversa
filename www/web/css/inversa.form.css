@@ -105,3 +105,18 @@ ul.itemlistimg {
 	list-style: square;
 	list-style-image: url(images/img.png);
 }
+
+div.inversa-errorlist {
+	display: inline;
+	margin: 4px;
+	color: #DE0000;
+	font-size: 10pt;
+}
+
+div.inversa-formerrorlist {
+	display: block;
+	margin: 4px;
+	margin-bottom: 16px;
+	color: #DE0000;
+	font-size: 10pt;
+}

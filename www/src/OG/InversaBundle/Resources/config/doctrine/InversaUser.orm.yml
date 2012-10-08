@@ -9,22 +9,29 @@ OG\InversaBundle\Entity\InversaUser:
     fields:
         username:
             type: string
-            length: 255
+            length: 32
+            unique: true
+        salt:
+            type: string
+            length: 32            
         name:
             type: string
             length: 255
+            nullable: true
         firstname:
             type: string
             length: 255
+            nullable: true
         email:
             type: string
-            length: 255
+            length: 60
             nullable: true
         password:
             type: string
-            length: 255
+            length: 40
         lastlogin:
             type: datetime
+            nullable: true
         isactive:
             type: boolean
             nullable: true

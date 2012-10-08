@@ -195,4 +195,55 @@ class CdItem
 
     return $formattedSongs . "</table>";
   }
+  
+    /**
+     * @var boolean $canorder
+     */
+    private $canorder;
+
+
+    /**
+     * Set canorder
+     *
+     * @param boolean $canorder
+     */
+    public function setCanorder($canorder)
+    {
+        $this->canorder = $canorder;
+    }
+
+    /**
+     * Get canorder
+     *
+     * @return boolean 
+     */
+    public function getCanorder()
+    {
+        return $this->canorder;
+    }
+    /**
+     * @var text $price
+     */
+    private $price;
+
+
+    /**
+     * Set price
+     *
+     * @param text $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * Get price
+     *
+     * @return text 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
 }

@@ -1,0 +1,33 @@
+{# src/OG/InversaBundle/Resources/views/Content/orderconfirm.html.twig #}
+{% extends 'OGInversaBundle:Content:base.html.twig' %}
+
+{% block title %}
+    Ensemble Inversa | Bestellung versendet
+{% endblock %}
+
+{% block css %}
+  <link href="/css/inversa.simple.css" type="text/css" rel="stylesheet" />
+  <link href="/css/inversa.mail.css" type="text/css" rel="stylesheet" />
+  <link href="/css/kendo/kendo.common.min.css" type="text/css" rel="stylesheet" />
+  <link href="/css/kendo/kendo.default.min.css" type="text/css" rel="stylesheet" />  
+{% endblock %}
+
+{% block js %}
+  <script src="/js/inversa.simple.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+<div class="content" style="width:1220px;">
+    <div class="defaultcontent">
+      <div id="membertitle" class="fixdiv" style="z-index:5; top: 123px; left:160px;">
+        <img src="/images/simple/typo_cds.png" />
+      </div>
+      <div id="maincontent" class="maincontent stackdiv" style="background-color:#696969">
+        <div class="textcontent">
+          <p>Vielen Dank!</p>
+          <p>Ihre Bestellung von {{ count }} x '{{ cdname }}' à {{ price }} wurde versendet.</p> 
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

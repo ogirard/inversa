@@ -2,25 +2,30 @@
 
 {% block body %}
     <h1>Login</h1>
-    <p>
+    <p style="margin:4px; margin-bottom:16px">
         Sie betreten den Ensemble Inversa Administrator Bereich.<br />Bitte Login Daten eingeben!<br />
     </p>
 
-    <form action="{{ path("_security_check") }}" method="post" id="login">
-        <table class="formtable">
+    <form action="{{ path("_security_check") }}" method="post" id="login" style="margin:0px; padding:0px;">
+        <table class="formtable" style="display:block;margin:0px;padding: 0px;" cellspacing="0" cellpadding="0">
         <tr>
         <td><label for="username" class="formlabel">Benutzername</label></td>
         <td><input class="formtext" type="text" id="username" name="_username" value="{{ last_username }}" /></td>
+        <td></td>
         </tr>
         <tr>
         <td><label for="password" class="formlabel">Passwort</label></td>
         <td><input class="formtext" type="password" id="password" name="_password" /></td>
+        <td>
+         {% if errorMessage %}
+	        <div class="formerror inversa-errorlist">
+	        <img src="/css/images/error.png" style="margin-right:8px"/>{{ errorMessage }}
+	        </div>
+	      {% endif %}
+        </td>
         </tr>
-        </table><br />
-	    
-        {% if error %}
-	        <div class="formerror">{{ error.message }}</div>
-	    {% endif %}
+        </table><br />    
+        
     </form>
     
     <a href="#" onclick="$('#login').submit();" class="k-button">Login</a>

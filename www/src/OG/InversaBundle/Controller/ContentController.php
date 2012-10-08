@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\SwiftmailerBundle;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\MinLength;
+use Symfony\Component\Validator\Constraints\Min;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Collection;
 
@@ -75,7 +76,7 @@ class ContentController extends Controller
   public function agendaAction()
   {
     $em = $this->getDoctrine()->getEntityManager();
-    $archiveDate = mktime(0, 0, 0, date("m") - 1, date("d"), date("Y"));
+    $archiveDate = mktime(0, 0, 0, date("m") - 6, date("d"), date("Y"));
     $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate > :archivedate AND a.isactive = true')
         ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->orderBy('a.eventdate', 'ASC')->getQuery();
     $entities = $query->getResult();
@@ -108,7 +109,7 @@ class ContentController extends Controller
   public function agendaarchiveAction()
   {
     $em = $this->getDoctrine()->getEntityManager();
-    $archiveDate = mktime(0, 0, 0, date("m") - 1, date("d"), date("Y"));
+    $archiveDate = mktime(0, 0, 0, date("m") - 6, date("d"), date("Y"));
     $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate <= :archivedate AND a.isactive = true')
         ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->orderBy('a.eventdate', 'DESC')->getQuery();
     $entities = $query->getResult();
@@ -163,7 +164,7 @@ class ContentController extends Controller
         $videoentities[] = $item;
       }
     }
-    
+
     return $this->render('OGInversaBundle:Content:videos.html.twig', array('name' => 'videos', 'entities' => $videoentities));
   }
 
@@ -195,9 +196,10 @@ class ContentController extends Controller
    */
   public function galleryAction()
   {
-  	$em = $this->getDoctrine()->getEntityManager();
-  	$query = $em->getRepository('OGInversaBundle:GalleryItem')->createQueryBuilder('g')->where('g.isactive = true')->orderBy('g.published', 'DESC')->getQuery();
-  	$entities = $query->getResult();
+    $em = $this->getDoctrine()->getEntityManager();
+    $query = $em->getRepository('OGInversaBundle:GalleryItem')->createQueryBuilder('g')->where('g.isactive = true')->orderBy('g.published', 'DESC')
+        ->getQuery();
+    $entities = $query->getResult();
     return $this->render('OGInversaBundle:Content:galleries.html.twig', array('name' => 'gallery', 'entities' => $entities));
   }
 
@@ -207,10 +209,65 @@ class ContentController extends Controller
    */
   public function cdsAction()
   {
-  	$em = $this->getDoctrine()->getEntityManager();
-  	$query = $em->getRepository('OGInversaBundle:CdItem')->createQueryBuilder('c')->where('c.isactive = true')->orderBy('c.published', 'DESC')->getQuery();
-  	$entities = $query->getResult();
+    $em = $this->getDoctrine()->getEntityManager();
+    $query = $em->getRepository('OGInversaBundle:CdItem')->createQueryBuilder('c')->where('c.isactive = true')->orderBy('c.published', 'DESC')
+        ->getQuery();
+    $entities = $query->getResult();
     return $this->render('OGInversaBundle:Content:cds.html.twig', array('name' => 'cds', 'entities' => $entities));
+  }
+
+  /**
+   *
+   * @Route("/cd/{id}/order", name="_content_cd_order")
+   */
+  public function ordercdAction($id)
+  {
+    $em = $this->getDoctrine()->getEntityManager();
+    $cdItem = $em->getRepository('OGInversaBundle:CdItem')->find($id);
+
+    $request = $this->getRequest();
+    $mailDataValidation = new Collection(
+        array(
+            'name' => array(new NotBlank(array('message' => 'Bitte geben Sie Ihren Namen ein')),
+                new MinLength(array('limit' => 3, 'message' => 'Bitte geben Sie Ihren Namen ein'))),
+            'email' => array(new NotBlank(array('message' => 'Bitte geben Sie Ihre E-Mail ein')),
+                new Email(array('message' => 'Bitte geben Sie eine gültige E-Mail ein'))),
+            'address' => array(new NotBlank(array('message' => 'Bitte geben Sie Ihre Adresse ein')),
+                new MinLength(array('limit' => 20, 'message' => 'Bitte geben Sie Ihre Adresse ein'))), 'message' => array(),
+            'count' => array(new NotBlank(array('message' => 'Bitte geben Sie an, wie viele CDs bestellt werden sollen')),
+                new Min(
+                    array('limit' => 1, 'message' => 'Mindestens eine CD muss bestellt werden',
+                        'invalidMessage' => 'Bitte eine gültige Anzahl erwünschter CDs angeben')))));
+
+    $mailData = array();
+    $form = $this->createFormBuilder($mailData, array('validation_constraint' => $mailDataValidation))
+        ->add('name', 'text', array('required' => false, 'label' => 'Name'))->add('email', 'email', array('required' => false, 'label' => 'E-Mail'))
+        ->add('address', 'textarea', array('required' => false, 'label' => 'Adresse'))
+        ->add('count', 'text', array('required' => false, 'label' => 'Anzahl CDs', 'data' => '1'))
+        ->add('message', 'textarea', array('required' => false, 'label' => 'Bemerkungen'))
+        ->add('captcha', 'captcha', array('width' => '100', 'height' => '32', 'required' => false))->getForm();
+
+    if ($request->getMethod() == 'POST') {
+      $form->bindRequest($request);
+
+      if ($form->isValid()) {
+
+        // data is an array with "name", "email", and "message", "count", "address" keys 
+        $data = $form->getData();
+        $data["cdname"] = $cdItem->getName();
+        $data["price"] = $cdItem->getPrice();
+        $message = \Swift_Message::newInstance()->setSubject('Kontakt www.ensemble-inversa.ch')->setFrom($data['email'])->setTo('info@ensemble-inversa.ch')
+            ->setBody($this->renderView('OGInversaBundle:Content:ordercd.txt.twig', $data));
+
+        $this->get('mailer')->send($message);
+        return $this
+            ->render('OGInversaBundle:Content:orderconfirm.html.twig',
+                array('name' => 'cds', 'email' => $data['email'], 'count' => $data['count'], 'price' => $cdItem->getPrice(),
+                    'cdname' => $cdItem->getName()));
+      }
+    }
+
+    return $this->render('OGInversaBundle:Content:ordercd.html.twig', array('name' => 'cds', 'form' => $form->createView(), 'cditem' => $cdItem));
   }
 
   /**

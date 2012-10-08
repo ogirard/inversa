@@ -10,7 +10,8 @@
             <th column-width="200" data-field="Name" data-type="string">Name</th>
             <th column-width="200" data-field="Beschreibung" data-type="string" data-filterable="false" data-sortable="false" data-groupable="false">Beschreibung</th>
             <th column-width="120" data-field="Publiziert" data-type="date" data-template="#= kendo.toString(Publiziert,'dd.MM.yyyy') #">Publiziert</th>
-            <th column-width="75" data-field="Status" data-type="string">Status</th>
+            <th column-width="75" data-field="Bestellformular" data-type="string">Bestellformular</th>
+            <th column-width="75" data-field="Status" data-type="string">Status</th>            
             <th column-width="200" data-field="Aktionen" data-filterable="false" data-sortable="false" data-groupable="false">&nbsp;&nbsp;</th>
         </tr>
     </thead>
@@ -26,6 +27,7 @@
             <td>{{ entity.name }}</td>
             <td><span class="cellwithtooltip" title="{{ entity.description | e }}">{{ entity.description | truncate }}</span></td> 
             <td>{{ entity.published | date("d.m.Y") }}</td>           
+            <td>{% if entity.canorder %}Aktiv{% else %}Nicht aktiv{% endif %}</td>
             <td>{% if entity.isactive %}Aktiv{% else %}Nicht aktiv{% endif %}</td>
             <td>
                 <div class="actionswithborder">

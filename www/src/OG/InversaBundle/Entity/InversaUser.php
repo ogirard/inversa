@@ -9,237 +9,335 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class InversaUser implements UserInterface
 {
-    /**
-     * @var integer $id
-     */
-    private $id;
+  /**
+   * @var integer $id
+   */
+  private $id;
 
-    /**
-     * @var string $username
-     */
-    private $username;
+  /**
+   * @var string $username
+   */
+  private $username;
 
-    /**
-     * @var string $name
-     */
-    private $name;
+  /**
+   * @var string $salt
+   */
+  private $salt;
 
-    /**
-     * @var string $firstname
-     */
-    private $firstname;
+  /**
+   * @var string $name
+   */
+  private $name;
 
-    /**
-     * @var string $email
-     */
-    private $email;
+  /**
+   * @var string $firstname
+   */
+  private $firstname;
 
-    /**
-     * @var string $password
-     */
-    private $password;
+  /**
+   * @var string $email
+   */
+  private $email;
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+  /**
+   * @var string $password
+   */
+  private $password;
 
-    /**
-     * Set username
-     *
-     * @param string $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
+  public function __construct()
+  {
+    $this->isactive = true;
+    $this->salt = md5(uniqid(null, true));
+  }
+  /**
+   * @inheritDoc
+   */
+  public function getUsername()
+  {
+    return $this->username;
+  }
 
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
+  /**
+   * @inheritDoc
+   */
+  public function getSalt()
+  {
+    return $this->salt;
+  }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
+  /**
+   * @inheritDoc
+   */
+  public function getPassword()
+  {
+    return $this->isactive ? $this->password : null;
+  }
 
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+  /**
+   * @inheritDoc
+   */
+  public function getRoles()
+  {
+    return array('ROLE_ADMIN');
+  }
 
-    /**
-     * Set firstname
-     *
-     * @param string $firstname
-     */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = $firstname;
-    }
+  /**
+   * @inheritDoc
+   */
+  public function eraseCredentials()
+  {
+  }
 
-    /**
-     * Get firstname
-     *
-     * @return string 
-     */
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
+  /**
+   * @inheritDoc
+   */
+  public function equals(UserInterface $user)
+  {
+    return $this->username === $user->getUsername();
+  }
 
-    /**
-     * Set email
-     *
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
+  /**
+   * Get id
+   *
+   * @return integer 
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
 
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
+  /**
+   * Set username
+   *
+   * @param string $username
+   */
+  public function setUsername($username)
+  {
+    $this->username = $username;
+  }
 
-    /**
-     * Set password
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
+  /**
+   * Set name
+   *
+   * @param string $name
+   */
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
 
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
+  /**
+   * Get name
+   *
+   * @return string 
+   */
+  public function getName()
+  {
+    return $this->name;
+  }
 
-    /**
-     * Returns the roles granted to the user.
-     *
-     * @return Role[] The user roles
-     */
-    function getRoles()
-    {
-        return array(new Role("ROLE_ADMIN"));
-    }
+  /**
+   * Set firstname
+   *
+   * @param string $firstname
+   */
+  public function setFirstname($firstname)
+  {
+    $this->firstname = $firstname;
+  }
 
-    /**
-     * Returns the salt.
-     *
-     * @return string The salt
-     */
-    function getSalt()
-    {
-        return 'inversa_salt';
-    }
+  /**
+   * Get firstname
+   *
+   * @return string 
+   */
+  public function getFirstname()
+  {
+    return $this->firstname;
+  }
 
-    /**
-     * Removes sensitive data from the user.
-     *
-     * @return void
-     */
-    function eraseCredentials()
-    {
-    }
+  /**
+   * Set email
+   *
+   * @param string $email
+   */
+  public function setEmail($email)
+  {
+    $this->email = $email;
+  }
 
-    /**
-     * The equality comparison should neither be done by referential equality
-     * nor by comparing identities (i.e. getId() === getId()).
-     *
-     * However, you do not need to compare every attribute, but only those that
-     * are relevant for assessing whether re-authentication is required.
-     *
-     * @param UserInterface $user
-     * @return Boolean
-     */
-    function equals(UserInterface $user)
-    {
-        return (($this->getId() === $user->getId()) && ($this->getName() === $user->getName()));
-    }
-    /**
-     * @var datetime $lastlogin
-     */
-    private $lastlogin;
+  /**
+   * Get email
+   *
+   * @return string 
+   */
+  public function getEmail()
+  {
+    return $this->email;
+  }
 
-    /**
-     * @var boolean $isactive
-     */
-    private $isactive;
+  /**
+   * Set password
+   *
+   * @param string $password
+   */
+  public function setPassword($password)
+  {
+    $this->password = $password;
+  }
 
+  /**
+   * Set salt
+   *
+   * @param string $salt
+   */
+  public function setSalt($salt)
+  {
+    $this->salt = $salt;
+  }
 
-    /**
-     * Set lastlogin
-     *
-     * @param datetime $lastlogin
-     */
-    public function setLastlogin($lastlogin)
-    {
-        $this->lastlogin = $lastlogin;
-    }
+  /**
+   * @var datetime $lastlogin
+   */
+  private $lastlogin;
 
-    /**
-     * Get lastlogin
-     *
-     * @return datetime 
-     */
-    public function getLastlogin()
-    {
-        return $this->lastlogin;
-    }
+  /**
+   * @var boolean $isactive
+   */
+  private $isactive;
 
-    /**
-     * Set isactive
-     *
-     * @param boolean $isactive
-     */
-    public function setIsactive($isactive)
-    {
-        $this->isactive = $isactive;
-    }
+  /**
+   * @var string $oldpassword
+   */
+  private $oldpassword;
 
-    /**
-     * Get isactive
-     *
-     * @return boolean 
-     */
-    public function getIsactive()
-    {
-        return $this->isactive;
-    }
+  /**
+   * @var string $newpassword
+   */
+  private $newpassword;
+
+  /**
+   * @var string $repeatpassword
+   */
+  private $repeatpassword;
+
+  /**
+   * @var boolean $oldPasswordOk
+   */
+  private $isOldPasswordOk;
+
+  /**
+   * Set lastlogin
+   *
+   * @param datetime $lastlogin
+   */
+  public function setLastlogin($lastlogin)
+  {
+    $this->lastlogin = $lastlogin;
+  }
+
+  /**
+   * Get lastlogin
+   *
+   * @return datetime 
+   */
+  public function getLastlogin()
+  {
+    return $this->lastlogin;
+  }
+
+  /**
+   * Set isactive
+   *
+   * @param boolean $isactive
+   */
+  public function setIsactive($isactive)
+  {
+    $this->isactive = $isactive;
+  }
+
+  /**
+   * Get isactive
+   *
+   * @return boolean 
+   */
+  public function getIsactive()
+  {
+    return $this->isactive;
+  }
+
+  /**
+   * Set oldpassword
+   *
+   * @param string $oldpassword
+   */
+  public function setOldpassword($oldpassword)
+  {
+    $this->oldpassword = $oldpassword;
+  }
+
+  /**
+   * Get oldpassword
+   *
+   * @return string 
+   */
+  public function getOldpassword()
+  {
+    return $this->oldpassword;
+  }
+
+  /**
+   * Set newpassword
+   *
+   * @param string $newpassword
+   */
+  public function setNewpassword($newpassword)
+  {
+    $this->newpassword = $newpassword;
+  }
+
+  /**
+   * Get newpassword
+   *
+   * @return string 
+   */
+  public function getNewpassword()
+  {
+    return $this->newpassword;
+  }
+
+  /**
+   * Set repeatpassword
+   *
+   * @param string $repeatpassword
+   */
+  public function setRepeatpassword($repeatpassword)
+  {
+    $this->repeatpassword = $repeatpassword;
+  }
+
+  /**
+   * Get repeatpassword
+   *
+   * @return string 
+   */
+  public function getRepeatpassword()
+  {
+    return $this->repeatpassword;
+  }
+
+  public function setIsOldPasswordOk($isOldPasswordOk)
+  {
+    $this->isOldPasswordOk = $isOldPasswordOk;
+  }
+
+  public function isOldPasswordOk()
+  {
+    return $this->isOldPasswordOk;
+  }
+
+  public function isRepeatPasswordOk()
+  {
+    return ($this->newpassword === null || $this->newpassword == $this->repeatpassword);
+  }
 }

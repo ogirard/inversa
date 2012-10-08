@@ -34,7 +34,7 @@
 <body>
 {% if app.user %}
   <div class="userheader" align="right">
-    {{ app.user.username }} &nbsp;&nbsp;&nbsp;<span class="footertext"><a href="{{ path('_admin_logout') }}">logout</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ path('_content_home') }}">www.ensemble-inversa.ch</a></span>
+    <img src="/css/images/user.png" style="padding: 0px; margin:0px; margin-right:4px; padding-top: 2px" /> {% if app.user.name is defined and app.user.firstname is defined %}{{ app.user.firstname }} {{ app.user.name }} {% else %} {{ app.user.username }} {% endif %} &nbsp;&nbsp;&nbsp;<span class="footertext"><a href="{{ path('_admin_logout') }}">logout</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ path('_content_home') }}">www.ensemble-inversa.ch</a></span>
   </div>
   {% endif %} 
   <table cellpadding="0" cellspacing="0" style="margin:15px; height:96px">
@@ -51,6 +51,7 @@
   <tr style="height:48px;">
   <td  style="vertical-align: middle;">
   <div class="header" id="headerdiv"><span class="adminmenu">
+  {% if app.user %}
   <a href="{{ path('_admin_home' ) }}" class="adminmenu info">Info</a>
   <a href="{{ path('admin_agendaitem' ) }}" class="adminmenu agenda">Agenda</a>
   <a href="{{ path('admin_projectitem' ) }}" class="adminmenu projects">Projekte</a>
@@ -59,6 +60,8 @@
   <a href="{{ path('admin_cditem' ) }}" class="adminmenu cds">CDs</a>
   <a href="{{ path('admin_galleryitem' ) }}" class="adminmenu gallery">Galerien</a>
   <a href="{{ path('admin_location' ) }}" class="adminmenu location">Locations</a>
+  <a href="{{ path('admin_user' ) }}" class="adminmenu inversauser">Benutzer</a>
+  {% endif %} 
   </span></div>
   </td></tr>
   </table>
