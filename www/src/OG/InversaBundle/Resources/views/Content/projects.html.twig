@@ -26,7 +26,7 @@
              {% if entity.day %}
              {% if entity.day|date("d.m.Y") == "now"|date("d.m.Y")  %}
              <h4 class="date today">Heute</h4>
-             {% elseif loop.index == 1 %}
+             {% elseif loop.index == 1 and entity.day|date("d.m.Y") >= "now"|date("d.m.Y") %}
              <h4 class="date today">Demnächst am {{ entity.day | date("d.m.Y") }}</h4>
              {% else %}
              <h4 class="date">{{ entity.day | date("d.m.Y") }}</h4>
