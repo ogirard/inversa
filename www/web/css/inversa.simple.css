@@ -151,3 +151,8 @@ table.songlist td.col3 {
 	font-style: italic;
 	padding-right: 24px;
 }
+
+div.inversa-video {
+	max-width: 360px;
+	margin-left: 14px;
+}

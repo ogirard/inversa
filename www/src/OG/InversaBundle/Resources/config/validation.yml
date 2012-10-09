@@ -47,10 +47,10 @@ OG\InversaBundle\Entity\MediaItem:
     properties:            
         mediafile:
             - File:
-                maxSize: 15M
+                maxSize: 30M
                 maxSizeMessage: Datei ist zu gross ({{ size }}). Maximalgrösse ist {{ limit }}
-                mimeTypes: [audio/mpeg, audio/wav, video/avi, video/mpeg]
-                mimeTypesMessage: Audio oder Video Datei (MP3/WAV, AVI/MPEG)
+                mimeTypes: [audio/mpeg, audio/wav, video/mp4, video/avi]
+                mimeTypesMessage: Audio (MP3/WAV) oder Video (MP4/AVI) Datei
                 uploadErrorMessage: Die Datei konnte nicht hochgeladen werden 
 OG\InversaBundle\Entity\InversaUser:
     constraints:

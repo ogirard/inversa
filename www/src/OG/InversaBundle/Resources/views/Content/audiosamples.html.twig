@@ -19,7 +19,7 @@
 <script>
 PageOnStartup = function() {
 	{% for entity in entities %}
-	  CreatePlayer("#jquery_jplayer_{{ loop.index }}", { {{ entity.doctype }} : "http://{{ app.request.host }}/{{ entity.webPath|e }}" }, "{{ entity.doctype }}");
+	  CreatePlayer("#jquery_jplayer_{{ loop.index }}", { {{ entity.playerdoctype }} : "http://{{ app.request.host }}/{{ entity.webPath|e }}" }, "{{ entity.playerdoctype }}");
 	{% endfor %}
 }
 
@@ -43,7 +43,7 @@ function CreatePlayer(id, media, supplied) {
            {% for entity in entities %}
            <div class="mediaitemaudio">
              <h2>{{ entity.name }}</h2>
-             {% if entity.image  %}
+             {% if entity.image and entity.image.webPath %}
              <a href="{{ entity.image.webPath | apply_filter('inversaDetailedThumb') }}" rel="lightbox" title="{{ entity.image.name }}"><img src="{{ entity.image.webPath | apply_filter('inversaOverviewThumb') }}" /></a>
              {% endif %}
              <p class="description">{{ entity.description | nl2br }}</p>
@@ -76,14 +76,14 @@ function CreatePlayer(id, media, supplied) {
                 </div>
                 <div class="jp-title">
                     <ul>
-                        <li>{{ entity.name }}</li>
+                        <li>{{ entity.name }} &nbsp;&nbsp;&nbsp;<a href="http://{{ app.request.host }}/{{ entity.webPath|e }}" target="_blank" class="content" title="Audio Datei herunterladen"><img src="/css/images/download_white.png" /> Download</a></li>
                     </ul>
                 </div>
                 <div class="jp-no-solution">
-                    <span>Update n&ouml;tig</span>
-                    Um diese Audio Datei im Browser abzuspielen müssen Sie entweder Ihren Browser oder das  <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash Plugin</a> updaten.<br />
+                    <b>Update n&ouml;tig</b><br />
+                    Um diese Audio Datei im Browser abzuspielen müssen Sie entweder Ihren Browser oder das  <a href="http://get.adobe.com/flashplayer/" target="_blank" class="content">Flash Plugin</a> updaten.<br />
                     <br />
-                    <a href="http://{{ app.request.host }}/{{ entity.webPath|e }}" target="_blank">Audio Datei herunterladen</a>
+                    <a href="http://{{ app.request.host }}/{{ entity.webPath|e }}" target="_blank" class="content">Audio Datei herunterladen</a>
                 </div>
             </div>
         </div>

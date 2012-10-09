@@ -598,9 +598,9 @@ a.jp-shuffle-off:hover {
 .jp-no-solution {
 	position:absolute;
 	width:390px;
-	margin-left:-202px;
+	margin-left:-192px;
 	left:50%;
-	top: 10px;
+	top: 0px;
 
 	padding:5px;
 	font-size:.8em;

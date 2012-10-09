@@ -135,7 +135,7 @@ class MediaItem
 
   public function getMediaType()
   {
-    return $this->getDoctype() == "mp3" || $this->getDoctype() == "wav" ? "Audio" : "Video";
+    return $this->getDoctype() == "mp3" || $this->getDoctype() == "wav" || $this->getDoctype() == "mpeg" ? "Audio" : "Video";
   }
 
   /**
@@ -222,6 +222,13 @@ class MediaItem
 
     $this->path = strtolower($noSpecialCharsName);
     $this->doctype = $this->mediafile->guessExtension();
+
+    if ($this->path && ($this->doctype == null || $this->doctype == "")) {
+      $parts = explode('.', $this->path);
+      if (count($parts) > 0) {
+        $this->doctype = $parts[count($parts) - 1];
+      }
+    }
   }
 
   /**
@@ -254,29 +261,45 @@ class MediaItem
       }
     }
   }
-    /**
-     * @var OG\InversaBundle\Entity\Image
-     */
-    private $image;
+  /**
+   * @var OG\InversaBundle\Entity\Image
+   */
+  private $image;
 
+  /**
+   * Set image
+   *
+   * @param OG\InversaBundle\Entity\Image $image
+   */
+  public function setImage(\OG\InversaBundle\Entity\Image $image)
+  {
+    $this->image = $image;
+  }
 
-    /**
-     * Set image
-     *
-     * @param OG\InversaBundle\Entity\Image $image
-     */
-    public function setImage(\OG\InversaBundle\Entity\Image $image)
-    {
-        $this->image = $image;
+  /**
+   * Get image
+   *
+   * @return OG\InversaBundle\Entity\Image 
+   */
+  public function getImage()
+  {
+    return $this->image;
+  }
+
+  public function getPlayerdoctype()
+  {
+    switch ($this->getDoctype()) {
+    case "mp3":
+    case "mpeg":
+      return "mp3";
+    case "wav":
+      return "wav";
+    case "avi":
+      return "avi"; // porbably not supported
+    case null: // handle unknown MIME type
+    case "mp4":
+    case "m4v":
+      return "m4v";
     }
-
-    /**
-     * Get image
-     *
-     * @return OG\InversaBundle\Entity\Image 
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
+  }
 }
