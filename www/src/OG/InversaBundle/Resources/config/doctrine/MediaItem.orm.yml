@@ -36,4 +36,4 @@ OG\InversaBundle\Entity\MediaItem:
         preUpdate: [preUpload]
         postPersist: [upload]
         postUpdate: [upload]
-        postRemove: [removeUpload]            
+        preRemove: [removeUpload]            
