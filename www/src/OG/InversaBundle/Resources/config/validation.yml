@@ -29,20 +29,28 @@ OG\InversaBundle\Entity\Document:
     properties:            
         file:
             - File:
-                maxSize: 3M
+                maxSize: 5M
                 maxSizeMessage: Datei ist zu gross ({{ size }}). Maximalgrösse ist {{ limit }}
                 mimeTypes: [application/pdf, application/x-pdf, text/plain, text/xml, application/msword]
                 mimeTypesMessage: PDF, Word oder Text Datei
                 uploadErrorMessage: Die Datei konnte nicht hochgeladen werden
+                notReadableMessage: Datei kann nicht gelesen werden
+                notFoundMessage: Datei nicht gefunden
+                uploadIniSizeErrorMessage: Datei ist zu gross (PHP Upload Grenze überschritten)
+                uploadFormSizeErrorMessage: Datei ist zu gross (Eingabefeldbeschränkung)
 OG\InversaBundle\Entity\Image:
     properties:            
         file:
             - Image:
-                maxSize: 2M
+                maxSize: 3M
                 maxSizeMessage: Datei ist zu gross ({{ size }}). Maximalgrösse ist {{ limit }}
                 mimeTypes: [image/png, image/jpeg, image/gif]
                 mimeTypesMessage: Bild Datei (PNG, JPEG, GIF)
                 uploadErrorMessage: Die Datei konnte nicht hochgeladen werden
+                notReadableMessage: Datei kann nicht gelesen werden
+                notFoundMessage: Datei nicht gefunden
+                uploadIniSizeErrorMessage: Datei ist zu gross (PHP Upload Grenze überschritten)
+                uploadFormSizeErrorMessage: Datei ist zu gross (Eingabefeldbeschränkung)
 OG\InversaBundle\Entity\MediaItem:
     properties:            
         mediafile:
@@ -51,7 +59,11 @@ OG\InversaBundle\Entity\MediaItem:
                 maxSizeMessage: Datei ist zu gross ({{ size }}). Maximalgrösse ist {{ limit }}
                 mimeTypes: [audio/mpeg, audio/wav, video/mp4, video/avi]
                 mimeTypesMessage: Audio (MP3/WAV) oder Video (MP4/AVI) Datei
-                uploadErrorMessage: Die Datei konnte nicht hochgeladen werden 
+                uploadErrorMessage: Die Datei konnte nicht hochgeladen werden
+                notReadableMessage: Datei kann nicht gelesen werden
+                notFoundMessage: Datei nicht gefunden
+                uploadIniSizeErrorMessage: Datei ist zu gross (PHP Upload Grenze überschritten)
+                uploadFormSizeErrorMessage: Datei ist zu gross (Eingabefeldbeschränkung)
 OG\InversaBundle\Entity\InversaUser:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: username, message: "Dieser Benutzername wird bereits verwendet" }
