@@ -1,11 +1,19 @@
-Nachricht von {{ name }} <{{ email }}>
------------------------------------------------------------------------------------------------------------------------
+------- Automatisch generiertes E-Mail  -  www.ensemble-inversa.ch -------
 
-CD Bestellung
-{{ count }} x {{ cdname }} à {{ price }}
+Bestellung von {{ name }} <{{ email }}>
+--------------------------------------------------------------------------
 
-{{ message }}
+CD Bestellung:
+  {{ count }} x {{ cdname }} à {{ price }}
 
-Bestelladresse
-{{ name }}
-{{ address }}
+{% if message %}
+Nachricht:
+  {{ message }}
+{% endif %}
+
+Bestelladresse:
+  {{ name }}
+  {{ address }}
+  {{ zipcity }}
+  
+  

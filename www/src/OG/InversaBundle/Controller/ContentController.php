@@ -228,12 +228,15 @@ class ContentController extends Controller
     $request = $this->getRequest();
     $mailDataValidation = new Collection(
         array(
-            'name' => array(new NotBlank(array('message' => 'Bitte geben Sie Ihren Namen ein')),
-                new MinLength(array('limit' => 3, 'message' => 'Bitte geben Sie Ihren Namen ein'))),
+            'name' => array(new NotBlank(array('message' => 'Bitte geben Sie Vornamen und Namen ein')),
+                new MinLength(array('limit' => 3, 'message' => 'Bitte geben Sie Ihren Vornamen und Namen ein'))),
             'email' => array(new NotBlank(array('message' => 'Bitte geben Sie Ihre E-Mail ein')),
                 new Email(array('message' => 'Bitte geben Sie eine gültige E-Mail ein'))),
             'address' => array(new NotBlank(array('message' => 'Bitte geben Sie Ihre Adresse ein')),
-                new MinLength(array('limit' => 20, 'message' => 'Bitte geben Sie Ihre Adresse ein'))), 'message' => array(),
+                new MinLength(array('limit' => 10, 'message' => 'Bitte geben Sie Ihre Adresse ein'))),
+        		'zipcity' => array(new NotBlank(array('message' => 'Bitte geben Sie PLZ und Ort ein')),
+        		    new MinLength(array('limit' => 5, 'message' => 'Bitte geben Sie PLZ und Ort ein'))),
+        		'message' => array(),
             'count' => array(new NotBlank(array('message' => 'Bitte geben Sie an, wie viele CDs bestellt werden sollen')),
                 new Min(
                     array('limit' => 1, 'message' => 'Mindestens eine CD muss bestellt werden',
@@ -241,8 +244,10 @@ class ContentController extends Controller
 
     $mailData = array();
     $form = $this->createFormBuilder($mailData, array('validation_constraint' => $mailDataValidation))
-        ->add('name', 'text', array('required' => false, 'label' => 'Name'))->add('email', 'email', array('required' => false, 'label' => 'E-Mail'))
-        ->add('address', 'textarea', array('required' => false, 'label' => 'Adresse'))
+        ->add('name', 'text', array('required' => false, 'label' => 'Vorname / Name'))
+        ->add('email', 'email', array('required' => false, 'label' => 'E-Mail'))
+        ->add('address', 'text', array('required' => false, 'label' => 'Adresse'))
+        ->add('zipcity', 'text', array('required' => false, 'label' => 'PLZ / Ort'))
         ->add('count', 'text', array('required' => false, 'label' => 'Anzahl CDs', 'data' => '1'))
         ->add('message', 'textarea', array('required' => false, 'label' => 'Bemerkungen'))
         ->add('captcha', 'captcha', array('width' => '100', 'height' => '32', 'required' => false))->getForm();
@@ -252,14 +257,19 @@ class ContentController extends Controller
 
       if ($form->isValid()) {
 
-        // data is an array with "name", "email", and "message", "count", "address" keys 
+        // data is an array with "name", "email", and "message", "count", "address" and "zipcity" keys 
         $data = $form->getData();
         $data["cdname"] = $cdItem->getName();
         $data["price"] = $cdItem->getPrice();
-        $message = \Swift_Message::newInstance()->setSubject('Kontakt www.ensemble-inversa.ch')->setFrom($data['email'])->setTo('info@ensemble-inversa.ch')
+        $message = \Swift_Message::newInstance()->setSubject('Bestellung auf www.ensemble-inversa.ch')->setFrom($data['email'])->setTo('info@ensemble-inversa.ch')
             ->setBody($this->renderView('OGInversaBundle:Content:ordercd.txt.twig', $data));
+        
+        $confirmMessage =  \Swift_Message::newInstance()->setSubject('Bestellung auf www.ensemble-inversa.ch')->setFrom('info@ensemble-inversa.ch')->setTo($data['email'])
+            ->setBody($this->renderView('OGInversaBundle:Content:customerconfirm_ordercd.txt.twig', $data));
 
         $this->get('mailer')->send($message);
+        $this->get('mailer')->send($confirmMessage);
+        
         return $this
             ->render('OGInversaBundle:Content:orderconfirm.html.twig',
                 array('name' => 'cds', 'email' => $data['email'], 'count' => $data['count'], 'price' => $cdItem->getPrice(),
