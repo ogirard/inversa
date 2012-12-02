@@ -76,30 +76,17 @@ class ContentController extends Controller
   public function agendaAction()
   {
     $em = $this->getDoctrine()->getEntityManager();
-    $archiveDate = mktime(0, 0, 0, date("m") - 6, date("d"), date("Y"));
-    $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate > :archivedate AND a.isactive = true')
-        ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->orderBy('a.eventdate', 'DESC')->getQuery();
+    $archiveDate = mktime(0, 0, 0, date("m") - 3, date("d"), date("Y"));
+    $nowDate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+    $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate > :archivedate AND a.eventdate < :nowdate AND a.isactive = true')
+        ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->setParameter('nowdate', date('Y-m-d h:i:s', $nowDate))->orderBy('a.eventdate', 'DESC')->getQuery();
     $entities = $query->getResult();
-    $nextEntity = -1;
-    $now = date_create("now");
-    foreach ($entities as $i => $entity) {
-      $daysInFuture = date_diff($entity->getEventDate(), $now)->d;
-      if ($daysInFuture >= 0 && $entity->getEventDate() >= $now) {
-        $nextEntity = $i;
-      }
-    }
-
+    $querynext = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate >= :nowdate AND a.isactive = true')
+        ->setParameter('nowdate', date('Y-m-d h:i:s', $nowDate))->orderBy('a.eventdate', 'ASC')->getQuery();
+    $entitiesnext = $querynext->getResult();
+    
     $logger = $this->get('logger');
-    $logger->info('$$MY: ' . $nextEntity);
-
-    // move next agenda item in the future to first position
-    if ($nextEntity >= 0) {
-      $e = $entities[$nextEntity];
-      unset($entities[$nextEntity]);
-      array_unshift($entities, $e);
-    }
-
-    return $this->render('OGInversaBundle:Content:agendacurrent.html.twig', array('name' => 'agendacurrent', 'entities' => $entities));
+    return $this->render('OGInversaBundle:Content:agendacurrent.html.twig', array('name' => 'agendacurrent', 'entities' => $entities, 'entitiesnext' => $entitiesnext));
   }
 
   /**
@@ -109,7 +96,7 @@ class ContentController extends Controller
   public function agendaarchiveAction()
   {
     $em = $this->getDoctrine()->getEntityManager();
-    $archiveDate = mktime(0, 0, 0, date("m") - 6, date("d"), date("Y"));
+    $archiveDate = mktime(0, 0, 0, date("m") - 3, date("d"), date("Y"));
     $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate <= :archivedate AND a.isactive = true')
         ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->orderBy('a.eventdate', 'DESC')->getQuery();
     $entities = $query->getResult();

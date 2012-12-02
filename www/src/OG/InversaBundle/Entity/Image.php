@@ -354,9 +354,6 @@ class Image
 
   private function saveImage($maxWidth = 1280, $maxHeight = 1280)
   {
-    $logger = $this->container->get('logger');
-    $logger->info('saving image');
-
     $dir = $this->getUploadRootDir();
     $tempPath = 'temp_' . $this->id . '_' . $this->path;
     $absoluteTempPath = $dir . '/' . $tempPath;
@@ -368,8 +365,6 @@ class Image
     // Get image size.
     list($oldWidth, $oldHeight, $imageType) = getimagesize($absoluteTempPath);
 
-    $logger->info('image size' . $oldWidth . 'x' . $oldHeight);
-
     if ($oldWidth <= $maxWidth && $oldHeight <= $maxHeight || !extension_loaded('gd') && !extension_loaded('gd2')) {
       // save original file to final path
       copy($absoluteTempPath, $absoluteFinalPath);
@@ -377,32 +372,40 @@ class Image
       if (file_exists($absoluteTempPath)) {
         unlink($absoluteTempPath);
       }
-      
-      $logger->info('saved without resizing');
+
       return false;
     }
 
-    switch ($imageType) {
-    case IMAGETYPE_GIF:
-      $srcImg = imagecreatefromgif($absoluteTempPath);
-      break;
-    case IMAGETYPE_JPEG:
-      $srcImg = imagecreatefromjpeg($absoluteTempPath);
-      break;
-    case IMAGETYPE_PNG:
-      $srcImg = imagecreatefrompng($absoluteTempPath);
-      break;
-    case IMAGETYPE_BMP:
-    case IMAGETYPE_WBMP:
-      $srcImg = imagecreatefromwbmp($absoluteTempPath);
-      break;
-    default:
-      if (file_exists($absoluteTempPath)) {
-        unlink($absoluteTempPath);
+    ini_set('memory_limit', -1);
+    $srcImg = null;
+    try {
+      switch ($imageType) {
+      case IMAGETYPE_GIF:
+        $srcImg = imagecreatefromgif($absoluteTempPath);
+        break;
+      case IMAGETYPE_JPEG:
+        $srcImg = imagecreatefromjpeg($absoluteTempPath);
+        break;
+      case IMAGETYPE_PNG:
+        $srcImg = imagecreatefrompng($absoluteTempPath);
+        break;
+      case IMAGETYPE_BMP:
+      case IMAGETYPE_WBMP:
+        $srcImg = imagecreatefromwbmp($absoluteTempPath);
+        break;
+      default:
+        if (file_exists($absoluteTempPath)) {
+          unlink($absoluteTempPath);
+        }
+        trigger_error('Unsupported filetype.', E_USER_WARNING);
+        break;
       }
-      trigger_error('Unsupported filetype.', E_USER_WARNING);
-      break;
+    } catch (Exception $e) {
+      ini_restore('memory_limit');
+      trigger_error($e->getMessage(), E_USER_WARNING);
     }
+
+    ini_restore('memory_limit');
 
     if (!$srcImg) {
       // delete temp file    	
@@ -421,44 +424,54 @@ class Image
       $newHeight = round($oldHeight / $oldWidth * $newWidth);
     }
 
-    $logger->info('resizing to '.$newWidth.'x'.$newHeight);
-    $newImg = imagecreatetruecolor($newWidth, $newHeight);
+    ini_set('memory_limit', -1);
 
-    // If this image is a PNG or GIF set alpha channel.
-    if ($imageType == IMAGETYPE_GIF || $imageType == IMAGETYPE_PNG) {
-      imagealphablending($newImg, false);
-      imagesavealpha($newImg, true);
-      $alpha = imagecolorallocatealpha($newImg, 255, 255, 255, 127);
-      imagefilledrectangle($newImg, 0, 0, $newWidth, $newHeight, $alpha);
-    }
+    try {
+      $newImg = imagecreatetruecolor($newWidth, $newHeight);
 
-    // copy and resize
-    imagecopyresized($newImg, $srcImg, 0, 0, 0, 0, $newWidth, $newHeight, $oldWidth, $oldHeight);
-
-    // create and save the file
-    switch ($imageType) {
-    case IMAGETYPE_GIF:
-      imagegif($newImg, $absoluteFinalPath);
-      break;
-    case IMAGETYPE_JPEG:
-      imagejpeg($newImg, $absoluteFinalPath);
-      break;
-    case IMAGETYPE_PNG:
-      imagepng($newImg, $absoluteFinalPath);
-      break;
-    case IMAGETYPE_BMP:
-    case IMAGETYPE_WBMP:
-      imagewbmp($newImg, $absoluteFinalPath);
-      break;
-    default:
-      if (file_exists($absoluteTempPath)) {
-        unlink($absoluteTempPath);
+      // If this image is a PNG or GIF set alpha channel.
+      if ($imageType == IMAGETYPE_GIF || $imageType == IMAGETYPE_PNG) {
+        imagealphablending($newImg, false);
+        imagesavealpha($newImg, true);
+        $alpha = imagecolorallocatealpha($newImg, 255, 255, 255, 127);
+        imagefilledrectangle($newImg, 0, 0, $newWidth, $newHeight, $alpha);
       }
-      trigger_error('Failed to create scaled image.', E_USER_WARNING);
-      break;
+
+      // copy and resize
+      imagecopyresized($newImg, $srcImg, 0, 0, 0, 0, $newWidth, $newHeight, $oldWidth, $oldHeight);
+
+      // create and save the file
+      switch ($imageType) {
+      case IMAGETYPE_GIF:
+        imagegif($newImg, $absoluteFinalPath);
+        break;
+      case IMAGETYPE_JPEG:
+        imagejpeg($newImg, $absoluteFinalPath);
+        break;
+      case IMAGETYPE_PNG:
+        imagepng($newImg, $absoluteFinalPath);
+        break;
+      case IMAGETYPE_BMP:
+      case IMAGETYPE_WBMP:
+        imagewbmp($newImg, $absoluteFinalPath);
+        break;
+      default:
+        if (file_exists($absoluteTempPath)) {
+          unlink($absoluteTempPath);
+        }
+        trigger_error('Failed to create scaled image.', E_USER_WARNING);
+        break;
+      }
+
+      imagedestroy($srcImg);
+      imagedestroy($newImg);
+    } catch (Exception $e) {
+      ini_restore('memory_limit');
+      trigger_error($e->getMessage(), E_USER_WARNING);
     }
-    $logger->info('saved image to '.$absoluteFinalPath);
-    
+
+    ini_restore('memory_limit');
+
     // delete temp file
     if (file_exists($absoluteTempPath)) {
       unlink($absoluteTempPath);
