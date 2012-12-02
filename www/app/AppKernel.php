@@ -5,6 +5,11 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+	  private static $kernel;
+	  public static function getStaticContainer() {
+	    return self::$kernel->getContainer();
+	  }
+	  
     public function registerBundles()
     {
         $bundles = array(
@@ -28,6 +33,7 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
+        AppKernel::$kernel = $this;
         return $bundles;
     }
 

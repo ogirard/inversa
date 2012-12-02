@@ -3,6 +3,8 @@
 namespace OG\InversaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use OG\InversaBundle\DependencyInjection\ContainerHelper;
+use AppKernel;
 
 /**
  * OG\InversaBundle\Entity\Image
@@ -28,6 +30,13 @@ class Image
    * @var string $doctype
    */
   private $doctype = "";
+
+  private $container;
+
+  public function __construct()
+  {
+    $this->container = AppKernel::getStaticContainer();
+  }
 
   public function isValid()
   {
@@ -345,6 +354,9 @@ class Image
 
   private function saveImage($maxWidth = 1280, $maxHeight = 1280)
   {
+    $logger = $this->container->get('logger');
+    $logger->info('saving image');
+
     $dir = $this->getUploadRootDir();
     $tempPath = 'temp_' . $this->id . '_' . $this->path;
     $absoluteTempPath = $dir . '/' . $tempPath;
@@ -356,12 +368,17 @@ class Image
     // Get image size.
     list($oldWidth, $oldHeight, $imageType) = getimagesize($absoluteTempPath);
 
+    $logger->info('image size' . $oldWidth . 'x' . $oldHeight);
+
     if ($oldWidth <= $maxWidth && $oldHeight <= $maxHeight || !extension_loaded('gd') && !extension_loaded('gd2')) {
       // save original file to final path
-	  $this->file->move($dir, $finalPath);
-	  if (file_exists($absoluteTempPath)) {
+      copy($absoluteTempPath, $absoluteFinalPath);
+
+      if (file_exists($absoluteTempPath)) {
         unlink($absoluteTempPath);
-      }	  
+      }
+      
+      $logger->info('saved without resizing');
       return false;
     }
 
@@ -380,6 +397,9 @@ class Image
       $srcImg = imagecreatefromwbmp($absoluteTempPath);
       break;
     default:
+      if (file_exists($absoluteTempPath)) {
+        unlink($absoluteTempPath);
+      }
       trigger_error('Unsupported filetype.', E_USER_WARNING);
       break;
     }
@@ -401,6 +421,7 @@ class Image
       $newHeight = round($oldHeight / $oldWidth * $newWidth);
     }
 
+    $logger->info('resizing to '.$newWidth.'x'.$newHeight);
     $newImg = imagecreatetruecolor($newWidth, $newHeight);
 
     // If this image is a PNG or GIF set alpha channel.
@@ -430,10 +451,14 @@ class Image
       imagewbmp($newImg, $absoluteFinalPath);
       break;
     default:
+      if (file_exists($absoluteTempPath)) {
+        unlink($absoluteTempPath);
+      }
       trigger_error('Failed to create scaled image.', E_USER_WARNING);
       break;
     }
-
+    $logger->info('saved image to '.$absoluteFinalPath);
+    
     // delete temp file
     if (file_exists($absoluteTempPath)) {
       unlink($absoluteTempPath);
