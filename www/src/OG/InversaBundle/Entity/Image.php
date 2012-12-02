@@ -358,7 +358,10 @@ class Image
 
     if ($oldWidth <= $maxWidth && $oldHeight <= $maxHeight || !extension_loaded('gd') && !extension_loaded('gd2')) {
       // save original file to final path
-      rename($absoluteTempPath, $absoluteFinalPath);
+	  $this->file->move($dir, $finalPath);
+	  if (file_exists($absoluteTempPath)) {
+        unlink($absoluteTempPath);
+      }	  
       return false;
     }
 

@@ -314,4 +314,29 @@ class AgendaItem
     {
         return $this->eventtime;
     }
+
+	 /**
+     * @var bool $isnext
+     */
+    private $isnext;
+	
+    /**
+     * Set isnext
+     *
+     * @param bool $isnext
+     */
+    public function setIsNext($isnext)
+    {
+        $this->isnext = $isnext;
+    }
+
+    /**
+     * Get isnext
+     *
+     * @return bool 
+     */
+    public function getIsNext()
+    {
+        return $this->isnext;
+    }
 }

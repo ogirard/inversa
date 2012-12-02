@@ -78,13 +78,13 @@ class ContentController extends Controller
     $em = $this->getDoctrine()->getEntityManager();
     $archiveDate = mktime(0, 0, 0, date("m") - 6, date("d"), date("Y"));
     $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate > :archivedate AND a.isactive = true')
-        ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->orderBy('a.eventdate', 'ASC')->getQuery();
+        ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->orderBy('a.eventdate', 'DESC')->getQuery();
     $entities = $query->getResult();
     $nextEntity = -1;
     $now = date_create("now");
     foreach ($entities as $i => $entity) {
       $daysInFuture = date_diff($entity->getEventDate(), $now)->d;
-      if (($daysInFuture == 0 || $entity->getEventDate() > $now) && $nextEntity == -1) {
+      if ($daysInFuture >= 0 && $entity->getEventDate() >= $now) {
         $nextEntity = $i;
       }
     }
