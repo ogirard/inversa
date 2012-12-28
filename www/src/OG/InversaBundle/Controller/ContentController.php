@@ -76,9 +76,9 @@ class ContentController extends Controller
   public function agendaAction()
   {
     $em = $this->getDoctrine()->getEntityManager();
-    $archiveDate = mktime(0, 0, 0, date("m") - 3, date("d"), date("Y"));
-    $nowDate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-    $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate > :archivedate AND a.eventdate < :nowdate AND a.isactive = true')
+    $archiveDate = strtotime("-3 months");
+    $nowDate = strtotime("-1 day");
+    $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate > :archivedate AND a.eventdate <= :nowdate AND a.isactive = true')
         ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->setParameter('nowdate', date('Y-m-d h:i:s', $nowDate))->orderBy('a.eventdate', 'DESC')->getQuery();
     $entities = $query->getResult();
     $querynext = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate >= :nowdate AND a.isactive = true')
@@ -96,7 +96,8 @@ class ContentController extends Controller
   public function agendaarchiveAction()
   {
     $em = $this->getDoctrine()->getEntityManager();
-    $archiveDate = mktime(0, 0, 0, date("m") - 3, date("d"), date("Y"));
+    // $archiveDate = mktime(0, 0, 0, date("m") - 3, date("d"), date("Y"));
+    $archiveDate = strtotime("-3 months");
     $query = $em->getRepository('OGInversaBundle:AgendaItem')->createQueryBuilder('a')->where('a.eventdate <= :archivedate AND a.isactive = true')
         ->setParameter('archivedate', date('Y-m-d h:i:s', $archiveDate))->orderBy('a.eventdate', 'DESC')->getQuery();
     $entities = $query->getResult();

@@ -19,17 +19,24 @@
 <script>
 PageOnStartup = function() {
 	{% for entity in entities %}
-	  CreatePlayer("#jquery_jplayer_{{ loop.index }}", { {{ entity.playerdoctype }} : "http://{{ app.request.host }}/{{ entity.webPath|e }}" }, "{{ entity.playerdoctype }}");
+	  CreatePlayer({{ loop.index }}, { {{ entity.playerdoctype }} : "http://{{ app.request.host }}/{{ entity.webPath|e }}" }, "{{ entity.playerdoctype }}");
 	{% endfor %}
 }
 
 function CreatePlayer(id, media, supplied) {
-	  $(id).jPlayer({
+    var playerId = "#jquery_jplayer_" + id;
+	  var containerId = "#jp_container_" + id;
+	  
+	  $(playerId).jPlayer({
       ready: function(event) {
           $(this).jPlayer("setMedia", media);
       },
+      play: function() { // To avoid both jPlayers playing together.
+		      $(this).jPlayer("pauseOthers");
+	    },  
       solution: 'html, flash',
       swfPath: "/js/jplayer",
+      cssSelectorAncestor: containerId,
       supplied: supplied,
       size: {
 			  width: "360px",

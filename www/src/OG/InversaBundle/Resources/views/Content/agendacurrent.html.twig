@@ -29,7 +29,7 @@
            <div class="agendaentry">
              {% if entity.eventdate %}
              {% if entity.eventdate|date("d.m.Y") == "now"|date("d.m.Y")  %}
-             <h4 class="date today">Heute</h4>
+             <h4 class="date today"><img src="/images/current.png" /> Heute</h4>
              {% elseif loop.index == 1  and entity.eventdate >= "now"|date("d.m.Y") %}
              <h4 class="date today">Demnächst am {{ entity.eventdate | date("d.m.Y") }}</h4>
              {% else %}
